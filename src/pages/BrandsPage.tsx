@@ -155,18 +155,15 @@ export default function BrandsPage() {
 // ✅ NEW: Promo cards (mi.com-like) — 4 cards (Buttons only)
 // =========================
 const promoCards: PromoCard[] = [
-  {
-    id: "promo-1",
-    title: "REDMI Note 15 Pro+",
-    badge: "5G",
-    subtitle: "แกร่งแบบ Titan",
-    lines: ['จอ AMOLED สุดคมชัดขนาด 6.83"', "กล้อง 200MP รุ่นใหม่ ถ่ายชัดทุกมุมมอง"],
-    priceLabel: "ตั้งแต่",
-    price: "฿13,990.00",
-    // ✅ ใช้ path ให้ตรงกับของจริงใน public/images/brands/promos/
+   {
+    id: "promo-2",
+    title: "Xiaomi Smart Home",
+    badge: "NEW",
+    subtitle: "ยกระดับบ้านให้สมาร์ทขึ้น",
+    lines: ["ควบคุมง่ายผ่านแอป", "เชื่อมต่อระบบนิเวศได้ครบ"],
     img: "/images/brands/promos/promo-1.jpg",
-    buyHref: "https://www.mi.com/th/product/redmi-note-15-pro-plus-5g/",
-    learnHref: "https://www.mi.com/th/product/redmi-note-15-pro-plus-5g/",
+    buyHref: "https://www.mi.com/th/product/xiaomi-smart-band-10/",
+    learnHref: "/brands/xiaomi",
   },
   {
     id: "promo-2",
@@ -175,18 +172,18 @@ const promoCards: PromoCard[] = [
     subtitle: "ยกระดับบ้านให้สมาร์ทขึ้น",
     lines: ["ควบคุมง่ายผ่านแอป", "เชื่อมต่อระบบนิเวศได้ครบ"],
     img: "/images/brands/promos/promo-2.jpg",
-    buyHref: "https://www.mi.com/th/",
-    learnHref: "https://www.mi.com/th/",
+    buyHref: "https://www.ankerthailand.co.th/",
+    learnHref: "/brands/anker",
   },
   {
-    id: "promo-3",
-    title: "70mai Dashcam Series",
-    badge: "HOT",
-    subtitle: "ความปลอดภัยที่ไว้ใจได้",
-    lines: ["คมชัดทั้งกลางวัน/กลางคืน", "ฟีเจอร์ช่วยขับขี่ครบ"],
+    id: "promo-2",
+    title: "Xiaomi Smart Home",
+    badge: "NEW",
+    subtitle: "ยกระดับบ้านให้สมาร์ทขึ้น",
+    lines: ["ควบคุมง่ายผ่านแอป", "เชื่อมต่อระบบนิเวศได้ครบ"],
     img: "/images/brands/promos/promo-3.jpg",
-    buyHref: "https://www.70mai.com/",
-    learnHref: "/brands/70mai",
+    buyHref: "https://www.mi.com/th/product/xiaomi-watch-s4/",
+    learnHref: "/brands/xiaomi",
   },
   {
     id: "promo-4",
@@ -338,7 +335,7 @@ const promoCards: PromoCard[] = [
       </button>
 
       {/* track */}
-      <div className="overflow-hidden rounded-[28px] ring-1 ring-slate-200/80 bg-white">
+      <div className="overflow-hidden rounded-[28px] bg-white">
         <div
           className="flex transition-transform duration-700 ease-[cubic-bezier(.2,.9,.2,1)]"
           style={{ transform: `translateX(-${promoIndex * 100}%)` }}
