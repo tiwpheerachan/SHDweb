@@ -1,0 +1,349 @@
+{
+  "nav": {
+    "home": "首页",
+    "about": "关于我们",
+    "brands": "品牌",
+    "services": "服务",
+    "activities": "活动",
+    "careers": "加入我们",
+    "contact": "联系"
+  },
+  "common": {
+    "skip": "跳到正文",
+    "section": {
+      "kicker": "概览",
+      "title": "全站统一的浅色高级风格",
+      "desc": "统一的视觉语言（按钮/卡片/配色）+ TH/EN/中文 一键切换，结构干净易扩展。"
+    },
+    "stats": [
+      {
+        "k": "服务国家/地区",
+        "v": "10+"
+      },
+      {
+        "k": "合作品牌",
+        "v": "20+"
+      },
+      {
+        "k": "团队规模",
+        "v": "500+"
+      }
+    ],
+    "promise": {
+      "title": "SHD 承诺",
+      "desc": "我们打造可衡量的系统与透明标准，面向区域化规模增长。",
+      "bullets": [
+        "流程清晰、可审计",
+        "结果导向 + 优秀客户体验",
+        "可本地化，适配不同市场与合作伙伴"
+      ]
+    }
+  },
+  "footer": {
+    "tagline": "在亚洲构建产品、运营与增长系统。",
+    "rights": "保留所有权利",
+    "cards": [
+      {
+        "title": "企业级标准",
+        "desc": "从战略 → 执行 → 衡量，流程清晰"
+      },
+      {
+        "title": "可规模化架构",
+        "desc": "多国家、多品牌、多渠道"
+      },
+      {
+        "title": "运营 + 技术",
+        "desc": "将技术与真实运营结合，确保落地"
+      }
+    ]
+  },
+  "home": {
+    "seo": {
+      "title": "SHD Corporate",
+      "description": "SHD Technology 企业官网 — 浅色高级风格，三语 i18n"
+    },
+    "hero": {
+      "badges": [
+        "浅色模式",
+        "玻璃质感 + 渐变",
+        "TH / EN / 中文"
+      ],
+      "title": "SHD Technology — 赋能品牌在亚洲增长",
+      "subtitle": "连接战略、电商、营销与运营，用数据与系统实现可衡量的结果。",
+      "ctaPrimary": "查看服务",
+      "ctaSecondary": "加入我们",
+      "stats": [
+        {
+          "k": "区域",
+          "v": "东南亚"
+        },
+        {
+          "k": "重点",
+          "v": "增长"
+        },
+        {
+          "k": "标准",
+          "v": "企业级"
+        }
+      ]
+    },
+    "highlights": [
+      {
+        "title": "品牌与分销",
+        "desc": "选择合适渠道，配合质量体系，稳定扩张。"
+      },
+      {
+        "title": "电商运营",
+        "desc": "订单、物流、财务与后端一体化。"
+      },
+      {
+        "title": "数据与自动化",
+        "desc": "统一数据与自动化，加速决策。"
+      }
+    ],
+    "sections": {
+      "showcase": {
+        "kicker": "我们在做什么",
+        "title": "既好看，也能真正落地",
+        "desc": "7 页结构 + 一致 UI 语言 + 三语支持。"
+      }
+    },
+    "showcase": [
+      {
+        "title": "浅色玻璃质感 UI",
+        "desc": "柔和渐变背景 + 透明卡片 + 轻阴影，阅读舒适。",
+        "tags": [
+          "清爽",
+          "高级",
+          "现代"
+        ]
+      },
+      {
+        "title": "完整 7 页站点",
+        "desc": "Home / About / Brands / Services / Activities / Careers / Contact",
+        "tags": [
+          "路由就绪",
+          "可上线",
+          "一致性"
+        ]
+      },
+      {
+        "title": "三语 i18n",
+        "desc": "TH/EN/中文 即时切换，语言持久化。",
+        "tags": [
+          "react-i18next",
+          "三语言",
+          "可扩展"
+        ]
+      },
+      {
+        "title": "方便二次开发",
+        "desc": "可继续接 API、CMS、表单、邮件或 Supabase。",
+        "tags": [
+          "TypeScript",
+          "Vite",
+          "易维护"
+        ]
+      }
+    ],
+    "final": {
+      "kicker": "就绪",
+      "title": "立刻开始你的 SHD Corporate 项目",
+      "desc": "可直接运行与部署的项目模板，含 7 页与三语内容。",
+      "ctaPrimary": "联系我们",
+      "ctaSecondary": "了解我们",
+      "bullets": [
+        "结构清晰（pages/components）",
+        "统一浅色主题",
+        "文案集中在 locales 文件中"
+      ]
+    }
+  },
+  "about": {
+    "seo": {
+      "title": "About",
+      "description": "SHD 的故事、理念与愿景"
+    },
+    "hero": {
+      "kicker": "关于我们",
+      "title": "SHD 增长背后的故事",
+      "desc": "我们打造团队与系统，帮助品牌跨市场与渠道持续增长。",
+      "ctaPrimary": "查看概览",
+      "ctaSecondary": "联系"
+    },
+    "blocks": [
+      {
+        "title": "公司故事",
+        "desc": "从 0→1 到 1→100：搭建可规模化基础。"
+      },
+      {
+        "title": "运营卓越",
+        "desc": "从前台到后台，以可衡量流程驱动。"
+      },
+      {
+        "title": "全球 + 本地",
+        "desc": "本地洞察结合全球标准。"
+      }
+    ]
+  },
+  "brands": {
+    "seo": {
+      "title": "Brands",
+      "description": "SHD 生态中的品牌与合作伙伴"
+    },
+    "hero": {
+      "kicker": "品牌",
+      "title": "我们推动增长的品牌组合",
+      "desc": "了解生态中的品牌与合作方式，共创双赢。",
+      "ctaPrimary": "查看品牌",
+      "ctaSecondary": "与我们沟通"
+    },
+    "blocks": [
+      {
+        "title": "分销与授权",
+        "desc": "透明分销体系与品牌级标准。"
+      },
+      {
+        "title": "平台招商增长",
+        "desc": "多平台增长策略与量化评估。"
+      },
+      {
+        "title": "品牌保护",
+        "desc": "价格/库存/内容监控，保障一致性。"
+      }
+    ]
+  },
+  "services": {
+    "seo": {
+      "title": "Services",
+      "description": "SHD 服务：电商、营销、运营与数据"
+    },
+    "hero": {
+      "kicker": "服务",
+      "title": "可模块化、可规模化的服务体系",
+      "desc": "按模块选择或端到端交付，从战略到执行。",
+      "ctaPrimary": "查看服务",
+      "ctaSecondary": "联系"
+    },
+    "blocks": [
+      {
+        "title": "电商运营",
+        "desc": "订单、仓储、物流、财务、退换与客服。"
+      },
+      {
+        "title": "效果营销",
+        "desc": "投放策略 + 创意 + 实验，追求明确 ROI。"
+      },
+      {
+        "title": "数据平台",
+        "desc": "整合多渠道数据，用于看板与决策。"
+      }
+    ]
+  },
+  "activities": {
+    "seo": {
+      "title": "Activities",
+      "description": "SHD 的团队文化与活动记录"
+    },
+    "hero": {
+      "kicker": "活动",
+      "title": "让我们持续前进的文化",
+      "desc": "团队瞬间与活动亮点，建立在尊重与标准之上。",
+      "ctaPrimary": "查看亮点",
+      "ctaSecondary": "加入我们"
+    },
+    "blocks": [
+      {
+        "title": "团队文化",
+        "desc": "认真工作，也支持彼此成长。"
+      },
+      {
+        "title": "学习分享",
+        "desc": "复盘结果、分享经验、持续改进。"
+      },
+      {
+        "title": "社区影响",
+        "desc": "为同事、伙伴与客户创造积极影响。"
+      }
+    ]
+  },
+  "careers": {
+    "seo": {
+      "title": "Careers",
+      "description": "加入 SHD — 在区域化舞台成长"
+    },
+    "hero": {
+      "kicker": "加入我们",
+      "title": "挑战与真实成长机会",
+      "desc": "清晰成长路径、优秀工具与支持团队，助你交付成果。",
+      "ctaPrimary": "查看岗位",
+      "ctaSecondary": "联系 HR"
+    },
+    "blocks": [
+      {
+        "title": "成长路径",
+        "desc": "里程碑明确，配合辅导与反馈。"
+      },
+      {
+        "title": "全球协作",
+        "desc": "多国家团队与区域项目。"
+      },
+      {
+        "title": "真实 Owner",
+        "desc": "亲自负责并看到结果。"
+      }
+    ]
+  },
+  "contact": {
+    "seo": {
+      "title": "Contact",
+      "description": "联系 SHD Technology"
+    },
+    "hero": {
+      "kicker": "联系",
+      "title": "欢迎随时沟通",
+      "desc": "合作、服务或公司咨询，都可以联系 SHD 团队。",
+      "ctaPrimary": "发送消息",
+      "ctaSecondary": "招聘"
+    },
+    "section": {
+      "kicker": "渠道",
+      "title": "主要联系方式",
+      "desc": "可直接扩展为真实表单与接口。"
+    },
+    "channels": [
+      {
+        "title": "邮箱",
+        "desc": "商务与合作",
+        "value": "hello@shd-technology.co.th"
+      },
+      {
+        "title": "电话",
+        "desc": "紧急咨询",
+        "value": "+66 xx-xxx-xxxx"
+      },
+      {
+        "title": "办公室",
+        "desc": "总部（示例）",
+        "value": "Bangkok, Thailand"
+      }
+    ],
+    "form": {
+      "title": "给我们留言",
+      "desc": "示例表单（mock）— 后续可接 API / Supabase / 邮件。",
+      "tags": [
+        "合作",
+        "服务",
+        "媒体",
+        "其他"
+      ],
+      "fields": {
+        "name": "姓名",
+        "email": "邮箱",
+        "message": "内容"
+      },
+      "submit": "发送",
+      "mockSubmit": "已发送（示例)"
+    }
+  }
+}

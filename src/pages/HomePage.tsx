@@ -1,0 +1,638 @@
+// src/pages/HomePage.tsx
+import React, { useMemo, useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import GlassCard from "../components/GlassCard";
+import SectionHeader from "../components/SectionHeader";
+
+type AnyObj = Record<string, any>;
+
+function asArray<T = any>(v: any): T[] {
+  return Array.isArray(v) ? (v as T[]) : [];
+}
+
+{/* ✅ helper component: count 0 -> to */}
+function CountTo({
+  to,
+  className,
+}: {
+  to: number;
+  className?: string;
+}) {
+  const [n, setN] = React.useState(0);
+
+  React.useEffect(() => {
+    let raf = 0;
+    const start = performance.now();
+    // ✅ ความเร็วกลางๆ (ไม่ช้าไม่เร็วเกิน) ~ 700ms
+    const dur = 700;
+
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - start) / dur);
+      // easeOutCubic
+      const eased = 1 - Math.pow(1 - p, 3);
+      const v = Math.round(eased * to);
+      setN(v);
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [to]);
+
+return (
+  <div className={className}>
+    <span
+      className="
+        bg-gradient-to-b
+        from-[#f6e7b0]
+        via-[#d7b85a]
+        to-[#b48a22]
+        bg-clip-text
+        text-transparent
+      "
+    >
+      {n}
+    </span>
+  </div>
+);
+
+}
+
+function cx(...xs: Array<string | false | null | undefined>) {
+  return xs.filter(Boolean).join(" ");
+}
+
+type BrandLink = {
+  name: string;
+  slug: string; // ✅ ใช้สำหรับลิ้งไปดีเทล /brands/:slug
+  desc?: string;
+  img: string;
+  tag?: string;
+};
+
+export default function HomePage() {
+  const { t } = useTranslation();
+
+  const highlightsI18n = asArray<AnyObj>(t("home.highlights", { returnObjects: true } as any));
+  const showcaseI18n = asArray<AnyObj>(t("home.showcase", { returnObjects: true } as any));
+
+  const highlights = useMemo(
+    () =>
+      highlightsI18n.length
+        ? highlightsI18n
+        : [
+            { title: "Brand & Distribution", desc: "ขยายแบรนด์ด้วยช่องทางที่เหมาะสม พร้อมระบบควบคุมคุณภาพ" },
+            { title: "Commerce Operations", desc: "บริหารออเดอร์ คลัง การเงิน และบริการหลังบ้านแบบ end-to-end" },
+            { title: "Data & Automation", desc: "ข้อมูลกลาง + ระบบอัตโนมัติ เพื่อการตัดสินใจที่เร็วและแม่นยำ" },
+          ],
+    [highlightsI18n]
+  );
+
+  const showcase = useMemo(
+    () =>
+      showcaseI18n.length
+        ? showcaseI18n
+        : [
+            {
+              title: "Performance Marketing",
+              desc: "Creative + Performance + Measurement เพื่อผลลัพธ์ที่วัดผลได้",
+              tags: ["Ads", "Creative", "Growth"],
+            },
+            {
+              title: "Regional Expansion",
+              desc: "ขยายตลาดหลายประเทศด้วยมาตรฐานเดียวกัน",
+              tags: ["SEA", "Localization", "Scale"],
+            },
+            {
+              title: "SOP & Quality",
+              desc: "มาตรฐานการทำงานชัดเจน ตรวจสอบได้ และขยายทีมได้เร็ว",
+              tags: ["Process", "Quality", "Enterprise"],
+            },
+            {
+              title: "Partnerships",
+              desc: "ร่วมมือกับแบรนด์/พาร์ทเนอร์เพื่อการเติบโตร่วมกัน",
+              tags: ["Partner", "Co-Build", "Win-Win"],
+            },
+          ],
+    [showcaseI18n]
+  );
+
+  // =========================
+  // ✅ Brand Links (10 แบรนด์) — ลิ้งไป Brand Detail
+  // route: /brands/:slug
+  // =========================
+  const brandLinks: BrandLink[] = [
+    {
+      name: "Anker",
+      slug: "anker",
+      desc: "Charging • Power • Innovation",
+      img: "/images/brands/anker.jpg",
+      tag: "Official",
+    },
+    {
+      name: "Soundcore",
+      slug: "soundcore",
+      desc: "True Wireless • Speakers • Audio",
+      img: "/images/brands/soundcore.jpg",
+      tag: "Official",
+    },
+    {
+      name: "Mova",
+      slug: "mova",
+      desc: "Smart devices for modern living",
+      img: "/images/brands/mova.jpg",
+      tag: "Official",
+    },
+    {
+      name: "70mai",
+      slug: "70mai",
+      desc: "Dashcam & Smart Car Accessories",
+      img: "/images/brands/70mai.jpg",
+      tag: "Official",
+    },
+    {
+      name: "Jimmy",
+      slug: "jimmy",
+      desc: "Vacuum • Cleaning solutions",
+      img: "/images/brands/jimmy.jpg",
+      tag: "Official",
+    },
+    {
+      name: "Xiaomi",
+      slug: "xiaomi",
+      desc: "Smart ecosystem • Lifestyle tech",
+      img: "/images/brands/xiaomi.jpg",
+      tag: "Official",
+    },
+    {
+      name: "Mibro",
+      slug: "mibro",
+      desc: "Wearables • Smartwatch",
+      img: "/images/brands/mibro.jpg",
+      tag: "Official",
+    },
+    {
+      name: "Wanbo",
+      slug: "wanbo",
+      desc: "Projectors • Home theater",
+      img: "/images/brands/wanbo.jpg",
+      tag: "Official",
+    },
+    {
+      name: "Dreame",
+      slug: "dreame",
+      desc: "Robot vacuum • Cleaning tech",
+      img: "/images/brands/dreame.jpg",
+      tag: "Official",
+    },
+    {
+      name: "Levoit",
+      slug: "levoit",
+      desc: "Air purifier • Healthy home",
+      img: "/images/brands/levoit.jpg",
+      tag: "Official",
+    },
+  ];
+
+  // =========================
+  // ✅ Search + Filter (ต้องอยู่หลัง brandLinks)
+  // =========================
+  const [brandQuery, setBrandQuery] = useState("");
+  const [brandFilter, setBrandFilter] = useState("All");
+  const brandFilters = ["All", "Official"];
+
+  const brandLinksToShow = useMemo(() => {
+    const q = brandQuery.trim().toLowerCase();
+
+    return brandLinks
+      .filter((b) => {
+        if (brandFilter === "All") return true;
+        return (b.tag || "").toLowerCase() === brandFilter.toLowerCase();
+      })
+      .filter((b) => {
+        if (!q) return true;
+        return (
+          (b.name || "").toLowerCase().includes(q) ||
+          (b.desc || "").toLowerCase().includes(q) ||
+          (b.tag || "").toLowerCase().includes(q)
+        );
+      });
+  }, [brandLinks, brandQuery, brandFilter]);
+
+  return (
+    <>
+      <Helmet>
+        <title>{(t("home.seo.title") as string) || "Home"} · SHD Technology</title>
+        <meta name="description" content={(t("home.seo.description") as string) || "SHD Corporate website"} />
+      </Helmet>
+
+      {/* ✅ แก้ช่องว่างขาวบนสุดที่มาจาก <main class="pt-8"> : ชดเชยเฉพาะหน้านี้ */}
+      <div className="-mt-8 bg-white">
+        {/* =========================
+            HERO (VIDEO + Gold/Black theme)
+        ========================== */}
+        <section className="relative">
+          {/* Full-bleed wrapper */}
+          <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+            <div className="relative min-h-[760px] w-full overflow-hidden">
+              {/* ✅ Background VIDEO */}
+              <video
+                className="absolute inset-0 h-full w-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                poster="/images/home/hero-bg.jpg"
+              >
+                <source src="/videos/hero.mp4" type="video/mp4" />
+              </video>
+
+              {/* ✅ Content */}
+              <div className="relative">
+                <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
+                  {/* top spacing */}
+                  <div className="pt-10 md:pt-14" />
+
+                  {/* ========= TOP HERO TEXT ========= */}
+                  <div className="mx-auto max-w-3xl text-center">
+                    {/* ✅ Badge ดำ-ทอง */}
+                    <div className="inline-flex rounded-full p-[1px] bg-gradient-to-r from-[#0b0b0c] via-[#c8a24a] to-[#0b0b0c] shadow-[0_18px_60px_-45px_rgba(200,162,74,.45)]">
+                      <div className="inline-flex items-center gap-2 rounded-full bg-black/25 px-4 py-2 text-xs font-semibold text-white ring-1 ring-white/15 backdrop-blur-xl">
+                        <span className="h-2 w-2 rounded-full bg-white" />
+                        {(t("home.hero.badges.0") as string) || "Light Mode"}
+                      </div>
+                    </div>
+
+                    {/* ✅ Title สีขาว */}
+                    <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-white drop-shadow-[0_10px_30px_rgba(0,0,0,.45)] md:text-5xl">
+                      {t("home.hero.title") || "SHD Technology — สร้างการเติบโตให้แบรนด์ในเอเชีย"}
+                    </h1>
+
+                    {/* ✅ Subtitle สีขาว */}
+                    <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/85 drop-shadow-[0_10px_30px_rgba(0,0,0,.40)] md:text-base">
+                      {t("home.hero.subtitle") ||
+                        "แพลตฟอร์มและทีมงานที่เชื่อมกลยุทธ์ การขาย การตลาด และปฏิบัติการ เพื่อผลลัพธ์ที่วัดผลได้"}
+                    </p>
+
+                    {/* ✅ CTA ทอง + ตัวหนังสือขาวชัด */}
+                    <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+                      <a
+                        href="/services"
+                        className={cx(
+                          "group inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-white",
+                          "bg-gradient-to-r from-[#b8892c] via-[#e7c46a] to-[#b8892c]",
+                          "shadow-[0_22px_70px_-45px_rgba(200,162,74,.60)]",
+                          "transition duration-300",
+                          "hover:-translate-y-0.5 hover:brightness-110",
+                          "active:translate-y-0"
+                        )}
+                      >
+                        <span className="relative">
+                          {t("home.hero.ctaPrimary") || "ดูบริการ"}
+                          <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-white/80 transition-all duration-300 group-hover:w-full" />
+                        </span>
+                      </a>
+
+                      <a
+                        href="/careers"
+                        className={cx(
+                          "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-white",
+                          "bg-black/25 backdrop-blur-xl",
+                          "ring-1 ring-[#e7c46a]/50",
+                          "shadow-[0_18px_60px_-45px_rgba(200,162,74,.25)]",
+                          "transition duration-300",
+                          "hover:bg-black/30 hover:ring-[#e7c46a]/70 hover:-translate-y-0.5",
+                          "active:translate-y-0"
+                        )}
+                      >
+                        {t("home.hero.ctaSecondary") || "ร่วมงานกับเรา"}
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* ========= STAGE: gap ชิดขึ้น + กลางสูงเท่ารวมซ้าย/ขวา ========= */}
+                  <div className="mt-14">
+                    <div className="mx-auto max-w-6xl px-4 md:px-6">
+                      {/* ✅ gap-8 -> gap-4 + items-stretch */}
+                      <div className="grid items-stretch gap-4 md:grid-cols-[1fr_2.6fr_1fr]">
+                        {/* LEFT */}
+                        <div className="hidden md:flex flex-col gap-4">
+                          <div className="aspect-[4/3] overflow-hidden rounded-[22px] shadow-[0_26px_80px_-55px_rgba(0,0,0,.55)] ring-1 ring-white/10">
+                            <img
+                              src="/images/home/card-1.jpg"
+                              alt="Card 1"
+                              className="h-full w-full object-cover"
+                              draggable={false}
+                            />
+                          </div>
+
+                          <div className="aspect-[4/3] overflow-hidden rounded-[22px] shadow-[0_26px_80px_-55px_rgba(0,0,0,.55)] ring-1 ring-white/10">
+                            <img
+                              src="/images/home/card-2.jpg"
+                              alt="Card 2"
+                              className="h-full w-full object-cover"
+                              draggable={false}
+                            />
+                          </div>
+                        </div>
+
+                        {/* CENTER: h-full ให้สูงเท่ารวมซ้าย/ขวา */}
+                        <div className="relative hidden md:block">
+                          <div className="h-full overflow-hidden rounded-[28px] shadow-[0_40px_130px_-65px_rgba(0,0,0,.65)] ring-1 ring-white/10">
+                            <img
+                              src="/images/home/mock.jpg"
+                              alt="Main mock"
+                              className="h-full w-full object-cover"
+                              draggable={false}
+                            />
+                          </div>
+                        </div>
+
+                        {/* RIGHT */}
+                        <div className="hidden md:flex flex-col gap-4">
+                          <div className="aspect-[4/3] overflow-hidden rounded-[22px] shadow-[0_26px_80px_-55px_rgba(0,0,0,.55)] ring-1 ring-white/10">
+                            <img
+                              src="/images/home/card-3.jpg"
+                              alt="Card 3"
+                              className="h-full w-full object-cover"
+                              draggable={false}
+                            />
+                          </div>
+
+                          <div className="aspect-[4/3] overflow-hidden rounded-[22px] shadow-[0_26px_80px_-55px_rgba(0,0,0,.55)] ring-1 ring-white/10">
+                            <img
+                              src="/images/home/card-4.jpg"
+                              alt="Card 4"
+                              className="h-full w-full object-cover"
+                              draggable={false}
+                            />
+                          </div>
+                        </div>
+
+                        {/* Mobile stack */}
+                        <div className="grid gap-4 md:hidden">
+                          {["card-1", "card-2", "mock", "card-3", "card-4"].map((k) => (
+                            <div
+                              key={k}
+                              className={cx(
+                                "overflow-hidden rounded-[20px]",
+                                "shadow-[0_18px_60px_-45px_rgba(0,0,0,.55)] ring-1 ring-white/10",
+                                k === "mock" ? "aspect-[16/10]" : "aspect-[16/9]"
+                              )}
+                            >
+                              <img
+                                src={k === "mock" ? "/images/home/mock.jpg" : `/images/home/${k}.jpg`}
+                                alt={k}
+                                className="h-full w-full object-cover"
+                                draggable={false}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* bottom spacing */}
+                  <div className="pb-16 md:pb-20" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+{/* =====================================================
+    NEW SECTION: Brand Cards (ดีไซน์ตามรูป + 10 cards / 5 per row)
+    ✅ Card กว้างขึ้นนิด (เพิ่ม max-w + ปรับ grid ให้การ์ดกว้างขึ้น)
+    ✅ เลข 10 ทำเอฟเฟค count 0 → 10 (ความเร็วกลางๆ)
+====================================================== */}
+<section className="bg-white">
+  <div className="mx-auto w-full max-w-7xl px-4 md:px-6 py-14">
+    <div className="text-center">
+      {/* ✅ Number count effect 0 -> 10 */}
+      <CountTo
+        to={10}
+        className="text-[72px] leading-none font-extrabold tracking-tight md:text-[104px]"
+      />
+
+      <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
+        {(t("home.sections.brands.title") as string) || "แบรนด์ที่เราจัดจำหน่ายอย่างเป็นทางการ"}
+      </h2>
+
+      <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-600 md:text-base">
+        {(t("home.sections.brands.desc") as string) ||
+          "ค้นหาแบรนด์และกดเข้าไปดูรายละเอียด การรับประกัน และช่องทางบริการ"}
+      </p>
+
+{/* Search (premium gold ring — less white, more “rich gold”) */}
+<div className="mx-auto mt-6 w-full max-w-md">
+  <div className="rounded-full p-[1px] bg-gradient-to-r from-[#C79A2E] via-[#D7B04A] to-[#9A6B12]">
+    <div className="flex items-center gap-2 rounded-full bg-white px-4 py-3 ring-1 ring-black/[0.03] shadow-[0_10px_30px_-22px_rgba(154,107,18,.28)] transition focus-within:shadow-[0_16px_44px_-28px_rgba(154,107,18,.42)]">
+      <span className="text-[#9A6B12] opacity-95">⌕</span>
+
+      <input
+        type="text"
+        value={brandQuery}
+        onChange={(e) => setBrandQuery(e.target.value)}
+        placeholder={(t("common.search") as string) || "Search"}
+        className="w-full bg-transparent text-sm text-slate-900 placeholder:text-slate-400 outline-none"
+      />
+    </div>
+  </div>
+</div>
+
+      {/* Chips */}
+      <div className="mx-auto mt-5 flex max-w-5xl flex-wrap items-center justify-center gap-2">
+        {brandFilters.map((x) => {
+          const active = brandFilter === x;
+          return (
+            <button
+              key={x}
+              type="button"
+              onClick={() => setBrandFilter(x)}
+              className={cx(
+                "rounded-full px-3 py-1 text-xs font-semibold transition",
+                active
+                  ? "bg-slate-900 text-white"
+                  : "bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50"
+              )}
+            >
+              {x}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+
+{/* ✅ Cards: ปรับใหม่ให้ “รูปเยอะขึ้น / ขาวไม่ล้น / ข้อความเตี้ยลง” */}
+<div className="mt-10 grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+  {brandLinksToShow.slice(0, 10).map((b) => (
+    <Link
+      key={b.slug}
+      to={`/brands/${b.slug}`}
+      className={cx(
+        "group relative overflow-hidden rounded-[34px] bg-white",
+        "ring-1 ring-slate-200/80",
+        "shadow-[0_18px_60px_-45px_rgba(15,23,42,.18)]",
+        "transition duration-300",
+        "hover:-translate-y-0.5 hover:shadow-[0_22px_70px_-46px_rgba(15,23,42,.22)]"
+      )}
+    >
+      {/* ✅ Top image: “ยาวขึ้น” (สูงขึ้นนิด) */}
+      <div className="relative aspect-[6/5.5] w-full overflow-hidden bg-slate-50">
+        <img
+          src={b.img}
+          alt={b.name}
+          className={cx(
+            "h-full w-full object-cover",
+            "transition duration-500",
+            "group-hover:scale-[1.04]"
+          )}
+          draggable={false}
+        />
+
+        {/* ✅ Top vignette เบาๆ ให้ดู premium แต่ไม่มืดจัด */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/25 via-black/0 to-transparent" />
+
+        {/* ✅ Bottom fade: ลด “ขาวล้น” (สั้นลง + จางลง + ไม่ทึบ) */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white/80 via-white/35 to-transparent" />
+      </div>
+
+      {/* ✅ Content: ลดพื้นที่ข้อความ (compact) */}
+      <div className="relative px-5 pb-5 pt-3">
+        {/* ✅ ไล่ขาวแบบเนียน (ไม่ทึบ) */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/55 via-white/85 to-white" />
+
+        <div className="relative">
+          <div className="text-[17px] font-extrabold tracking-tight text-slate-900">
+            {b.name}
+          </div>
+
+          {/* ✅ desc 1 line -> ... */}
+          <div className="mt-1 text-[13px] leading-snug text-slate-600 overflow-hidden text-ellipsis whitespace-nowrap">
+            {b.desc ||
+              ((t("home.sections.brands.cardHint") as string) ||
+                "Official distributor • Warranty • Service")}
+          </div>
+
+          {/* ✅ bottom action: เตี้ยลง + เนียนขึ้น */}
+          <div className="mt-3 flex items-center gap-3">
+            <span
+              className={cx(
+                "inline-flex h-9 w-9 items-center justify-center rounded-full",
+                "bg-slate-100/80 ring-1 ring-slate-200",
+                "text-slate-800",
+                "transition",
+                "group-hover:bg-slate-900 group-hover:text-white group-hover:ring-slate-900"
+              )}
+              aria-hidden="true"
+            >
+              →
+            </span>
+
+            <span className="text-[13px] font-semibold text-slate-700 group-hover:underline">
+              {(t("common.open") as string) || "Open"}
+            </span>
+          </div>
+        </div>
+      </div>
+    </Link>
+  ))}
+</div>
+  </div>
+</section>
+
+        {/* =====================================================
+            Showcase (เหมือนเดิม)
+        ====================================================== */}
+        <section className="bg-white">
+          <div className="mx-auto w-full max-w-6xl px-4 md:px-6 pt-12">
+            <SectionHeader
+              kicker={t("home.sections.showcase.kicker") || "Capabilities"}
+              title={t("home.sections.showcase.title") || "What we do"}
+              desc={t("home.sections.showcase.desc") || "ครบเครื่องตั้งแต่กลยุทธ์ → execution"}
+            />
+
+            <div className="mt-6 grid gap-4 md:grid-cols-2 md:gap-6">
+              {showcase.map((s: any, idx: number) => (
+                <GlassCard key={idx} className="p-6 md:p-7">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <div className="text-sm font-extrabold text-slate-900">{s.title}</div>
+                      <div className="mt-2 text-sm leading-relaxed text-slate-700">{s.desc}</div>
+                    </div>
+                    <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-indigo-600 via-cyan-500 to-rose-400 opacity-90" />
+                  </div>
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {asArray<string>(s.tags).map((tag) => (
+                      <span
+                        key={tag}
+                        className="inline-flex items-center rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-700 ring-1 ring-slate-200"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </GlassCard>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="bg-white">
+          <div className="mx-auto w-full max-w-6xl px-4 md:px-6 py-12">
+            <div className="rounded-3xl bg-white ring-1 ring-slate-200 shadow-[0_18px_60px_-45px_rgba(15,23,42,.25)] p-6 md:p-8">
+              <div className="grid gap-6 md:grid-cols-[1.2fr_.8fr] md:items-center">
+                <div>
+                  <div className="inline-flex items-center rounded-full bg-white px-4 py-2 text-xs font-extrabold text-slate-800 ring-1 ring-slate-200">
+                    {t("home.final.kicker") || "Contact"}
+                  </div>
+
+                  <div className="mt-4 text-2xl font-extrabold tracking-tight text-slate-900 md:text-3xl">
+                    {t("home.final.title") || "ติดต่อทีม SHD เพื่อความร่วมมือ"}
+                  </div>
+
+                  <p className="mt-3 text-sm leading-relaxed text-slate-700 md:text-base">
+                    {t("home.final.desc") || "พูดคุยเรื่องพาร์ทเนอร์ งานบริการ หรือคำถามเกี่ยวกับบริษัท"}
+                  </p>
+
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    <a
+                      href="/contact"
+                      className="inline-flex items-center justify-center rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_22px_70px_-45px_rgba(79,70,229,.70)] transition hover:bg-indigo-700"
+                    >
+                      {t("home.final.ctaPrimary") || "ส่งข้อความ"}
+                    </a>
+                    <a
+                      href="/about"
+                      className="inline-flex items-center justify-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 ring-1 ring-slate-200 transition hover:bg-slate-50"
+                    >
+                      {t("home.final.ctaSecondary") || "ดูงาน"}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="grid gap-3">
+                  {(asArray<string>(t("home.final.bullets", { returnObjects: true } as any)).length
+                    ? asArray<string>(t("home.final.bullets", { returnObjects: true } as any))
+                    : ["Business & Partnership", "Services & Operations", "Careers & HR"]
+                  ).map((x, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <div className="mt-1 h-2 w-2 rounded-full bg-indigo-600" />
+                      <div className="text-sm text-slate-800">{x}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </>
+  );
+}

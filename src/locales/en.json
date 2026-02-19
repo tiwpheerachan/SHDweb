@@ -1,0 +1,349 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "brands": "Brands",
+    "services": "Services",
+    "activities": "Activities",
+    "careers": "Careers",
+    "contact": "Contact"
+  },
+  "common": {
+    "skip": "Skip to content",
+    "section": {
+      "kicker": "Overview",
+      "title": "One coherent light theme across all pages",
+      "desc": "Shared tokens, buttons, cards, and a clean i18n setup (TH/EN/中文) with instant switching."
+    },
+    "stats": [
+      {
+        "k": "Countries served",
+        "v": "10+"
+      },
+      {
+        "k": "Brands powered",
+        "v": "20+"
+      },
+      {
+        "k": "Team members",
+        "v": "500+"
+      }
+    ],
+    "promise": {
+      "title": "The SHD Promise",
+      "desc": "We build measurable systems with transparent standards—designed to scale across regions.",
+      "bullets": [
+        "Clear, auditable operating standards",
+        "Outcome-driven work with excellent customer experience",
+        "Localization-ready for each market and partner"
+      ]
+    }
+  },
+  "footer": {
+    "tagline": "Building products, operations, and growth systems across Asia.",
+    "rights": "All rights reserved",
+    "cards": [
+      {
+        "title": "Enterprise-grade Standards",
+        "desc": "Clear process from strategy → execution → measurement"
+      },
+      {
+        "title": "Built to Scale",
+        "desc": "Designed for multi-country, multi-brand, multi-channel"
+      },
+      {
+        "title": "Operators + Builders",
+        "desc": "We combine tech and real operations to make it happen"
+      }
+    ]
+  },
+  "home": {
+    "seo": {
+      "title": "SHD Corporate",
+      "description": "SHD Technology corporate website — beautiful light theme with 3-language i18n"
+    },
+    "hero": {
+      "badges": [
+        "Light Mode",
+        "Glass + Gradient",
+        "TH / EN / 中文"
+      ],
+      "title": "SHD Technology — powering brand growth across Asia",
+      "subtitle": "A platform and team that connects strategy, commerce, marketing, and operations into measurable outcomes.",
+      "ctaPrimary": "Explore services",
+      "ctaSecondary": "Join us",
+      "stats": [
+        {
+          "k": "Network",
+          "v": "SEA"
+        },
+        {
+          "k": "Focus",
+          "v": "Growth"
+        },
+        {
+          "k": "Standard",
+          "v": "Enterprise"
+        }
+      ]
+    },
+    "highlights": [
+      {
+        "title": "Brand & Distribution",
+        "desc": "Scale brands through the right channels with strong quality control."
+      },
+      {
+        "title": "Commerce Operations",
+        "desc": "End-to-end ops: orders, logistics, finance, and back office."
+      },
+      {
+        "title": "Data & Automation",
+        "desc": "Unified data and automation for faster, better decisions."
+      }
+    ],
+    "sections": {
+      "showcase": {
+        "kicker": "What we do",
+        "title": "Designed to look premium—and work in real life",
+        "desc": "A coherent 7-page structure with consistent UI language and translations."
+      }
+    },
+    "showcase": [
+      {
+        "title": "Premium light glass UI",
+        "desc": "Soft gradient background + glass cards + gentle shadows, highly readable.",
+        "tags": [
+          "clean",
+          "premium",
+          "modern"
+        ]
+      },
+      {
+        "title": "Complete 7-page site",
+        "desc": "Home, About, Brands, Services, Activities, Careers, Contact.",
+        "tags": [
+          "router-ready",
+          "production base",
+          "consistent"
+        ]
+      },
+      {
+        "title": "i18n TH/EN/中文",
+        "desc": "Instant switching + language persisted in localStorage.",
+        "tags": [
+          "react-i18next",
+          "3 languages",
+          "scalable"
+        ]
+      },
+      {
+        "title": "Ready to extend",
+        "desc": "Add API, CMS, forms, email, or Supabase later—structure stays clean.",
+        "tags": [
+          "TypeScript",
+          "Vite",
+          "extensible"
+        ]
+      }
+    ],
+    "final": {
+      "kicker": "Ready",
+      "title": "Start your SHD Corporate project instantly",
+      "desc": "A runnable project with 7 pages and 3 languages—perfect to deploy on Netlify/Vercel.",
+      "ctaPrimary": "Contact us",
+      "ctaSecondary": "Read our story",
+      "bullets": [
+        "Clean structure (pages/components)",
+        "One coherent light theme",
+        "Update copy easily in locale files"
+      ]
+    }
+  },
+  "about": {
+    "seo": {
+      "title": "About",
+      "description": "Story, principles, and vision of SHD Technology"
+    },
+    "hero": {
+      "kicker": "About",
+      "title": "The story behind SHD growth",
+      "desc": "We build teams and systems that help brands scale across markets and channels.",
+      "ctaPrimary": "See overview",
+      "ctaSecondary": "Contact"
+    },
+    "blocks": [
+      {
+        "title": "Company Story",
+        "desc": "From 0→1 to 1→100: building scalable foundations."
+      },
+      {
+        "title": "Operational Excellence",
+        "desc": "Measurable processes from storefront to back office."
+      },
+      {
+        "title": "Global + Local",
+        "desc": "Local insights combined with global standards."
+      }
+    ]
+  },
+  "brands": {
+    "seo": {
+      "title": "Brands",
+      "description": "Brands and partners powered by SHD"
+    },
+    "hero": {
+      "kicker": "Brands",
+      "title": "A portfolio we help grow",
+      "desc": "A quick overview of brands in our ecosystem and how we collaborate for win-win outcomes.",
+      "ctaPrimary": "View brands",
+      "ctaSecondary": "Talk to us"
+    },
+    "blocks": [
+      {
+        "title": "Distribution & Authorized",
+        "desc": "Transparent distribution with brand-grade standards."
+      },
+      {
+        "title": "Marketplace Growth",
+        "desc": "Multi-platform growth plans with real measurement."
+      },
+      {
+        "title": "Brand Protection",
+        "desc": "Monitoring systems for pricing, stock, and content quality."
+      }
+    ]
+  },
+  "services": {
+    "seo": {
+      "title": "Services",
+      "description": "SHD services: commerce, marketing, operations, and data"
+    },
+    "hero": {
+      "kicker": "Services",
+      "title": "Modular services that scale",
+      "desc": "Choose modules or run end-to-end—from strategy to execution.",
+      "ctaPrimary": "Explore services",
+      "ctaSecondary": "Contact"
+    },
+    "blocks": [
+      {
+        "title": "E-commerce Ops",
+        "desc": "Orders, warehouse, logistics, finance, returns, and support."
+      },
+      {
+        "title": "Performance Marketing",
+        "desc": "Media plan + creative + experimentation for clear ROI."
+      },
+      {
+        "title": "Data Platform",
+        "desc": "Unified multi-channel data for dashboards and decisions."
+      }
+    ]
+  },
+  "activities": {
+    "seo": {
+      "title": "Activities",
+      "description": "Team culture, activities, and stories from SHD"
+    },
+    "hero": {
+      "kicker": "Activities",
+      "title": "Culture that keeps us moving",
+      "desc": "Highlights and moments from the team—built on respect and measurable standards.",
+      "ctaPrimary": "See highlights",
+      "ctaSecondary": "Join the team"
+    },
+    "blocks": [
+      {
+        "title": "Team Culture",
+        "desc": "We work seriously—and support each other’s growth."
+      },
+      {
+        "title": "Learning & Sharing",
+        "desc": "We review outcomes, share knowledge, and improve constantly."
+      },
+      {
+        "title": "Community",
+        "desc": "Positive impact for teammates, partners, and customers."
+      }
+    ]
+  },
+  "careers": {
+    "seo": {
+      "title": "Careers",
+      "description": "Join SHD Technology — grow with regional opportunities"
+    },
+    "hero": {
+      "kicker": "Careers",
+      "title": "Challenging work with real growth",
+      "desc": "Clear growth paths, strong tools, and a supportive team to deliver outcomes.",
+      "ctaPrimary": "View roles",
+      "ctaSecondary": "Contact HR"
+    },
+    "blocks": [
+      {
+        "title": "Growth Path",
+        "desc": "Clear milestones with coaching and feedback."
+      },
+      {
+        "title": "Global Collaboration",
+        "desc": "Multi-country teams and regional projects."
+      },
+      {
+        "title": "Real Ownership",
+        "desc": "Hands-on ownership with visible results."
+      }
+    ]
+  },
+  "contact": {
+    "seo": {
+      "title": "Contact",
+      "description": "Contact channels for SHD Technology"
+    },
+    "hero": {
+      "kicker": "Contact",
+      "title": "Let’s talk",
+      "desc": "Reach out for partnerships, services, or corporate inquiries.",
+      "ctaPrimary": "Send a message",
+      "ctaSecondary": "Careers"
+    },
+    "section": {
+      "kicker": "Channels",
+      "title": "Primary contact channels",
+      "desc": "A ready-to-extend Contact page template."
+    },
+    "channels": [
+      {
+        "title": "Email",
+        "desc": "Business & partnerships",
+        "value": "hello@shd-technology.co.th"
+      },
+      {
+        "title": "Phone",
+        "desc": "Urgent inquiries",
+        "value": "+66 xx-xxx-xxxx"
+      },
+      {
+        "title": "Office",
+        "desc": "HQ (example)",
+        "value": "Bangkok, Thailand"
+      }
+    ],
+    "form": {
+      "title": "Send us a message",
+      "desc": "Mock form — connect to API / Supabase / email later.",
+      "tags": [
+        "Partnership",
+        "Service",
+        "Media",
+        "Other"
+      ],
+      "fields": {
+        "name": "Name",
+        "email": "Email",
+        "message": "Message"
+      },
+      "submit": "Send",
+      "mockSubmit": "Sent (demo)"
+    }
+  }
+}
