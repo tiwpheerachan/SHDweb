@@ -1,14 +1,75 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import SectionHeader from "../components/SectionHeader";
-import GlassCard from "../components/GlassCard";
-import { StatPills } from "../components/StatPills";
+
+function cn(...xs: Array<string | false | undefined | null>) {
+  return xs.filter(Boolean).join(" ");
+}
+
+function PrimaryBtn({
+  href,
+  children,
+  className,
+}: {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const external = href.startsWith("http");
+  return (
+    <a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noreferrer" : undefined}
+      className={cn(
+        "inline-flex items-center justify-center rounded-full",
+        "bg-white px-6 py-3 text-sm font-bold text-black",
+        "transition hover:scale-[1.03] active:scale-[0.99]",
+        "focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black/40",
+        className
+      )}
+    >
+      {children}
+    </a>
+  );
+}
+
+function GhostBtn({
+  href,
+  children,
+  className,
+}: {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const external = href.startsWith("http");
+  return (
+    <a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noreferrer" : undefined}
+      className={cn(
+        "inline-flex items-center justify-center rounded-full",
+        "border border-white/60 px-6 py-3 text-sm font-bold text-white",
+        "transition hover:bg-white hover:text-black",
+        "focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black/40",
+        className
+      )}
+    >
+      {children}
+    </a>
+  );
+}
 
 export default function AboutPage() {
   const { t } = useTranslation();
 
-  const blocks = (t("about.blocks", { returnObjects: true }) as Array<any>) || [];
+  const blocks = useMemo(
+    () => (t("about.blocks", { returnObjects: true }) as Array<any>) || [],
+    [t]
+  );
 
   return (
     <>
@@ -17,77 +78,127 @@ export default function AboutPage() {
         <meta name="description" content={t("about.seo.description")} />
       </Helmet>
 
-      <section className="relative overflow-hidden rounded-[32px] bg-white/70 ring-1 ring-slate-200 shadow-soft">
-        <div
-          className="absolute inset-0 opacity-90"
-          style={{
-            background:
-              "radial-gradient(800px 420px at 20% 0%, rgba(79,70,229,.18), transparent 60%)," +
-              "radial-gradient(700px 420px at 90% 20%, rgba(6,182,212,.16), transparent 60%)," +
-              "radial-gradient(700px 520px at 60% 110%, rgba(251,113,133,.12), transparent 65%)",
-          }}
-        />
-        <div className="relative p-7 md:p-10">
-          <div className="chip">{t("about.hero.kicker")}</div>
-          <h1 className="mt-5 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
-            {t("about.hero.title")}
-          </h1>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 md:text-lg">
-            {t("about.hero.desc")}
-          </p>
+      {/* ================= HERO VIDEO (bounded width) ================= */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-6xl px-6 pt-10">
+          <div className="relative w-full overflow-hidden">
+            <div className="relative aspect-video">
+              <video
+                className="absolute inset-0 h-full w-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+              >
+                <source src="/videos/about-hero.mp4" type="video/mp4" />
+              </video>
 
-          <div className="mt-7 flex flex-wrap items-center gap-3">
-            <a className="btnPrimary" href="#content">
-              {t("about.hero.ctaPrimary")}
-            </a>
-            <a className="btn" href="/contact">
-              {t("about.hero.ctaSecondary")}
-            </a>
+              {/* overlay */}
+              <div className="absolute inset-0 bg-black/35" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/55" />
+
+              {/* copy */}
+              <div className="absolute inset-x-0 bottom-0 p-6 md:p-10 text-white">
+                <div className="text-xs font-bold tracking-[0.25em] uppercase text-white/80">
+                  {t("about.hero.kicker")}
+                </div>
+
+                <h1 className="mt-4 max-w-3xl text-3xl font-extrabold leading-tight md:text-5xl">
+                  {t("about.hero.title")}
+                </h1>
+
+                <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/85 md:text-lg">
+                  {t("about.hero.desc")}
+                </p>
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <PrimaryBtn href="#content">{t("about.hero.ctaPrimary")}</PrimaryBtn>
+                  <GhostBtn href="/contact">{t("about.hero.ctaSecondary")}</GhostBtn>
+                </div>
+              </div>
+            </div>
           </div>
-
-          <StatPills
-            items={[
-              { k: t("common.stats.0.k"), v: t("common.stats.0.v") },
-              { k: t("common.stats.1.k"), v: t("common.stats.1.v") },
-              { k: t("common.stats.2.k"), v: t("common.stats.2.v") },
-            ]}
-          />
         </div>
       </section>
 
-      <section id="content" className="mt-10">
-        <SectionHeader
-          kicker={t("common.section.kicker")}
-          title={t("common.section.title")}
-          desc={t("common.section.desc")}
-        />
+      {/* ================= COMPANY INTRO ================= */}
+      <section id="content" className="bg-white py-24">
+        <div className="mx-auto max-w-6xl px-6">
+          <SectionHeader
+            kicker={t("about.section1.kicker")}
+            title={t("about.section1.title")}
+            desc={t("about.section1.desc")}
+          />
 
-        <div className="mt-6 grid gap-4 md:grid-cols-3 md:gap-6">
-          {blocks.map((b, idx) => (
-            <GlassCard key={idx} className="p-6 md:p-7">
-              <div className="flex items-start justify-between gap-4">
-                <div className="text-sm font-extrabold text-slate-900">{b.title}</div>
-                <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-indigo-600 via-cyan-500 to-rose-400 opacity-90" />
+          <div className="mt-16 grid gap-12 md:grid-cols-3">
+            {blocks.map((b, idx) => (
+              <div key={idx} className="group">
+                <div className="text-2xl font-bold text-slate-900">{b.title}</div>
+
+                <p className="mt-4 text-base leading-relaxed text-slate-600">
+                  {b.desc}
+                </p>
+
+                <div className="mt-6 h-[2px] w-0 bg-gradient-to-r from-indigo-600 to-cyan-500 transition-all duration-500 group-hover:w-full" />
               </div>
-              <div className="mt-3 text-sm leading-relaxed text-slate-600">{b.desc}</div>
-            </GlassCard>
-          ))}
+            ))}
+          </div>
         </div>
+      </section>
 
-        <div className="mt-6 card">
-          <div className="grid gap-4 md:grid-cols-2 md:gap-6">
-            <div>
-              <div className="text-sm font-extrabold text-slate-900">{t("common.promise.title")}</div>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">{t("common.promise.desc")}</p>
+      {/* ================= MISSION / VISION / VALUES ================= */}
+      <section className="bg-slate-50 py-24">
+        <div className="mx-auto max-w-5xl px-6 text-center">
+          {/* ✅ you said this kicker is good */}
+          <div className="text-sm font-bold tracking-[0.25em] uppercase text-slate-500">
+            {t("about.mission.kicker")}
+          </div>
+
+          <h2 className="mt-6 text-4xl font-extrabold text-slate-900">
+            {t("about.mission.title")}
+          </h2>
+
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-slate-600">
+            {t("about.mission.desc")}
+          </p>
+
+          <div className="mt-16 grid gap-12 md:grid-cols-2">
+            <div className="text-left md:text-center">
+              <div className="text-2xl font-bold text-slate-900">
+                {t("about.vision.title")}
+              </div>
+              <p className="mt-4 text-slate-600">{t("about.vision.desc")}</p>
             </div>
-            <div className="grid gap-2">
-              {(t("common.promise.bullets", { returnObjects: true }) as string[]).map((x, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <div className="mt-1 h-2 w-2 rounded-full bg-indigo-600" />
-                  <div className="text-sm text-slate-700">{x}</div>
-                </div>
-              ))}
+
+            <div className="text-left md:text-center">
+              <div className="text-2xl font-bold text-slate-900">
+                {t("about.values.title")}
+              </div>
+              <p className="mt-4 text-slate-600">{t("about.values.desc")}</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= CTA ================= */}
+      <section className="bg-black py-20 text-center text-white">
+        <div className="mx-auto max-w-3xl px-6">
+          <h3 className="text-3xl font-bold">{t("about.cta.title")}</h3>
+
+          <p className="mt-4 text-white/80">{t("about.cta.desc")}</p>
+
+          <div className="mt-8">
+            <a
+              href="/contact"
+              className={cn(
+                "inline-flex items-center justify-center rounded-full",
+                "bg-white px-8 py-4 text-sm font-bold text-black",
+                "transition hover:scale-105 active:scale-[0.99]",
+                "focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              )}
+            >
+              {t("about.cta.button")}
+            </a>
           </div>
         </div>
       </section>

@@ -15,10 +15,15 @@ function cn(...xs: Array<string | false | undefined | null>) {
  * - ✅ ปิด hover effect ทั้งหมด: เอาเม้าส์โดน navbar แล้ว "ต้องไม่เปลี่ยนสี/ไม่ขาว"
  * - Active link ตอน top: เป็นเส้นวง (ring) ไม่เติมพื้นขาว
  * - Scroll แล้ว/หน้าอื่น: เป็น glass pill แบบเดิม
+ *
+ * ✅ Update:
+ * - Careers ลิ้งออกไปยัง http://careers.shd-technology.co.th (external link)
  */
 export default function Navbar() {
   const { t, i18n } = useTranslation();
   const location = useLocation();
+
+  const CAREERS_URL = "http://careers.shd-technology.co.th";
 
   const links = useMemo(
     () => [
@@ -26,8 +31,8 @@ export default function Navbar() {
       { to: "/about", label: t("nav.about") },
       { to: "/brands", label: t("nav.brands") },
       { to: "/services", label: t("nav.services") },
-      { to: "/activities", label: t("nav.activities") },
-      { to: "/careers", label: t("nav.careers") },
+      // ✅ external
+      { to: CAREERS_URL, label: t("nav.careers"), external: true as const },
       { to: "/contact", label: t("nav.contact") },
     ],
     [t]
@@ -167,11 +172,7 @@ export default function Navbar() {
       "transition-[background-color,box-shadow,transform,border-color] duration-200 ease-out",
       m === "glass"
         ? cn("bg-white/40 backdrop-blur-xl ring-1 ring-white/70", "hover:bg-white/55")
-        : cn(
-            "bg-white/0",
-            "ring-1 ring-white/30",
-            "hover:ring-white/55 hover:backdrop-blur-xl"
-          )
+        : cn("bg-white/0", "ring-1 ring-white/30", "hover:ring-white/55 hover:backdrop-blur-xl")
     );
 
   const langLabel = (lng: string) => (lng === "th" ? "TH" : lng === "zh" ? "中文" : "EN");
@@ -210,11 +211,28 @@ export default function Navbar() {
 
               {/* Desktop nav */}
               <nav className="relative hidden md:flex items-center gap-1">
-                {links.map((l) => (
-                  <NavLink key={l.to} to={l.to} className={({ isActive }) => desktopLinkClass(isActive)}>
-                    {l.label}
-                  </NavLink>
-                ))}
+                {links.map((l) => {
+                  if ((l as any).external) {
+                    // ✅ External Careers link — keep exact same styling (no active state)
+                    return (
+                      <a
+                        key={l.to}
+                        href={l.to}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={desktopLinkClass(false)}
+                      >
+                        {l.label}
+                      </a>
+                    );
+                  }
+
+                  return (
+                    <NavLink key={l.to} to={l.to} className={({ isActive }) => desktopLinkClass(isActive)}>
+                      {l.label}
+                    </NavLink>
+                  );
+                })}
               </nav>
 
               {/* Right controls (desktop) */}
@@ -318,7 +336,28 @@ export default function Navbar() {
               <div className="px-4 pb-4">
                 <div className="grid grid-cols-2 gap-2">
                   {links.map((l) => {
-                    const active = location.pathname === l.to;
+                    const isExternal = (l as any).external;
+                    const active = !isExternal && location.pathname === l.to;
+
+                    if (isExternal) {
+                      return (
+                        <a
+                          key={l.to}
+                          href={l.to}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={cn(
+                            "rounded-2xl px-4 py-3 text-sm font-semibold transition",
+                            "ring-1 ring-white/70",
+                            "bg-white/55 text-slate-800 hover:bg-white/75"
+                          )}
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          {l.label}
+                        </a>
+                      );
+                    }
+
                     return (
                       <NavLink
                         key={l.to}

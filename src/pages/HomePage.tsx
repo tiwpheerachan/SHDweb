@@ -12,14 +12,8 @@ function asArray<T = any>(v: any): T[] {
   return Array.isArray(v) ? (v as T[]) : [];
 }
 
-{/* ✅ helper component: count 0 -> to */}
-function CountTo({
-  to,
-  className,
-}: {
-  to: number;
-  className?: string;
-}) {
+// ✅ helper component: count 0 -> to
+function CountTo({ to, className }: { to: number; className?: string }) {
   const [n, setN] = React.useState(0);
 
   React.useEffect(() => {
@@ -41,23 +35,22 @@ function CountTo({
     return () => cancelAnimationFrame(raf);
   }, [to]);
 
-return (
-  <div className={className}>
-    <span
-      className="
-        bg-gradient-to-b
-        from-[#f6e7b0]
-        via-[#d7b85a]
-        to-[#b48a22]
-        bg-clip-text
-        text-transparent
-      "
-    >
-      {n}
-    </span>
-  </div>
-);
-
+  return (
+    <div className={className}>
+      <span
+        className="
+          bg-gradient-to-b
+          from-[#f6e7b0]
+          via-[#d7b85a]
+          to-[#b48a22]
+          bg-clip-text
+          text-transparent
+        "
+      >
+        {n}
+      </span>
+    </div>
+  );
 }
 
 function cx(...xs: Array<string | false | null | undefined>) {
@@ -233,317 +226,472 @@ export default function HomePage() {
         {/* =========================
             HERO (VIDEO + Gold/Black theme)
         ========================== */}
-        <section className="relative">
-          {/* Full-bleed wrapper */}
-          <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
-            <div className="relative min-h-[760px] w-full overflow-hidden">
-              {/* ✅ Background VIDEO */}
-              <video
-                className="absolute inset-0 h-full w-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                poster="/images/home/hero-bg.jpg"
-              >
-                <source src="/videos/hero.mp4" type="video/mp4" />
-              </video>
+<section className="relative">
+  {/* Full-bleed wrapper */}
+  <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+    <div className="relative min-h-[780px] w-full overflow-hidden">
+      {/* ✅ Background VIDEO */}
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        poster="/images/home/hero-bg.jpg"
+      >
+        <source src="/videos/hero.mp4" type="video/mp4" />
+      </video>
 
-              {/* ✅ Content */}
-              <div className="relative">
-                <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
-                  {/* top spacing */}
-                  <div className="pt-10 md:pt-14" />
+      {/* ✅ NO background gradient overlay ✅
+          แต่เพิ่ม “เส้นไล่สีบางๆ” ที่วิ่งผ่านเหมือนดาวตก + twinkle เบามาก (ไม่ทำพื้นหลังเป็นไล่สี) */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        {/* meteor lines */}
+        <span
+        />
 
-                  {/* ========= TOP HERO TEXT ========= */}
-                  <div className="mx-auto max-w-3xl text-center">
-                    {/* ✅ Badge ดำ-ทอง */}
-                    <div className="inline-flex rounded-full p-[1px] bg-gradient-to-r from-[#0b0b0c] via-[#c8a24a] to-[#0b0b0c] shadow-[0_18px_60px_-45px_rgba(200,162,74,.45)]">
-                      <div className="inline-flex items-center gap-2 rounded-full bg-black/25 px-4 py-2 text-xs font-semibold text-white ring-1 ring-white/15 backdrop-blur-xl">
-                        <span className="h-2 w-2 rounded-full bg-white" />
-                        {(t("home.hero.badges.0") as string) || "Light Mode"}
-                      </div>
-                    </div>
+        {/* subtle twinkle dots (น้อยมาก) */}
+        <span
+          className="absolute inset-0 opacity-[0.14] mix-blend-multiply"
+          style={{
+            animation: "shdTwinkle 7.5s ease-in-out infinite",
+            background:
+              "radial-gradient(circle at 18% 22%, rgba(184,137,44,.45) 0 1px, transparent 2px),\
+               radial-gradient(circle at 62% 28%, rgba(215,184,90,.38) 0 1px, transparent 2px),\
+               radial-gradient(circle at 42% 64%, rgba(199,154,46,.32) 0 1px, transparent 2px),\
+               radial-gradient(circle at 78% 58%, rgba(184,137,44,.30) 0 1px, transparent 2px),\
+               radial-gradient(circle at 26% 78%, rgba(215,184,90,.30) 0 1px, transparent 2px)",
+          }}
+        />
+      </div>
 
-                    {/* ✅ Title สีขาว */}
-                    <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-white drop-shadow-[0_10px_30px_rgba(0,0,0,.45)] md:text-5xl">
-                      {t("home.hero.title") || "SHD Technology — สร้างการเติบโตให้แบรนด์ในเอเชีย"}
-                    </h1>
+      {/* ✅ Content */}
+      <div className="relative">
+        <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
+          {/* ✅ ขยับทั้งส่วนลงมานิดหน่อย */}
+          <div className="pt-16 md:pt-24" />
 
-                    {/* ✅ Subtitle สีขาว */}
-                    <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/85 drop-shadow-[0_10px_30px_rgba(0,0,0,.40)] md:text-base">
-                      {t("home.hero.subtitle") ||
-                        "แพลตฟอร์มและทีมงานที่เชื่อมกลยุทธ์ การขาย การตลาด และปฏิบัติการ เพื่อผลลัพธ์ที่วัดผลได้"}
-                    </p>
+{/* ========= TOP HERO TEXT ========= */}
+<div className="mx-auto max-w-3xl text-center">
+  {/* ✅ Badge: transparent + thin gold outline (SHD) */}
+  <div className="inline-flex">
+    <div
+      className={[
+        "relative inline-flex items-center gap-2 rounded-full px-4 py-2",
+        "text-xs font-semibold text-slate-900",
+        "bg-transparent",
+        "ring-1 ring-[#d7b85a]/70",
+        "shadow-[0_10px_32px_-26px_rgba(184,137,44,.25)]",
+        "backdrop-blur-[10px]",
+      ].join(" ")}
+    >
+      <span className="relative h-2 w-2 rounded-full bg-[#b8892c]">
+        <span className="absolute -inset-1 rounded-full bg-[#f6e7b0]/80 blur-[2px]" />
+      </span>
 
-                    {/* ✅ CTA ทอง + ตัวหนังสือขาวชัด */}
-                    <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-                      <a
-                        href="/services"
-                        className={cx(
-                          "group inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-white",
-                          "bg-gradient-to-r from-[#b8892c] via-[#e7c46a] to-[#b8892c]",
-                          "shadow-[0_22px_70px_-45px_rgba(200,162,74,.60)]",
-                          "transition duration-300",
-                          "hover:-translate-y-0.5 hover:brightness-110",
-                          "active:translate-y-0"
-                        )}
-                      >
-                        <span className="relative">
-                          {t("home.hero.ctaPrimary") || "ดูบริการ"}
-                          <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-white/80 transition-all duration-300 group-hover:w-full" />
-                        </span>
-                      </a>
+      {(t("home.hero.badges.0") as string) || "SHD THAILAND"}
 
-                      <a
-                        href="/careers"
-                        className={cx(
-                          "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-white",
-                          "bg-black/25 backdrop-blur-xl",
-                          "ring-1 ring-[#e7c46a]/50",
-                          "shadow-[0_18px_60px_-45px_rgba(200,162,74,.25)]",
-                          "transition duration-300",
-                          "hover:bg-black/30 hover:ring-[#e7c46a]/70 hover:-translate-y-0.5",
-                          "active:translate-y-0"
-                        )}
-                      >
-                        {t("home.hero.ctaSecondary") || "ร่วมงานกับเรา"}
-                      </a>
-                    </div>
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-90"
+        style={{
+          WebkitMaskImage: "linear-gradient(110deg, transparent, #000, transparent)",
+          WebkitMaskSize: "260% 100%",
+          animation: "shdBadgeGoldShimmer 2.2s linear infinite",
+          background:
+            "radial-gradient(circle at 16% 42%, rgba(255,242,200,.95) 0 1.2px, transparent 2.6px),\
+             radial-gradient(circle at 28% 66%, rgba(242,213,126,.85) 0 1.2px, transparent 2.6px),\
+             radial-gradient(circle at 44% 32%, rgba(199,154,46,.72) 0 1.2px, transparent 2.6px),\
+             radial-gradient(circle at 62% 56%, rgba(255,242,200,.90) 0 1.2px, transparent 2.6px),\
+             radial-gradient(circle at 78% 36%, rgba(215,184,90,.78) 0 1.2px, transparent 2.6px),\
+             radial-gradient(circle at 90% 58%, rgba(184,137,44,.66) 0 1.2px, transparent 2.6px)",
+        }}
+      />
+    </div>
+  </div>
+
+  {/* ✅ Title: change to Tailwind gold tone: from/via/to */}
+  <h1 className="mt-6 text-4xl font-extrabold tracking-tight md:text-5xl">
+    <span className="relative inline-block">
+      {/* gold gradient text (STATIC) */}
+      <span
+        className={[
+          "bg-gradient-to-r from-[#f6e7b0] via-[#d7b85a] to-[#b48a22]",
+          "bg-clip-text text-transparent",
+          "drop-shadow-[0_12px_22px_rgba(2,6,23,.16)]",
+        ].join(" ")}
+      >
+        {t("home.hero.title") || "SHD Technology — สร้างการเติบโตให้แบรนด์ในเอเชีย"}
+      </span>
+
+      {/* ✨ GOLD sparkle sweep (ชัดกว่าเดิม) */}
+      <span
+        aria-hidden="true"
+        className={[
+          "pointer-events-none absolute inset-0",
+          "opacity-95",
+          "mix-blend-screen",
+          "[mask-image:linear-gradient(110deg,transparent,black,transparent)]",
+          "[mask-size:280%_100%]",
+          "animate-[shdGoldSparkleSweep_1.9s_linear_infinite]",
+        ].join(" ")}
+        style={{
+          background:
+            "radial-gradient(circle at 12% 44%, rgba(255,242,200,1) 0 1.35px, transparent 2.8px),\
+             radial-gradient(circle at 18% 62%, rgba(242,213,126,.98) 0 1.35px, transparent 2.8px),\
+             radial-gradient(circle at 28% 30%, rgba(199,154,46,.92) 0 1.35px, transparent 2.8px),\
+             radial-gradient(circle at 40% 54%, rgba(255,242,200,.98) 0 1.35px, transparent 2.8px),\
+             radial-gradient(circle at 52% 36%, rgba(215,184,90,.92) 0 1.35px, transparent 2.8px),\
+             radial-gradient(circle at 64% 58%, rgba(255,242,200,.98) 0 1.35px, transparent 2.8px),\
+             radial-gradient(circle at 76% 34%, rgba(184,137,44,.90) 0 1.35px, transparent 2.8px),\
+             radial-gradient(circle at 88% 52%, rgba(242,213,126,.96) 0 1.35px, transparent 2.8px)",
+        }}
+      />
+
+      {/* ✨ extra twinkles */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-70"
+        style={{
+          background:
+            "radial-gradient(circle at 20% 28%, rgba(255,242,200,.95) 0 2.2px, transparent 3.6px),\
+             radial-gradient(circle at 46% 72%, rgba(242,213,126,.75) 0 2.2px, transparent 3.6px),\
+             radial-gradient(circle at 72% 30%, rgba(255,242,200,.92) 0 2.2px, transparent 3.6px),\
+             radial-gradient(circle at 86% 60%, rgba(199,154,46,.68) 0 2.2px, transparent 3.6px)",
+          animation: "shdGoldTwinkle 2.8s ease-in-out infinite",
+        }}
+      />
+
+      {/* gloss sweep */}
+      <span
+        aria-hidden="true"
+        className={[
+          "pointer-events-none absolute -inset-x-12 inset-y-0",
+          "bg-gradient-to-r from-transparent via-[#fff2c8]/45 to-transparent",
+          "skew-x-[-18deg]",
+          "opacity-60 mix-blend-screen",
+          "animate-[shdTitleSweep_4.8s_ease-in-out_infinite]",
+        ].join(" ")}
+      />
+    </span>
+
+    <style>{`
+      @keyframes shdGoldSparkleSweep{
+        0% { mask-position: -140% 0; }
+        100% { mask-position: 140% 0; }
+      }
+      @keyframes shdGoldTwinkle{
+        0%,100%{ opacity: .52; filter: blur(0px); }
+        50%{ opacity: .82; filter: blur(.25px); }
+      }
+      @keyframes shdTitleSweep{
+        0%{ transform: translateX(-55%) skewX(-18deg); opacity: 0; }
+        16%{ opacity: .62; }
+        52%{ transform: translateX(55%) skewX(-18deg); opacity: .40; }
+        86%{ opacity: .14; }
+        100%{ transform: translateX(78%) skewX(-18deg); opacity: 0; }
+      }
+      @keyframes shdBadgeGoldShimmer{
+        0%{ -webkit-mask-position: -140% 0; mask-position: -140% 0; }
+        100%{ -webkit-mask-position: 140% 0; mask-position: 140% 0; }
+      }
+    `}</style>
+  </h1>
+
+  <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-800/90 md:text-base">
+    {t("home.hero.subtitle") ||
+      "แพลตฟอร์มและทีมงานที่เชื่อมกลยุทธ์ การขาย การตลาด และปฏิบัติการ เพื่อผลลัพธ์ที่วัดผลได้"}
+  </p>
+
+  <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+    {/* Primary: black button */}
+    <a
+      href="/services"
+      className={cx(
+        "group relative inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold",
+        "bg-black text-white",
+        "ring-1 ring-black/10",
+        "shadow-[0_20px_60px_-46px_rgba(2,6,23,.55)]",
+        "transition duration-300",
+        "hover:-translate-y-0.5 hover:bg-slate-950 hover:brightness-105",
+        "active:translate-y-0"
+      )}
+    >
+      <span className="relative">
+        {t("home.hero.ctaPrimary") || "ดูบริการ"}
+        <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-white/75 transition-all duration-300 group-hover:w-full" />
+      </span>
+    </a>
+
+    {/* Secondary: glass */}
+    <a
+      href="http://careers.shd-technology.co.th/"
+      target="_blank"
+      rel="noreferrer"
+      className={cx(
+        "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold",
+        "text-slate-800",
+        "bg-white/75 backdrop-blur-xl",
+        "ring-1 ring-[#d7b85a]/55",
+        "shadow-[0_14px_44px_-34px_rgba(184,137,44,.20)]",
+        "transition duration-300",
+        "hover:-translate-y-0.5 hover:bg-white/85 hover:ring-[#f2d57e]/70",
+        "active:translate-y-0"
+      )}
+    >
+      {t("home.hero.ctaSecondary") || "ร่วมงานกับเรา"}
+    </a>
+  </div>
+</div>
+
+          {/* ========= STAGE: รองรับ “กรอบเป็นวิดีโอ” + ไม่มี “กรอบ/ขอบ” (เหลือแค่รูป/วิดีโอ) ========= */}
+          <div className="mt-14">
+            <div className="mx-auto max-w-6xl px-4 md:px-6">
+              <div className="grid items-stretch gap-4 md:grid-cols-[1fr_2.6fr_1fr]">
+                {/* LEFT */}
+                <div className="hidden md:flex flex-col gap-4">
+                  <div className="aspect-[4/3] overflow-hidden rounded-[22px] bg-transparent">
+                    <video
+                      className="h-full w-full object-cover"
+                      src="/videos/9+.mp4"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                    />
                   </div>
 
-                  {/* ========= STAGE: gap ชิดขึ้น + กลางสูงเท่ารวมซ้าย/ขวา ========= */}
-                  <div className="mt-14">
-                    <div className="mx-auto max-w-6xl px-4 md:px-6">
-                      {/* ✅ gap-8 -> gap-4 + items-stretch */}
-                      <div className="grid items-stretch gap-4 md:grid-cols-[1fr_2.6fr_1fr]">
-                        {/* LEFT */}
-                        <div className="hidden md:flex flex-col gap-4">
-                          <div className="aspect-[4/3] overflow-hidden rounded-[22px] shadow-[0_26px_80px_-55px_rgba(0,0,0,.55)] ring-1 ring-white/10">
-                            <img
-                              src="/images/home/card-1.jpg"
-                              alt="Card 1"
-                              className="h-full w-full object-cover"
-                              draggable={false}
-                            />
-                          </div>
+                  {/* ✅ Card 2: VIDEO */}
+                  <div className="aspect-[4/3] overflow-hidden rounded-[22px] bg-transparent">
+                    <video
+                      className="h-full w-full object-cover"
+                      src="/videos/Untitled design (3).mp4"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                    />
+                  </div>
+                </div>
 
-                          <div className="aspect-[4/3] overflow-hidden rounded-[22px] shadow-[0_26px_80px_-55px_rgba(0,0,0,.55)] ring-1 ring-white/10">
-                            <img
-                              src="/images/home/card-2.jpg"
-                              alt="Card 2"
-                              className="h-full w-full object-cover"
-                              draggable={false}
-                            />
-                          </div>
-                        </div>
+                {/* CENTER */}
+                <div className="relative hidden md:block">
+                  <div className="h-full overflow-hidden rounded-[28px] bg-transparent">
+                    <video
+                      className="h-full w-full object-cover"
+                      src="/videos/hro.mp4"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                    />
+                  </div>
+                </div>
 
-                        {/* CENTER: h-full ให้สูงเท่ารวมซ้าย/ขวา */}
-                        <div className="relative hidden md:block">
-                          <div className="h-full overflow-hidden rounded-[28px] shadow-[0_40px_130px_-65px_rgba(0,0,0,.65)] ring-1 ring-white/10">
-                            <img
-                              src="/images/home/mock.jpg"
-                              alt="Main mock"
-                              className="h-full w-full object-cover"
-                              draggable={false}
-                            />
-                          </div>
-                        </div>
-
-                        {/* RIGHT */}
-                        <div className="hidden md:flex flex-col gap-4">
-                          <div className="aspect-[4/3] overflow-hidden rounded-[22px] shadow-[0_26px_80px_-55px_rgba(0,0,0,.55)] ring-1 ring-white/10">
-                            <img
-                              src="/images/home/card-3.jpg"
-                              alt="Card 3"
-                              className="h-full w-full object-cover"
-                              draggable={false}
-                            />
-                          </div>
-
-                          <div className="aspect-[4/3] overflow-hidden rounded-[22px] shadow-[0_26px_80px_-55px_rgba(0,0,0,.55)] ring-1 ring-white/10">
-                            <img
-                              src="/images/home/card-4.jpg"
-                              alt="Card 4"
-                              className="h-full w-full object-cover"
-                              draggable={false}
-                            />
-                          </div>
-                        </div>
-
-                        {/* Mobile stack */}
-                        <div className="grid gap-4 md:hidden">
-                          {["card-1", "card-2", "mock", "card-3", "card-4"].map((k) => (
-                            <div
-                              key={k}
-                              className={cx(
-                                "overflow-hidden rounded-[20px]",
-                                "shadow-[0_18px_60px_-45px_rgba(0,0,0,.55)] ring-1 ring-white/10",
-                                k === "mock" ? "aspect-[16/10]" : "aspect-[16/9]"
-                              )}
-                            >
-                              <img
-                                src={k === "mock" ? "/images/home/mock.jpg" : `/images/home/${k}.jpg`}
-                                alt={k}
-                                className="h-full w-full object-cover"
-                                draggable={false}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
+                {/* RIGHT */}
+                <div className="hidden md:flex flex-col gap-4">
+                  <div className="aspect-[4/3] overflow-hidden rounded-[22px] bg-transparent">
+                    <video
+                      className="h-full w-full object-cover"
+                      src="/videos/Untitled design (5).mp4"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                    />
                   </div>
 
-                  {/* bottom spacing */}
-                  <div className="pb-16 md:pb-20" />
+                  <div className="aspect-[4/3] overflow-hidden rounded-[22px] bg-transparent">
+                    <video
+                      className="h-full w-full object-cover"
+                      src="/videos/Gold.mp4"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                    />
+                  </div>
+                </div>
+
+                {/* Mobile stack */}
+                <div className="grid gap-4 md:hidden">
+                  {(["card-1", "hro-video", "mock", "card-3", "card-4"] as const).map((k) => (
+                    <div
+                      key={k}
+                      className={cx(
+                        "overflow-hidden rounded-[20px] bg-transparent",
+                        k === "mock" ? "aspect-[16/10]" : "aspect-[16/9]"
+                      )}
+                    >
+                      {k === "hro-video" ? (
+                        <video
+                          className="h-full w-full object-cover"
+                          src="/videos/hro.mp4"
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          preload="metadata"
+                        />
+                      ) : (
+                        <img
+                          src={k === "mock" ? "/images/home/mock.jpg" : `/images/home/${k}.jpg`}
+                          alt={k}
+                          className="h-full w-full object-cover"
+                          draggable={false}
+                        />
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
-        </section>
 
-{/* =====================================================
-    NEW SECTION: Brand Cards (ดีไซน์ตามรูป + 10 cards / 5 per row)
-    ✅ Card กว้างขึ้นนิด (เพิ่ม max-w + ปรับ grid ให้การ์ดกว้างขึ้น)
-    ✅ เลข 10 ทำเอฟเฟค count 0 → 10 (ความเร็วกลางๆ)
-====================================================== */}
-<section className="bg-white">
-  <div className="mx-auto w-full max-w-7xl px-4 md:px-6 py-14">
-    <div className="text-center">
-      {/* ✅ Number count effect 0 -> 10 */}
-      <CountTo
-        to={10}
-        className="text-[72px] leading-none font-extrabold tracking-tight md:text-[104px]"
-      />
-
-      <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
-        {(t("home.sections.brands.title") as string) || "แบรนด์ที่เราจัดจำหน่ายอย่างเป็นทางการ"}
-      </h2>
-
-      <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-600 md:text-base">
-        {(t("home.sections.brands.desc") as string) ||
-          "ค้นหาแบรนด์และกดเข้าไปดูรายละเอียด การรับประกัน และช่องทางบริการ"}
-      </p>
-
-{/* Search (premium gold ring — less white, more “rich gold”) */}
-<div className="mx-auto mt-6 w-full max-w-md">
-  <div className="rounded-full p-[1px] bg-gradient-to-r from-[#C79A2E] via-[#D7B04A] to-[#9A6B12]">
-    <div className="flex items-center gap-2 rounded-full bg-white px-4 py-3 ring-1 ring-black/[0.03] shadow-[0_10px_30px_-22px_rgba(154,107,18,.28)] transition focus-within:shadow-[0_16px_44px_-28px_rgba(154,107,18,.42)]">
-      <span className="text-[#9A6B12] opacity-95">⌕</span>
-
-      <input
-        type="text"
-        value={brandQuery}
-        onChange={(e) => setBrandQuery(e.target.value)}
-        placeholder={(t("common.search") as string) || "Search"}
-        className="w-full bg-transparent text-sm text-slate-900 placeholder:text-slate-400 outline-none"
-      />
-    </div>
-  </div>
-</div>
-
-      {/* Chips */}
-      <div className="mx-auto mt-5 flex max-w-5xl flex-wrap items-center justify-center gap-2">
-        {brandFilters.map((x) => {
-          const active = brandFilter === x;
-          return (
-            <button
-              key={x}
-              type="button"
-              onClick={() => setBrandFilter(x)}
-              className={cx(
-                "rounded-full px-3 py-1 text-xs font-semibold transition",
-                active
-                  ? "bg-slate-900 text-white"
-                  : "bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50"
-              )}
-            >
-              {x}
-            </button>
-          );
-        })}
-      </div>
-    </div>
-
-{/* ✅ Cards: ปรับใหม่ให้ “รูปเยอะขึ้น / ขาวไม่ล้น / ข้อความเตี้ยลง” */}
-<div className="mt-10 grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-  {brandLinksToShow.slice(0, 10).map((b) => (
-    <Link
-      key={b.slug}
-      to={`/brands/${b.slug}`}
-      className={cx(
-        "group relative overflow-hidden rounded-[34px] bg-white",
-        "ring-1 ring-slate-200/80",
-        "shadow-[0_18px_60px_-45px_rgba(15,23,42,.18)]",
-        "transition duration-300",
-        "hover:-translate-y-0.5 hover:shadow-[0_22px_70px_-46px_rgba(15,23,42,.22)]"
-      )}
-    >
-      {/* ✅ Top image: “ยาวขึ้น” (สูงขึ้นนิด) */}
-      <div className="relative aspect-[6/5.5] w-full overflow-hidden bg-slate-50">
-        <img
-          src={b.img}
-          alt={b.name}
-          className={cx(
-            "h-full w-full object-cover",
-            "transition duration-500",
-            "group-hover:scale-[1.04]"
-          )}
-          draggable={false}
-        />
-
-        {/* ✅ Top vignette เบาๆ ให้ดู premium แต่ไม่มืดจัด */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/25 via-black/0 to-transparent" />
-
-        {/* ✅ Bottom fade: ลด “ขาวล้น” (สั้นลง + จางลง + ไม่ทึบ) */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white/80 via-white/35 to-transparent" />
-      </div>
-
-      {/* ✅ Content: ลดพื้นที่ข้อความ (compact) */}
-      <div className="relative px-5 pb-5 pt-3">
-        {/* ✅ ไล่ขาวแบบเนียน (ไม่ทึบ) */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/55 via-white/85 to-white" />
-
-        <div className="relative">
-          <div className="text-[17px] font-extrabold tracking-tight text-slate-900">
-            {b.name}
-          </div>
-
-          {/* ✅ desc 1 line -> ... */}
-          <div className="mt-1 text-[13px] leading-snug text-slate-600 overflow-hidden text-ellipsis whitespace-nowrap">
-            {b.desc ||
-              ((t("home.sections.brands.cardHint") as string) ||
-                "Official distributor • Warranty • Service")}
-          </div>
-
-          {/* ✅ bottom action: เตี้ยลง + เนียนขึ้น */}
-          <div className="mt-3 flex items-center gap-3">
-            <span
-              className={cx(
-                "inline-flex h-9 w-9 items-center justify-center rounded-full",
-                "bg-slate-100/80 ring-1 ring-slate-200",
-                "text-slate-800",
-                "transition",
-                "group-hover:bg-slate-900 group-hover:text-white group-hover:ring-slate-900"
-              )}
-              aria-hidden="true"
-            >
-              →
-            </span>
-
-            <span className="text-[13px] font-semibold text-slate-700 group-hover:underline">
-              {(t("common.open") as string) || "Open"}
-            </span>
-          </div>
+          {/* bottom spacing */}
+          <div className="pb-16 md:pb-20" />
         </div>
       </div>
-    </Link>
-  ))}
-</div>
+    </div>
   </div>
 </section>
+
+        {/* =====================================================
+            NEW SECTION: Brand Cards (ดีไซน์ตามรูป + 10 cards / 5 per row)
+            ✅ Card กว้างขึ้นนิด (เพิ่ม max-w + ปรับ grid ให้การ์ดกว้างขึ้น)
+            ✅ เลข 10 ทำเอฟเฟค count 0 → 10 (ความเร็วกลางๆ)
+        ====================================================== */}
+        <section className="bg-white">
+          <div className="mx-auto w-full max-w-7xl px-4 md:px-6 py-14">
+            <div className="text-center">
+              {/* ✅ Number count effect 0 -> 10 */}
+              <CountTo to={10} className="text-[72px] leading-none font-extrabold tracking-tight md:text-[104px]" />
+
+              <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
+                {(t("home.sections.brands.title") as string) || "แบรนด์ที่เราจัดจำหน่ายอย่างเป็นทางการ"}
+              </h2>
+
+              <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-600 md:text-base">
+                {(t("home.sections.brands.desc") as string) ||
+                  "ค้นหาแบรนด์และกดเข้าไปดูรายละเอียด การรับประกัน และช่องทางบริการ"}
+              </p>
+
+              {/* Search (premium gold ring — less white, more “rich gold”) */}
+              <div className="mx-auto mt-6 w-full max-w-md">
+                <div className="rounded-full p-[1px] bg-gradient-to-r from-[#C79A2E] via-[#D7B04A] to-[#9A6B12]">
+                  <div className="flex items-center gap-2 rounded-full bg-white px-4 py-3 ring-1 ring-black/[0.03] shadow-[0_10px_30px_-22px_rgba(154,107,18,.28)] transition focus-within:shadow-[0_16px_44px_-28px_rgba(154,107,18,.42)]">
+                    <span className="text-[#9A6B12] opacity-95">⌕</span>
+
+                    <input
+                      type="text"
+                      value={brandQuery}
+                      onChange={(e) => setBrandQuery(e.target.value)}
+                      placeholder={(t("common.search") as string) || "Search"}
+                      className="w-full bg-transparent text-sm text-slate-900 placeholder:text-slate-400 outline-none"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Chips */}
+              <div className="mx-auto mt-5 flex max-w-5xl flex-wrap items-center justify-center gap-2">
+                {brandFilters.map((x) => {
+                  const active = brandFilter === x;
+                  return (
+                    <button
+                      key={x}
+                      type="button"
+                      onClick={() => setBrandFilter(x)}
+                      className={cx(
+                        "rounded-full px-3 py-1 text-xs font-semibold transition",
+                        active
+                          ? "bg-slate-900 text-white"
+                          : "bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50"
+                      )}
+                    >
+                      {x}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* ✅ Cards: ปรับใหม่ให้ “รูปเยอะขึ้น / ขาวไม่ล้น / ข้อความเตี้ยลง” */}
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+              {brandLinksToShow.slice(0, 10).map((b) => (
+                <Link
+                  key={b.slug}
+                  to={`/brands/${b.slug}`}
+                  className={cx(
+                    "group relative overflow-hidden rounded-[34px] bg-white",
+                    "ring-1 ring-slate-200/80",
+                    "shadow-[0_18px_60px_-45px_rgba(15,23,42,.18)]",
+                    "transition duration-300",
+                    "hover:-translate-y-0.5 hover:shadow-[0_22px_70px_-46px_rgba(15,23,42,.22)]"
+                  )}
+                >
+                  {/* ✅ Top image: “ยาวขึ้น” (สูงขึ้นนิด) */}
+                  <div className="relative aspect-[6/5.5] w-full overflow-hidden bg-slate-50">
+                    <img
+                      src={b.img}
+                      alt={b.name}
+                      className={cx("h-full w-full object-cover", "transition duration-500", "group-hover:scale-[1.04]")}
+                      draggable={false}
+                    />
+
+                    {/* ✅ Top vignette เบาๆ ให้ดู premium แต่ไม่มืดจัด */}
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/25 via-black/0 to-transparent" />
+
+                    {/* ✅ Bottom fade: ลด “ขาวล้น” (สั้นลง + จางลง + ไม่ทึบ) */}
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white/80 via-white/35 to-transparent" />
+                  </div>
+
+                  {/* ✅ Content: ลดพื้นที่ข้อความ (compact) */}
+                  <div className="relative px-5 pb-5 pt-3">
+                    {/* ✅ ไล่ขาวแบบเนียน (ไม่ทึบ) */}
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/55 via-white/85 to-white" />
+
+                    <div className="relative">
+                      <div className="text-[17px] font-extrabold tracking-tight text-slate-900">{b.name}</div>
+
+                      {/* ✅ desc 1 line -> ... */}
+                      <div className="mt-1 text-[13px] leading-snug text-slate-600 overflow-hidden text-ellipsis whitespace-nowrap">
+                        {b.desc ||
+                          ((t("home.sections.brands.cardHint") as string) ||
+                            "Official distributor • Warranty • Service")}
+                      </div>
+
+                      {/* ✅ bottom action: เตี้ยลง + เนียนขึ้น */}
+                      <div className="mt-3 flex items-center gap-3">
+                        <span
+                          className={cx(
+                            "inline-flex h-9 w-9 items-center justify-center rounded-full",
+                            "bg-slate-100/80 ring-1 ring-slate-200",
+                            "text-slate-800",
+                            "transition",
+                            "group-hover:bg-slate-900 group-hover:text-white group-hover:ring-slate-900"
+                          )}
+                          aria-hidden="true"
+                        >
+                          →
+                        </span>
+
+                        <span className="text-[13px] font-semibold text-slate-700 group-hover:underline">
+                          {(t("common.open") as string) || "Open"}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* =====================================================
             Showcase (เหมือนเดิม)

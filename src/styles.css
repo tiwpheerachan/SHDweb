@@ -77,3 +77,15 @@ body{
   .card { @apply glass rounded-3xl p-6 md:p-7; }
 }
 
+@keyframes shdGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Fix: gradient text “holes” / broken glyphs in some browsers */
+.shd-gradient-text{
+  -webkit-text-fill-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}

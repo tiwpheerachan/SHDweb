@@ -1,14 +1,161 @@
-import React from "react";
+// frontend/src/pages/ServicesPage.tsx
+import React, { useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
+import { ArrowRight, CalendarClock, PackageSearch } from "lucide-react";
 import SectionHeader from "../components/SectionHeader";
 import GlassCard from "../components/GlassCard";
-import { StatPills } from "../components/StatPills";
+
+function cn(...xs: Array<string | false | undefined | null>) {
+  return xs.filter(Boolean).join(" ");
+}
+
+type ServiceRow = {
+  key: string;
+  title: string;
+  desc: string;
+  bullets: string[];
+  href: string;
+  icon: React.ReactNode;
+  imageSrc: string; // kept for later, not used in card design
+  tag?: string;
+  ctaLabel?: string;
+};
+
+function LinkBtn({ href, children }: { href: string; children: React.ReactNode }) {
+  const external = href.startsWith("http");
+  return (
+    <a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noreferrer" : undefined}
+      className={cn(
+        "group inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-extrabold",
+        "bg-slate-900 text-white",
+        "shadow-[0_14px_50px_-28px_rgba(2,6,23,0.55)]",
+        "transition hover:-translate-y-[1px] hover:bg-slate-950",
+        "focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
+      )}
+    >
+      {children}
+      <ArrowRight className="h-4 w-4 transition group-hover:translate-x-[2px]" />
+    </a>
+  );
+}
+
+function GhostBtn({ href, children }: { href: string; children: React.ReactNode }) {
+  const external = href.startsWith("http");
+  return (
+    <a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noreferrer" : undefined}
+      className={cn(
+        "group inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-extrabold",
+        "bg-white text-slate-900",
+        "ring-1 ring-slate-200",
+        "shadow-[0_12px_45px_-34px_rgba(2,6,23,0.35)]",
+        "transition hover:-translate-y-[1px] hover:ring-slate-300",
+        "focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
+      )}
+    >
+      {children}
+      <ArrowRight className="h-4 w-4 transition group-hover:translate-x-[2px]" />
+    </a>
+  );
+}
+
+/** ✅ NEW card design to match your screenshot */
+function ServiceRowCard({ item }: { item: ServiceRow }) {
+  const external = item.href.startsWith("http");
+
+  return (
+    <GlassCard
+      className={cn(
+        "group relative overflow-hidden rounded-[18px] bg-white",
+        "ring-1 ring-slate-200",
+        "shadow-[0_14px_55px_-42px_rgba(2,6,23,0.28)]",
+        "transition hover:-translate-y-[2px] hover:shadow-[0_18px_70px_-48px_rgba(2,6,23,0.36)]"
+      )}
+    >
+      <div className="relative p-5 md:p-6">
+        {/* top-right arrow */}
+        <a
+          href={item.href}
+          target={external ? "_blank" : undefined}
+          rel={external ? "noreferrer" : undefined}
+          className={cn(
+            "absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full",
+            "bg-white ring-1 ring-slate-200",
+            "shadow-[0_12px_40px_-30px_rgba(2,6,23,0.25)]",
+            "transition",
+            "group-hover:bg-slate-900 group-hover:text-white"
+          )}
+          aria-label={`Open ${item.title}`}
+        >
+          <ArrowRight className="h-4 w-4" />
+        </a>
+
+        {/* title + desc (with right padding for arrow) */}
+        <div className="pr-12">
+          <h3 className="text-[15px] font-black text-slate-950 md:text-base">
+            {item.title}
+          </h3>
+          <p className="mt-1 text-sm text-slate-600">{item.desc}</p>
+        </div>
+
+        {/* bullets (single line style, wrap if needed) */}
+        {!!item.bullets?.length && (
+          <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-slate-600">
+            {item.bullets.slice(0, 3).map((b, i) => (
+              <div key={i} className="inline-flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-slate-400" />
+                <span className="leading-relaxed">{b}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* bottom actions */}
+        <div className="mt-4 flex flex-wrap items-center gap-2">
+          <LinkBtn href={item.href}>{item.ctaLabel || "เริ่มใช้งาน"}</LinkBtn>
+          <GhostBtn href="/contact">ติดต่อเรา</GhostBtn>
+        </div>
+      </div>
+    </GlassCard>
+  );
+}
 
 export default function ServicesPage() {
   const { t } = useTranslation();
 
-  const blocks = (t("services.blocks", { returnObjects: true }) as Array<any>) || [];
+  const services = useMemo<ServiceRow[]>(
+    () => [
+      {
+        key: "booking",
+        title: "บริการติดตั้งกล้องติดรถยนต์ 70mai",
+        desc: "จองคิวออนไลน์ เลือกสาขา/วัน/เวลา พร้อมช่างผู้เชี่ยวชาญดูแลแบบพรีเมียม",
+        bullets: ["เลือกสาขา/วัน/เวลา ได้ทันที", "จัดการเลื่อนนัด/ยกเลิกได้", "ขั้นตอนชัดเจน โปร่งใส"],
+        href: "https://booking.70mai.co.th/",
+        icon: <CalendarClock className="h-3.5 w-3.5 text-slate-900" />,
+        imageSrc: "/images/services/70mai-booking.jpg",
+        tag: "Booking",
+        ctaLabel: "จองคิว",
+      },
+      {
+        key: "tracking",
+        title: "ตรวจสอบสถานะงานซ่อม-เคลม",
+        desc: "ติดตามสถานะงานซ่อม/เคลมแบบเรียลไทม์ ด้วยเลขอ้างอิงที่คุณมี",
+        bullets: ["ดูสถานะแต่ละขั้นตอน", "มีรายละเอียดงานและการจัดส่ง", "ลดเวลาตามงาน/โทรถาม"],
+        href: "https://sv.shd-technology.co.th/servicetracking.aspx",
+        icon: <PackageSearch className="h-3.5 w-3.5 text-slate-900" />,
+        imageSrc: "/images/services/service-tracking.jpg",
+        tag: "Tracking",
+        ctaLabel: "ตรวจสอบ",
+      },
+    ],
+    []
+  );
 
   return (
     <>
@@ -17,78 +164,155 @@ export default function ServicesPage() {
         <meta name="description" content={t("services.seo.description")} />
       </Helmet>
 
-      <section className="relative overflow-hidden rounded-[32px] bg-white/70 ring-1 ring-slate-200 shadow-soft">
-        <div
-          className="absolute inset-0 opacity-90"
-          style={{
-            background:
-              "radial-gradient(800px 420px at 20% 0%, rgba(79,70,229,.18), transparent 60%)," +
-              "radial-gradient(700px 420px at 90% 20%, rgba(6,182,212,.16), transparent 60%)," +
-              "radial-gradient(700px 520px at 60% 110%, rgba(251,113,133,.12), transparent 65%)",
-          }}
-        />
-        <div className="relative p-7 md:p-10">
-          <div className="chip">{t("services.hero.kicker")}</div>
-          <h1 className="mt-5 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
-            {t("services.hero.title")}
-          </h1>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 md:text-lg">
-            {t("services.hero.desc")}
-          </p>
+      {/* ===== HERO (luxury minimal + animated gradient on MAIN TITLE) ===== */}
+      <style>{`
+        .heroGradText{
+          background-image: linear-gradient(90deg,
+            #0f172a,
+            #2563eb,
+            #7c3aed,
+            #db2777,
+            #0ea5e9,
+            #0f172a
+          );
+          background-size: 320% 100%;
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          animation: shdHeroGrad 7s ease-in-out infinite;
+        }
+        @keyframes shdHeroGrad{
+          0%{ background-position: 0% 50%; }
+          50%{ background-position: 100% 50%; }
+          100%{ background-position: 0% 50%; }
+        }
 
-          <div className="mt-7 flex flex-wrap items-center gap-3">
-            <a className="btnPrimary" href="#content">
-              {t("services.hero.ctaPrimary")}
-            </a>
-            <a className="btn" href="/contact">
-              {t("services.hero.ctaSecondary")}
-            </a>
+        .heroFrameGrad{
+          background-image: linear-gradient(90deg,
+            rgba(14,165,233,0.55),
+            rgba(124,58,237,0.55),
+            rgba(219,39,119,0.50),
+            rgba(245,158,11,0.45),
+            rgba(14,165,233,0.55)
+          );
+          background-size: 260% 100%;
+          animation: shdFrameMove 9s ease-in-out infinite;
+        }
+        @keyframes shdFrameMove{
+          0%{ background-position: 0% 50%; }
+          50%{ background-position: 100% 50%; }
+          100%{ background-position: 0% 50%; }
+        }
+      `}</style>
+
+      <section className="relative overflow-hidden bg-white">
+        <div className="absolute inset-x-0 top-0 h-[1px] bg-slate-200/70" />
+
+        <div className="mx-auto max-w-6xl px-4 pb-10 pt-12 md:pb-12 md:pt-14">
+          <div className="grid items-center gap-8 md:grid-cols-12">
+            {/* LEFT */}
+            <div className="md:col-span-7">
+              <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-extrabold text-slate-900 ring-1 ring-slate-200 shadow-[0_16px_60px_-46px_rgba(2,6,23,0.30)]">
+                <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                Premium Service
+              </div>
+
+              <h1 className="mt-4 text-3xl font-black tracking-tight md:text-5xl">
+                <span className="heroGradText">
+                  {t("services.hero.title", { defaultValue: "บริการแบบครบวงจรที่ต่อยอดได้" })}
+                </span>
+              </h1>
+
+              <p className="mt-3 max-w-xl text-base text-slate-600 md:text-lg">
+                {t("services.hero.subtitle", {
+                  defaultValue:
+                    "จองคิวติดตั้ง 70mai • ติดตามงานซ่อม/เคลม • และการดูแลหลังการขาย — ทุกอย่างอยู่ในมาตรฐานเดียวกัน เพื่อประสบการณ์ที่ชัดเจนและพรีเมียม",
+                })}
+              </p>
+
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <LinkBtn href="https://booking.70mai.co.th/">เริ่มจองคิว 70mai</LinkBtn>
+                <GhostBtn href="https://sv.shd-technology.co.th/servicetracking.aspx">ตรวจสอบงานซ่อม-เคลม</GhostBtn>
+              </div>
+
+              <div className="mt-7 grid gap-3 sm:grid-cols-3">
+                {[
+                  { k: "Support", v: "ทุกวัน 24 ชม." },
+                  { k: "มาตรฐาน", v: "ตรวจสอบได้" },
+                  { k: "บริการ", v: "ครบวงจร" },
+                ].map((x, i) => (
+                  <div
+                    key={i}
+                    className={cn(
+                      "rounded-2xl bg-white p-4",
+                      "ring-1 ring-slate-200",
+                      "shadow-[0_16px_60px_-48px_rgba(2,6,23,0.28)]"
+                    )}
+                  >
+                    <div className="text-xs font-extrabold text-slate-500">{x.k}</div>
+                    <div className="mt-1 text-sm font-black text-slate-950">{x.v}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT */}
+            <div className="md:col-span-5">
+              <div className="relative">
+                <div className="heroFrameGrad absolute -inset-[2px] rounded-[30px] opacity-70 blur-[0.2px]" />
+                <div className="heroFrameGrad absolute -inset-[1px] rounded-[30px] opacity-55" />
+
+                <GlassCard
+                  className={cn(
+                    "relative overflow-hidden rounded-[28px] bg-white",
+                    "ring-1 ring-slate-200",
+                    "shadow-[0_22px_90px_-60px_rgba(2,6,23,0.35)]"
+                  )}
+                >
+                  <div className="relative aspect-[6/3.8] overflow-hidden">
+                    <img
+                      src="/images/services/hero-card.jpg"
+                      alt="SHD Services"
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/10 via-black/0 to-black/18" />
+                  </div>
+
+                  <div className="p-5">
+                    <div className="text-sm font-black text-slate-950">
+                      {t("services.hero.cardTitle", { defaultValue: "Service Hub" })}
+                    </div>
+                    <div className="mt-2 text-sm text-slate-600">
+                      {t("services.hero.cardDesc", {
+                        defaultValue: "เข้าถึงบริการหลักทั้งหมดได้ทันที",
+                      })}
+                    </div>
+
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      <GhostBtn href="https://booking.70mai.co.th/">จองคิว</GhostBtn>
+                      <GhostBtn href="https://sv.shd-technology.co.th/servicetracking.aspx">เช็คสถานะ</GhostBtn>
+                    </div>
+                  </div>
+                </GlassCard>
+              </div>
+            </div>
           </div>
-
-          <StatPills
-            items={[
-              { k: t("common.stats.0.k"), v: t("common.stats.0.v") },
-              { k: t("common.stats.1.k"), v: t("common.stats.1.v") },
-              { k: t("common.stats.2.k"), v: t("common.stats.2.v") },
-            ]}
-          />
         </div>
       </section>
 
-      <section id="content" className="mt-10">
+      {/* ===== SERVICES (cards redesigned to match screenshot) ===== */}
+      <section className="mx-auto max-w-6xl px-4 pb-14 pt-2">
         <SectionHeader
-          kicker={t("common.section.kicker")}
-          title={t("common.section.title")}
-          desc={t("common.section.desc")}
+          kicker={t("services.section.kicker", { defaultValue: "SERVICES" })}
+          title={t("services.section.title", { defaultValue: "บริการหลัก" })}
+          align="left"
         />
 
-        <div className="mt-6 grid gap-4 md:grid-cols-3 md:gap-6">
-          {blocks.map((b, idx) => (
-            <GlassCard key={idx} className="p-6 md:p-7">
-              <div className="flex items-start justify-between gap-4">
-                <div className="text-sm font-extrabold text-slate-900">{b.title}</div>
-                <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-indigo-600 via-cyan-500 to-rose-400 opacity-90" />
-              </div>
-              <div className="mt-3 text-sm leading-relaxed text-slate-600">{b.desc}</div>
-            </GlassCard>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          {services.map((s) => (
+            <ServiceRowCard key={s.key} item={s} />
           ))}
-        </div>
-
-        <div className="mt-6 card">
-          <div className="grid gap-4 md:grid-cols-2 md:gap-6">
-            <div>
-              <div className="text-sm font-extrabold text-slate-900">{t("common.promise.title")}</div>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">{t("common.promise.desc")}</p>
-            </div>
-            <div className="grid gap-2">
-              {(t("common.promise.bullets", { returnObjects: true }) as string[]).map((x, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <div className="mt-1 h-2 w-2 rounded-full bg-indigo-600" />
-                  <div className="text-sm text-slate-700">{x}</div>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
     </>
