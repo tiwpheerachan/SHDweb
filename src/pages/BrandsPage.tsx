@@ -151,51 +151,51 @@ export default function BrandsPage() {
   // =========================
   // ✅ NEW: Promo cards (mi.com-like) — 4 cards
   // =========================
-// =========================
-// ✅ NEW: Promo cards (mi.com-like) — 4 cards (Buttons only)
-// =========================
-const promoCards: PromoCard[] = [
-   {
-    id: "promo-2",
-    title: "Xiaomi Smart Home",
-    badge: "NEW",
-    subtitle: "ยกระดับบ้านให้สมาร์ทขึ้น",
-    lines: ["ควบคุมง่ายผ่านแอป", "เชื่อมต่อระบบนิเวศได้ครบ"],
-    img: "/images/brands/promos/promo-1.jpg",
-    buyHref: "https://www.mi.com/th/product/xiaomi-smart-band-10/",
-    learnHref: "/brands/xiaomi",
-  },
-  {
-    id: "promo-2",
-    title: "Xiaomi Smart Home",
-    badge: "NEW",
-    subtitle: "ยกระดับบ้านให้สมาร์ทขึ้น",
-    lines: ["ควบคุมง่ายผ่านแอป", "เชื่อมต่อระบบนิเวศได้ครบ"],
-    img: "/images/brands/promos/promo-2.jpg",
-    buyHref: "https://www.ankerthailand.co.th/",
-    learnHref: "/brands/anker",
-  },
-  {
-    id: "promo-2",
-    title: "Xiaomi Smart Home",
-    badge: "NEW",
-    subtitle: "ยกระดับบ้านให้สมาร์ทขึ้น",
-    lines: ["ควบคุมง่ายผ่านแอป", "เชื่อมต่อระบบนิเวศได้ครบ"],
-    img: "/images/brands/promos/promo-3.jpg",
-    buyHref: "https://www.mi.com/th/product/xiaomi-watch-s4/",
-    learnHref: "/brands/xiaomi",
-  },
-  {
-    id: "promo-4",
-    title: "Dreame Cleaning Premium",
-    badge: "PRO",
-    subtitle: "ทำความสะอาดแบบพรีเมียม",
-    lines: ["พลังดูดสูง ทำความสะอาดลึก", "ระบบอัจฉริยะช่วยวางแผน"],
-    img: "/images/brands/promos/promo-4.jpg",
-    buyHref: "https://www.dreametech.com/",
-    learnHref: "/brands/dreame",
-  },
-];
+  // =========================
+  // ✅ NEW: Promo cards (mi.com-like) — 4 cards (Buttons only)
+  // =========================
+  const promoCards: PromoCard[] = [
+    {
+      id: "promo-2",
+      title: "Xiaomi Smart Home",
+      badge: "NEW",
+      subtitle: "ยกระดับบ้านให้สมาร์ทขึ้น",
+      lines: ["ควบคุมง่ายผ่านแอป", "เชื่อมต่อระบบนิเวศได้ครบ"],
+      img: "/images/brands/promos/promo-1.jpg",
+      buyHref: "https://www.mi.com/th/product/xiaomi-smart-band-10/",
+      learnHref: "/brands/xiaomi",
+    },
+    {
+      id: "promo-2",
+      title: "Xiaomi Smart Home",
+      badge: "NEW",
+      subtitle: "ยกระดับบ้านให้สมาร์ทขึ้น",
+      lines: ["ควบคุมง่ายผ่านแอป", "เชื่อมต่อระบบนิเวศได้ครบ"],
+      img: "/images/brands/promos/promo-2.jpg",
+      buyHref: "https://www.ankerthailand.co.th/",
+      learnHref: "/brands/anker",
+    },
+    {
+      id: "promo-2",
+      title: "Xiaomi Smart Home",
+      badge: "NEW",
+      subtitle: "ยกระดับบ้านให้สมาร์ทขึ้น",
+      lines: ["ควบคุมง่ายผ่านแอป", "เชื่อมต่อระบบนิเวศได้ครบ"],
+      img: "/images/brands/promos/promo-3.jpg",
+      buyHref: "https://www.mi.com/th/product/xiaomi-watch-s4/",
+      learnHref: "/brands/xiaomi",
+    },
+    {
+      id: "promo-4",
+      title: "Dreame Cleaning Premium",
+      badge: "PRO",
+      subtitle: "ทำความสะอาดแบบพรีเมียม",
+      lines: ["พลังดูดสูง ทำความสะอาดลึก", "ระบบอัจฉริยะช่วยวางแผน"],
+      img: "/images/brands/promos/promo-4.jpg",
+      buyHref: "https://www.dreametech.com/",
+      learnHref: "/brands/dreame",
+    },
+  ];
 
   // =========================
   // ✅ UI State: search + chips
@@ -285,132 +285,135 @@ const promoCards: PromoCard[] = [
     <>
       <Helmet>
         <title>{(t("brands.seo.title") as string) || "Brands"} · SHD Technology</title>
-        <meta name="description" content={(t("brands.seo.description") as string) || "Official distributor brands by SHD Technology"} />
+        <meta
+          name="description"
+          content={(t("brands.seo.description") as string) || "Official distributor brands by SHD Technology"}
+        />
       </Helmet>
-      
-{/* =========================
-    NEW: Promo cards (mi.com-like)
-    - ✅ ไม่มีคำอธิบาย (ตัด title/subtitle)
-    - ✅ มีแค่ 2 ปุ่ม: ซื้อตอนนี้ / เรียนรู้เพิ่มเติม
-    - ✅ ขยับปุ่มลงต่ำ
-========================== */}
-<section className="bg-white">
-  <div className="mx-auto w-full max-w-6xl px-4 md:px-6 py-10">
-    <div
-      className="relative"
-      onMouseEnter={() => (promoPauseRef.current = true)}
-      onMouseLeave={() => (promoPauseRef.current = false)}
-      onTouchStart={() => (promoPauseRef.current = true)}
-      onTouchEnd={() => (promoPauseRef.current = false)}
-    >
-      {/* arrows */}
-      <button
-        type="button"
-        onClick={() => setPromoIndex((v) => (v - 1 + promoCards.length) % promoCards.length)}
-        className={cx(
-          "hidden md:inline-flex",
-          "absolute left-3 top-1/2 z-20 -translate-y-1/2",
-          "h-10 w-10 items-center justify-center rounded-full",
-          "bg-white/80 backdrop-blur ring-1 ring-slate-200",
-          "text-slate-700 transition hover:bg-white"
-        )}
-        aria-label="Previous"
-      >
-        ←
-      </button>
 
-      <button
-        type="button"
-        onClick={() => setPromoIndex((v) => (v + 1) % promoCards.length)}
-        className={cx(
-          "hidden md:inline-flex",
-          "absolute right-3 top-1/2 z-20 -translate-y-1/2",
-          "h-10 w-10 items-center justify-center rounded-full",
-          "bg-white/80 backdrop-blur ring-1 ring-slate-200",
-          "text-slate-700 transition hover:bg-white"
-        )}
-        aria-label="Next"
-      >
-        →
-      </button>
+      {/* =========================
+          NEW: Promo cards (mi.com-like)
+          - ✅ ไม่มีคำอธิบาย (ตัด title/subtitle)
+          - ✅ มีแค่ 2 ปุ่ม: ซื้อตอนนี้ / เรียนรู้เพิ่มเติม
+          - ✅ ขยับปุ่มลงต่ำ
+          - ✅ FIX: internal route ใช้ <Link> (ไม่ใช้ <a href> + ไม่เปิดแท็บใหม่)
+      ========================== */}
+      <section className="bg-white">
+        <div className="mx-auto w-full max-w-6xl px-4 md:px-6 py-10">
+          <div
+            className="relative"
+            onMouseEnter={() => (promoPauseRef.current = true)}
+            onMouseLeave={() => (promoPauseRef.current = false)}
+            onTouchStart={() => (promoPauseRef.current = true)}
+            onTouchEnd={() => (promoPauseRef.current = false)}
+          >
+            {/* arrows */}
+            <button
+              type="button"
+              onClick={() => setPromoIndex((v) => (v - 1 + promoCards.length) % promoCards.length)}
+              className={cx(
+                "hidden md:inline-flex",
+                "absolute left-3 top-1/2 z-20 -translate-y-1/2",
+                "h-10 w-10 items-center justify-center rounded-full",
+                "bg-white/80 backdrop-blur ring-1 ring-slate-200",
+                "text-slate-700 transition hover:bg-white"
+              )}
+              aria-label="Previous"
+            >
+              ←
+            </button>
 
-      {/* track */}
-      <div className="overflow-hidden rounded-[28px] bg-white">
-        <div
-          className="flex transition-transform duration-700 ease-[cubic-bezier(.2,.9,.2,1)]"
-          style={{ transform: `translateX(-${promoIndex * 100}%)` }}
-        >
-          {promoCards.map((c) => (
-            <div key={c.id} className="w-full flex-none">
-<div className="relative min-h-[380px] md:min-h-[420px] lg:min-h-[460px]">
-  {/* full image */}
-  <img
-    src={c.img}
-    alt={c.title}
-    className="absolute inset-0 h-full w-full object-cover"
-    draggable={false}
-  />
+            <button
+              type="button"
+              onClick={() => setPromoIndex((v) => (v + 1) % promoCards.length)}
+              className={cx(
+                "hidden md:inline-flex",
+                "absolute right-3 top-1/2 z-20 -translate-y-1/2",
+                "h-10 w-10 items-center justify-center rounded-full",
+                "bg-white/80 backdrop-blur ring-1 ring-slate-200",
+                "text-slate-700 transition hover:bg-white"
+              )}
+              aria-label="Next"
+            >
+              →
+            </button>
 
-{/* ✅ buttons overlay (bottom-right) */}
-<div className="absolute bottom-6 right-6 md:bottom-8 md:right-8 z-20 flex flex-wrap items-center justify-end gap-3">
-  <a
-    href={c.buyHref}
-    target="_blank"
-    rel="noreferrer"
-    className={cx(
-      "inline-flex items-center justify-center rounded-full",
-      "px-6 py-3 text-sm font-semibold",
-      "bg-slate-900 text-white",
-      "transition hover:bg-black"
-    )}
-  >
-    {(t("brands.promo.buyNow") as string) || "Buy now"}
-  </a>
+            {/* track */}
+            <div className="overflow-hidden rounded-[28px] bg-white">
+              <div
+                className="flex transition-transform duration-700 ease-[cubic-bezier(.2,.9,.2,1)]"
+                style={{ transform: `translateX(-${promoIndex * 100}%)` }}
+              >
+                {promoCards.map((c) => (
+                  <div key={c.id} className="w-full flex-none">
+                    <div className="relative min-h-[380px] md:min-h-[420px] lg:min-h-[460px]">
+                      {/* full image */}
+                      <img
+                        src={c.img}
+                        alt={c.title}
+                        className="absolute inset-0 h-full w-full object-cover"
+                        draggable={false}
+                      />
 
-  <a
-    href={c.learnHref}
-    target="_blank"
-    rel="noreferrer"
-    className={cx(
-      "inline-flex items-center justify-center rounded-full",
-      "px-6 py-3 text-sm font-semibold",
-      "bg-white/85 backdrop-blur",
-      "ring-1 ring-slate-200",
-      "text-slate-900",
-      "transition hover:bg-white"
-    )}
-  >
-    {(t("brands.promo.learnMore") as string) || "Learn more"} <span className="ml-1">›</span>
-  </a>
-</div>
-</div>
+                      {/* ✅ buttons overlay (bottom-right) */}
+                      <div className="absolute bottom-6 right-6 md:bottom-8 md:right-8 z-20 flex flex-wrap items-center justify-end gap-3">
+                        {/* external -> keep <a target=_blank> */}
+                        <a
+                          href={c.buyHref}
+                          target="_blank"
+                          rel="noreferrer"
+                          className={cx(
+                            "inline-flex items-center justify-center rounded-full",
+                            "px-6 py-3 text-sm font-semibold",
+                            "bg-slate-900 text-white",
+                            "transition hover:bg-black"
+                          )}
+                        >
+                          {(t("brands.promo.buyNow") as string) || "Buy now"}
+                        </a>
 
+                        {/* ✅ internal route -> use <Link> */}
+                        <Link
+                          to={c.learnHref}
+                          className={cx(
+                            "inline-flex items-center justify-center rounded-full",
+                            "px-6 py-3 text-sm font-semibold",
+                            "bg-white/85 backdrop-blur",
+                            "ring-1 ring-slate-200",
+                            "text-slate-900",
+                            "transition hover:bg-white"
+                          )}
+                        >
+                          {(t("brands.promo.learnMore") as string) || "Learn more"} <span className="ml-1">›</span>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-          ))}
-        </div>
-      </div>
+            </div>
 
-      {/* dots */}
-      <div className="mt-4 flex items-center justify-center gap-2">
-        {promoCards.map((_, i) => (
-          <button
-            key={i}
-            type="button"
-            onClick={() => setPromoIndex(i)}
-            className={cx(
-              "h-1.5 w-1.5 rounded-full transition-all duration-300",
-              "focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white",
-              i === promoIndex
-                ? "bg-amber-400 ring-1 ring-amber-400/90 scale-[1.08]"
-                : "bg-slate-200/75 ring-1 ring-slate-300/70 opacity-80 hover:opacity-100"
-            )}
-            aria-label={`Go to promo ${i + 1}`}
-          />
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
+            {/* dots */}
+            <div className="mt-4 flex items-center justify-center gap-2">
+              {promoCards.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => setPromoIndex(i)}
+                  className={cx(
+                    "h-1.5 w-1.5 rounded-full transition-all duration-300",
+                    "focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white",
+                    i === promoIndex
+                      ? "bg-amber-400 ring-1 ring-amber-400/90 scale-[1.08]"
+                      : "bg-slate-200/75 ring-1 ring-slate-300/70 opacity-80 hover:opacity-100"
+                  )}
+                  aria-label={`Go to promo ${i + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* =========================
           HERO (Home-like)
@@ -420,7 +423,9 @@ const promoCards: PromoCard[] = [
           <div className="text-center">
             {/* Big number (ตามสไตล์ Home section) */}
             <div className="text-[72px] leading-none font-extrabold tracking-tight md:text-[108px]">
-              <span className="bg-gradient-to-b from-sky-500 to-indigo-600 bg-clip-text text-transparent">{String(brands.length)}</span>
+              <span className="bg-gradient-to-b from-sky-500 to-indigo-600 bg-clip-text text-transparent">
+                {String(brands.length)}
+              </span>
             </div>
 
             {/* ✅ เปลี่ยนจาก “หัวข้อใหญ่บนสุดแบบเดิม” -> ให้เป็น Search focus */}
@@ -457,7 +462,9 @@ const promoCards: PromoCard[] = [
                     onClick={() => setFilter(x)}
                     className={cx(
                       "rounded-full px-3 py-1 text-xs font-semibold transition",
-                      active ? "bg-slate-900 text-white" : "bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50"
+                      active
+                        ? "bg-slate-900 text-white"
+                        : "bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50"
                     )}
                   >
                     {x}
@@ -479,7 +486,6 @@ const promoCards: PromoCard[] = [
           </div>
         </div>
       </section>
-
 
       {/* =========================
           Brand cards grid (คงเดิม)
@@ -517,7 +523,7 @@ const promoCards: PromoCard[] = [
                     )}
                   >
                     <span className="inline-block h-2 w-2 rounded-full bg-white/90" />
-                    {b.isOfficial ? (t("brands.badge.official") || "Official") : (t("brands.badge.brand") || "Brand")}
+                    {b.isOfficial ? t("brands.badge.official") || "Official" : t("brands.badge.brand") || "Brand"}
                   </div>
                 </div>
 
@@ -562,8 +568,7 @@ const promoCards: PromoCard[] = [
               ✅ ลบเงา “กรอบใหญ่” และ “การ์ดรูป”
           ========================== */}
           <div className="mt-10">
-            <div className="px-1">
-            </div>
+            <div className="px-1"></div>
             <div
               className={cx("mt-4 relative", "rounded-[22px]")}
               onMouseEnter={() => (pauseRef.current = true)}
@@ -580,8 +585,12 @@ const promoCards: PromoCard[] = [
           {shown.length === 0 ? (
             <div className="mt-10 text-center">
               <div className="mx-auto max-w-lg rounded-3xl bg-slate-50 p-8 ring-1 ring-slate-200">
-                <div className="text-sm font-extrabold text-slate-900">{t("brands.empty.title") || "ไม่พบแบรนด์"}</div>
-                <div className="mt-2 text-sm text-slate-600">{t("brands.empty.desc") || "ลองเปลี่ยนคำค้นหา หรือเลือกหมวดหมู่ใหม่"}</div>
+                <div className="text-sm font-extrabold text-slate-900">
+                  {t("brands.empty.title") || "ไม่พบแบรนด์"}
+                </div>
+                <div className="mt-2 text-sm text-slate-600">
+                  {t("brands.empty.desc") || "ลองเปลี่ยนคำค้นหา หรือเลือกหมวดหมู่ใหม่"}
+                </div>
               </div>
             </div>
           ) : null}
