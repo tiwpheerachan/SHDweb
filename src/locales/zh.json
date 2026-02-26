@@ -44,24 +44,70 @@
       ]
     }
   },
+
   "footer": {
-    "tagline": "在亚洲构建产品、运营与增长系统。",
-    "rights": "保留所有权利",
+    "brandAlt": "SHD Technology",
+    "tagline": "Building products, operations, and growth systems across Asia.",
+    "rights": "版权所有",
+
+    "newsletterTitle": "订阅我们的通讯",
+    "newsletterDesc": "获取 SHD 的最新动态、亮点与独家资讯。",
+    "emailLabel": "邮箱",
+    "emailPlaceholder": "你的邮箱地址",
+    "submitAria": "提交邮箱",
+    "submitTitle": "提交",
+    "subscribed": "订阅成功，谢谢！",
+    "invalidEmail": "请输入有效的邮箱地址。",
+
+    "cta": "预约沟通",
+    "navTitle": "导航",
+    "companyTitle": "公司",
+
+    "quickLinks": {
+      "brands": "查看品牌",
+      "careers": "加入我们"
+    },
+
+    "copyright": "© {{year}} SHD Technology Co., Ltd.",
+
+    "socials": [
+      {
+        "key": "facebook",
+        "label": "Facebook",
+        "href": "https://facebook.com/yourpage",
+        "src": "/images/social/facebook.png"
+      },
+      {
+        "key": "instagram",
+        "label": "Instagram",
+        "href": "https://instagram.com/yourpage",
+        "src": "/images/social/instagram.png"
+      },
+      {
+        "key": "line",
+        "label": "LINE",
+        "href": "https://line.me/ti/p/yourid",
+        "src": "/images/social/line.png"
+      }
+    ],
+
     "cards": [
       {
         "title": "企业级标准",
-        "desc": "从战略 → 执行 → 衡量，流程清晰"
+        "desc": "从战略 → 执行 → 衡量，流程清晰可追踪。"
       },
       {
-        "title": "可规模化架构",
-        "desc": "多国家、多品牌、多渠道"
+        "title": "可扩展的结构",
+        "desc": "为多国家、多品牌与多渠道的增长而设计。"
       },
       {
-        "title": "运营 + 技术",
-        "desc": "将技术与真实运营结合，确保落地"
+        "title": "能打的团队",
+        "desc": "融合技术与真实运营，把结果落地。"
       }
     ]
-  },
+  }
+
+  ,
   
 
   "home": {

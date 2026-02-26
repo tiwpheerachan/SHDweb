@@ -32,9 +32,53 @@
       ]
     }
   },
+
   "footer": {
+    "brandAlt": "SHD Technology",
     "tagline": "Building products, operations, and growth systems across Asia.",
     "rights": "สงวนลิขสิทธิ์",
+
+    "newsletterTitle": "ติดตามข่าวสารจาก SHD",
+    "newsletterDesc": "รับอัปเดต ไฮไลต์ และข่าวสารสำคัญจาก SHD ทางอีเมล",
+    "emailLabel": "อีเมล",
+    "emailPlaceholder": "อีเมลของคุณ",
+    "submitAria": "ส่งอีเมล",
+    "submitTitle": "ส่ง",
+    "subscribed": "สมัครรับข่าวสารเรียบร้อย ขอบคุณครับ!",
+    "invalidEmail": "กรุณากรอกอีเมลให้ถูกต้อง",
+
+    "cta": "นัดคุยกับทีม",
+    "navTitle": "เมนู",
+    "companyTitle": "บริษัท",
+
+    "quickLinks": {
+      "brands": "ดูแบรนด์",
+      "careers": "ร่วมงานกับเรา"
+    },
+
+    "copyright": "© {{year}} SHD Technology Co., Ltd.",
+
+    "socials": [
+      {
+        "key": "facebook",
+        "label": "Facebook",
+        "href": "https://facebook.com/yourpage",
+        "src": "/images/social/facebook.png"
+      },
+      {
+        "key": "instagram",
+        "label": "Instagram",
+        "href": "https://instagram.com/yourpage",
+        "src": "/images/social/instagram.png"
+      },
+      {
+        "key": "line",
+        "label": "LINE",
+        "href": "https://line.me/ti/p/yourid",
+        "src": "/images/social/line.png"
+      }
+    ],
+
     "cards": [
       {
         "title": "มาตรฐานระดับองค์กร",

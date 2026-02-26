@@ -42,24 +42,70 @@
       ]
     }
   },
+
+
   "footer": {
+    "brandAlt": "SHD Technology",
     "tagline": "Building products, operations, and growth systems across Asia.",
     "rights": "All rights reserved",
+
+    "newsletterTitle": "Subscribe to our newsletter",
+    "newsletterDesc": "Get updates, highlights, and exclusive news from SHD.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Your email address",
+    "submitAria": "Submit email",
+    "submitTitle": "Submit",
+    "subscribed": "Subscribed. Thank you!",
+    "invalidEmail": "Please enter a valid email.",
+
+    "cta": "Schedule a call",
+    "navTitle": "Navigation",
+    "companyTitle": "Company",
+
+    "quickLinks": {
+      "brands": "View brands",
+      "careers": "Join our team"
+    },
+
+    "copyright": "© {{year}} SHD Technology Co., Ltd.",
+
+    "socials": [
+      {
+        "key": "facebook",
+        "label": "Facebook",
+        "href": "https://facebook.com/yourpage",
+        "src": "/images/social/facebook.png"
+      },
+      {
+        "key": "instagram",
+        "label": "Instagram",
+        "href": "https://instagram.com/yourpage",
+        "src": "/images/social/instagram.png"
+      },
+      {
+        "key": "line",
+        "label": "LINE",
+        "href": "https://line.me/ti/p/yourid",
+        "src": "/images/social/line.png"
+      }
+    ],
+
     "cards": [
       {
-        "title": "Enterprise-grade Standards",
-        "desc": "Clear process from strategy → execution → measurement"
+        "title": "Enterprise-grade standards",
+        "desc": "A clear process from strategy → execution → measurement."
       },
       {
-        "title": "Built to Scale",
-        "desc": "Designed for multi-country, multi-brand, multi-channel"
+        "title": "Scalable structure",
+        "desc": "Designed for multi-country, multi-brand, and multi-channel growth."
       },
       {
-        "title": "Operators + Builders",
-        "desc": "We combine tech and real operations to make it happen"
+        "title": "A team that delivers",
+        "desc": "Blending technology with real operations to make things happen."
       }
     ]
-  },
+  }
+  ,
 "home": {
   "seo": {
     "title": "SHD Corporate",
