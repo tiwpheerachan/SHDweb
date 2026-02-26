@@ -231,17 +231,16 @@ export default function HomePage() {
   <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
     <div className="relative min-h-[780px] w-full overflow-hidden">
       {/* ✅ Background VIDEO */}
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        poster="/images/home/hero-bg.jpg"
-      >
-        <source src="/videos/hero.mp4" type="video/mp4" />
-      </video>
+<video
+  className="absolute inset-0 h-full w-full object-cover"
+  autoPlay
+  muted
+  loop
+  playsInline
+  preload="auto"
+>
+  <source src="/videos/hero.mp4" type="video/mp4" />
+</video>
 
       {/* ✅ NO background gradient overlay ✅
           แต่เพิ่ม “เส้นไล่สีบางๆ” ที่วิ่งผ่านเหมือนดาวตก + twinkle เบามาก (ไม่ทำพื้นหลังเป็นไล่สี) */}
@@ -271,179 +270,185 @@ export default function HomePage() {
           {/* ✅ ขยับทั้งส่วนลงมานิดหน่อย */}
           <div className="pt-16 md:pt-24" />
 
-{/* ========= TOP HERO TEXT ========= */}
+{/* ========= TOP HERO TEXT (DARK BG • WHITE TITLE • GOLD OUTLINES • PREMIUM PILLS) ========= */}
+
 <div className="mx-auto max-w-3xl text-center">
-  {/* ✅ Badge: transparent + thin gold outline (SHD) */}
+  {/* ✅ Badge: dark glass + GOLD outline + shimmer */}
   <div className="inline-flex">
     <div
-      className={[
-        "relative inline-flex items-center gap-2 rounded-full px-4 py-2",
-        "text-xs font-semibold text-slate-900",
-        "bg-transparent",
-        "ring-1 ring-[#d7b85a]/70",
-        "shadow-[0_10px_32px_-26px_rgba(184,137,44,.25)]",
-        "backdrop-blur-[10px]",
-      ].join(" ")}
+      className={cx(
+        "group relative inline-flex items-center gap-2 rounded-full px-4 py-2",
+        "text-xs font-semibold tracking-wide text-white",
+        "bg-white/[0.06] backdrop-blur-xl",
+        "ring-1 ring-[#d7b85a]/55",
+        "shadow-[0_22px_70px_-56px_rgba(0,0,0,.85)]",
+        "transition duration-300 hover:bg-white/[0.08] hover:ring-[#f6e7b0]/60"
+      )}
     >
-      <span className="relative h-2 w-2 rounded-full bg-[#b8892c]">
-        <span className="absolute -inset-1 rounded-full bg-[#f6e7b0]/80 blur-[2px]" />
+      {/* tiny gold dot */}
+      <span className="relative h-2 w-2 rounded-full bg-[#d7b85a]">
+        <span className="absolute -inset-1 rounded-full bg-[#f6e7b0]/70 blur-[2px]" />
       </span>
 
-      {(t("home.hero.badges.0") as string) || "SHD THAILAND"}
+      <span className="relative z-[2]">
+        {(t("home.hero.badges.0") as string) || "SHD THAILAND"}
+      </span>
 
+      {/* gold sweep on border */}
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-90"
+        className={cx(
+          "pointer-events-none absolute inset-0 rounded-full",
+          "opacity-70",
+          "[mask-image:linear-gradient(110deg,transparent,black,transparent)]",
+          "[mask-size:240%_100%]",
+          "animate-[shdGoldSweep_3.2s_linear_infinite]"
+        )}
         style={{
-          WebkitMaskImage: "linear-gradient(110deg, transparent, #000, transparent)",
-          WebkitMaskSize: "260% 100%",
-          animation: "shdBadgeGoldShimmer 2.2s linear infinite",
           background:
-            "radial-gradient(circle at 16% 42%, rgba(255,242,200,.95) 0 1.2px, transparent 2.6px),\
-             radial-gradient(circle at 28% 66%, rgba(242,213,126,.85) 0 1.2px, transparent 2.6px),\
-             radial-gradient(circle at 44% 32%, rgba(199,154,46,.72) 0 1.2px, transparent 2.6px),\
-             radial-gradient(circle at 62% 56%, rgba(255,242,200,.90) 0 1.2px, transparent 2.6px),\
-             radial-gradient(circle at 78% 36%, rgba(215,184,90,.78) 0 1.2px, transparent 2.6px),\
-             radial-gradient(circle at 90% 58%, rgba(184,137,44,.66) 0 1.2px, transparent 2.6px)",
+            "radial-gradient(circle at 18% 45%, rgba(246,231,176,.85) 0 1.2px, transparent 2.8px),\
+             radial-gradient(circle at 62% 62%, rgba(215,184,90,.75) 0 1.2px, transparent 2.8px),\
+             radial-gradient(circle at 86% 44%, rgba(246,231,176,.95) 0 1.2px, transparent 2.8px)"
         }}
       />
     </div>
   </div>
 
-  {/* ✅ Title: change to Tailwind gold tone: from/via/to */}
+  {/* ✅ Title: PURE WHITE + shimmer sparkle */}
   <h1 className="mt-6 text-4xl font-extrabold tracking-tight md:text-5xl">
     <span className="relative inline-block">
-      {/* gold gradient text (STATIC) */}
-      <span
-        className={[
-          "bg-gradient-to-r from-[#f6e7b0] via-[#d7b85a] to-[#b48a22]",
-          "bg-clip-text text-transparent",
-          "drop-shadow-[0_12px_22px_rgba(2,6,23,.16)]",
-        ].join(" ")}
-      >
+      {/* base white text */}
+      <span className="relative z-[3] text-white">
         {t("home.hero.title") || "SHD Technology — สร้างการเติบโตให้แบรนด์ในเอเชีย"}
       </span>
 
-      {/* ✨ GOLD sparkle sweep (ชัดกว่าเดิม) */}
+      {/* sparkle sweep layer */}
       <span
         aria-hidden="true"
-        className={[
-          "pointer-events-none absolute inset-0",
-          "opacity-95",
-          "mix-blend-screen",
+        className={cx(
+          "pointer-events-none absolute inset-0 z-[2]",
           "[mask-image:linear-gradient(110deg,transparent,black,transparent)]",
-          "[mask-size:280%_100%]",
-          "animate-[shdGoldSparkleSweep_1.9s_linear_infinite]",
-        ].join(" ")}
+          "[mask-size:260%_100%]",
+          "animate-[shdTitleGoldWhiteSweep_2.9s_linear_infinite]"
+        )}
         style={{
           background:
-            "radial-gradient(circle at 12% 44%, rgba(255,242,200,1) 0 1.35px, transparent 2.8px),\
-             radial-gradient(circle at 18% 62%, rgba(242,213,126,.98) 0 1.35px, transparent 2.8px),\
-             radial-gradient(circle at 28% 30%, rgba(199,154,46,.92) 0 1.35px, transparent 2.8px),\
-             radial-gradient(circle at 40% 54%, rgba(255,242,200,.98) 0 1.35px, transparent 2.8px),\
-             radial-gradient(circle at 52% 36%, rgba(215,184,90,.92) 0 1.35px, transparent 2.8px),\
-             radial-gradient(circle at 64% 58%, rgba(255,242,200,.98) 0 1.35px, transparent 2.8px),\
-             radial-gradient(circle at 76% 34%, rgba(184,137,44,.90) 0 1.35px, transparent 2.8px),\
-             radial-gradient(circle at 88% 52%, rgba(242,213,126,.96) 0 1.35px, transparent 2.8px)",
+            "radial-gradient(circle at 18% 50%, rgba(255,255,255,.95) 0 1.1px, transparent 2.7px),\
+             radial-gradient(circle at 42% 20%, rgba(255,255,255,.80) 0 1.1px, transparent 2.7px),\
+             radial-gradient(circle at 70% 60%, rgba(255,255,255,.90) 0 1.1px, transparent 2.7px),\
+             radial-gradient(circle at 88% 36%, rgba(255,255,255,.85) 0 1.1px, transparent 2.7px)"
         }}
-      />
-
-      {/* ✨ extra twinkles */}
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-70"
-        style={{
-          background:
-            "radial-gradient(circle at 20% 28%, rgba(255,242,200,.95) 0 2.2px, transparent 3.6px),\
-             radial-gradient(circle at 46% 72%, rgba(242,213,126,.75) 0 2.2px, transparent 3.6px),\
-             radial-gradient(circle at 72% 30%, rgba(255,242,200,.92) 0 2.2px, transparent 3.6px),\
-             radial-gradient(circle at 86% 60%, rgba(199,154,46,.68) 0 2.2px, transparent 3.6px)",
-          animation: "shdGoldTwinkle 2.8s ease-in-out infinite",
-        }}
-      />
-
-      {/* gloss sweep */}
-      <span
-        aria-hidden="true"
-        className={[
-          "pointer-events-none absolute -inset-x-12 inset-y-0",
-          "bg-gradient-to-r from-transparent via-[#fff2c8]/45 to-transparent",
-          "skew-x-[-18deg]",
-          "opacity-60 mix-blend-screen",
-          "animate-[shdTitleSweep_4.8s_ease-in-out_infinite]",
-        ].join(" ")}
       />
     </span>
 
     <style>{`
-      @keyframes shdGoldSparkleSweep{
-        0% { mask-position: -140% 0; }
-        100% { mask-position: 140% 0; }
+      @keyframes shdGoldSweep{
+        0%{ -webkit-mask-position:-160% 0; mask-position:-160% 0; }
+        100%{ -webkit-mask-position:160% 0; mask-position:160% 0; }
       }
-      @keyframes shdGoldTwinkle{
-        0%,100%{ opacity: .52; filter: blur(0px); }
-        50%{ opacity: .82; filter: blur(.25px); }
+      @keyframes shdTitleGoldWhiteSweep{
+        0%{ -webkit-mask-position:-180% 0; mask-position:-180% 0; opacity:.65; }
+        55%{ opacity:1; }
+        100%{ -webkit-mask-position:180% 0; mask-position:180% 0; opacity:.55; }
       }
-      @keyframes shdTitleSweep{
-        0%{ transform: translateX(-55%) skewX(-18deg); opacity: 0; }
-        16%{ opacity: .62; }
-        52%{ transform: translateX(55%) skewX(-18deg); opacity: .40; }
-        86%{ opacity: .14; }
-        100%{ transform: translateX(78%) skewX(-18deg); opacity: 0; }
-      }
-      @keyframes shdBadgeGoldShimmer{
-        0%{ -webkit-mask-position: -140% 0; mask-position: -140% 0; }
-        100%{ -webkit-mask-position: 140% 0; mask-position: 140% 0; }
+      @keyframes shdGoldBtnSweep{
+        0%{ -webkit-mask-position:-170% 0; mask-position:-170% 0; }
+        100%{ -webkit-mask-position:170% 0; mask-position:170% 0; }
       }
     `}</style>
   </h1>
 
-  <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-800/90 md:text-base">
-    {t("home.hero.subtitle") ||
-      "แพลตฟอร์มและทีมงานที่เชื่อมกลยุทธ์ การขาย การตลาด และปฏิบัติการ เพื่อผลลัพธ์ที่วัดผลได้"}
-  </p>
+{/* ✅ Subtitle: PURE WHITE */}
+{/* ✅ Subtitle: GOLD GRADIENT LUXURY */}
+<p
+  className={cx(
+    "mx-auto mt-4 max-w-2xl text-sm leading-relaxed md:text-base font-medium",
+    "bg-gradient-to-r from-[#f6e7b0] via-[#ffd56a] to-[#f0c44c]",
+    "bg-clip-text text-transparent"
+  )}
+  style={{
+    textShadow: "0 8px 28px rgba(215,184,90,.25)",
+  }}
+>
+  {t("home.hero.subtitle") ||
+    "แพลตฟอร์มและทีมงานที่เชื่อมกลยุทธ์ การขาย การตลาด และปฏิบัติการ เพื่อผลลัพธ์ที่วัดผลได้"}
+</p>
 
+  {/* ✅ Buttons: GOLD outline pills */}
   <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-    {/* Primary: black button */}
+    {/* Primary: WHITE pill + gold rim + premium shine */}
     <a
       href="/services"
       className={cx(
         "group relative inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold",
-        "bg-black text-white",
-        "ring-1 ring-black/10",
-        "shadow-[0_20px_60px_-46px_rgba(2,6,23,.55)]",
+        "text-slate-950",
+        "bg-white",
+        "ring-1 ring-[#d7b85a]/45",
+        "shadow-[0_28px_90px_-60px_rgba(255,255,255,.72)]",
         "transition duration-300",
-        "hover:-translate-y-0.5 hover:bg-slate-950 hover:brightness-105",
+        "hover:-translate-y-0.5 hover:brightness-[1.03]",
         "active:translate-y-0"
       )}
     >
+      {/* glossy top light */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 rounded-full opacity-75"
+        style={{
+          background:
+            "radial-gradient(140px 70px at 28% 18%, rgba(255,255,255,.95), transparent 62%),\
+             radial-gradient(220px 110px at 70% 0%, rgba(246,231,176,.45), transparent 65%)"
+        }}
+      />
+      {/* subtle gold sweep */}
+      <span
+        aria-hidden="true"
+        className={cx(
+          "pointer-events-none absolute inset-0 rounded-full opacity-55",
+          "[mask-image:linear-gradient(110deg,transparent,black,transparent)]",
+          "[mask-size:240%_100%]",
+          "animate-[shdGoldBtnSweep_3.1s_linear_infinite]"
+        )}
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, rgba(215,184,90,.55), transparent)"
+        }}
+      />
       <span className="relative">
         {t("home.hero.ctaPrimary") || "ดูบริการ"}
-        <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-white/75 transition-all duration-300 group-hover:w-full" />
+        <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-[#b8892c]/80 transition-all duration-300 group-hover:w-full" />
       </span>
     </a>
 
-    {/* Secondary: glass */}
+    {/* Secondary: DARK glass + GOLD outline */}
     <a
       href="http://careers.shd-technology.co.th/"
       target="_blank"
       rel="noreferrer"
       className={cx(
-        "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold",
-        "text-slate-800",
-        "bg-white/75 backdrop-blur-xl",
+        "group relative inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold",
+        "text-white/92",
+        "bg-white/[0.06] backdrop-blur-xl",
         "ring-1 ring-[#d7b85a]/55",
-        "shadow-[0_14px_44px_-34px_rgba(184,137,44,.20)]",
+        "shadow-[0_18px_80px_-60px_rgba(0,0,0,.85)]",
         "transition duration-300",
-        "hover:-translate-y-0.5 hover:bg-white/85 hover:ring-[#f2d57e]/70",
+        "hover:-translate-y-0.5 hover:bg-white/[0.085] hover:ring-[#f6e7b0]/65",
         "active:translate-y-0"
       )}
     >
-      {t("home.hero.ctaSecondary") || "ร่วมงานกับเรา"}
+      {/* inner glow */}
+<span
+  className={cx(
+    "relative font-semibold",
+    "bg-gradient-to-r from-[#f6e7b0] via-[#ffd56a] to-[#f0c44c]",
+    "bg-clip-text text-transparent"
+  )}
+>
+  {t("home.hero.ctaSecondary") || "ร่วมงานกับเรา"}
+</span>
     </a>
   </div>
 </div>
-
           {/* ========= STAGE: รองรับ “กรอบเป็นวิดีโอ” + ไม่มี “กรอบ/ขอบ” (เหลือแค่รูป/วิดีโอ) ========= */}
           <div className="mt-14">
             <div className="mx-auto max-w-6xl px-4 md:px-6">
@@ -689,94 +694,6 @@ export default function HomePage() {
                   </div>
                 </Link>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* =====================================================
-            Showcase (เหมือนเดิม)
-        ====================================================== */}
-        <section className="bg-white">
-          <div className="mx-auto w-full max-w-6xl px-4 md:px-6 pt-12">
-            <SectionHeader
-              kicker={t("home.sections.showcase.kicker") || "Capabilities"}
-              title={t("home.sections.showcase.title") || "What we do"}
-              desc={t("home.sections.showcase.desc") || "ครบเครื่องตั้งแต่กลยุทธ์ → execution"}
-            />
-
-            <div className="mt-6 grid gap-4 md:grid-cols-2 md:gap-6">
-              {showcase.map((s: any, idx: number) => (
-                <GlassCard key={idx} className="p-6 md:p-7">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <div className="text-sm font-extrabold text-slate-900">{s.title}</div>
-                      <div className="mt-2 text-sm leading-relaxed text-slate-700">{s.desc}</div>
-                    </div>
-                    <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-indigo-600 via-cyan-500 to-rose-400 opacity-90" />
-                  </div>
-
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {asArray<string>(s.tags).map((tag) => (
-                      <span
-                        key={tag}
-                        className="inline-flex items-center rounded-full bg-white px-3 py-1 text-xs font-semibold text-slate-700 ring-1 ring-slate-200"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </GlassCard>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Final CTA */}
-        <section className="bg-white">
-          <div className="mx-auto w-full max-w-6xl px-4 md:px-6 py-12">
-            <div className="rounded-3xl bg-white ring-1 ring-slate-200 shadow-[0_18px_60px_-45px_rgba(15,23,42,.25)] p-6 md:p-8">
-              <div className="grid gap-6 md:grid-cols-[1.2fr_.8fr] md:items-center">
-                <div>
-                  <div className="inline-flex items-center rounded-full bg-white px-4 py-2 text-xs font-extrabold text-slate-800 ring-1 ring-slate-200">
-                    {t("home.final.kicker") || "Contact"}
-                  </div>
-
-                  <div className="mt-4 text-2xl font-extrabold tracking-tight text-slate-900 md:text-3xl">
-                    {t("home.final.title") || "ติดต่อทีม SHD เพื่อความร่วมมือ"}
-                  </div>
-
-                  <p className="mt-3 text-sm leading-relaxed text-slate-700 md:text-base">
-                    {t("home.final.desc") || "พูดคุยเรื่องพาร์ทเนอร์ งานบริการ หรือคำถามเกี่ยวกับบริษัท"}
-                  </p>
-
-                  <div className="mt-6 flex flex-wrap gap-3">
-                    <a
-                      href="/contact"
-                      className="inline-flex items-center justify-center rounded-full bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_22px_70px_-45px_rgba(79,70,229,.70)] transition hover:bg-indigo-700"
-                    >
-                      {t("home.final.ctaPrimary") || "ส่งข้อความ"}
-                    </a>
-                    <a
-                      href="/about"
-                      className="inline-flex items-center justify-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 ring-1 ring-slate-200 transition hover:bg-slate-50"
-                    >
-                      {t("home.final.ctaSecondary") || "ดูงาน"}
-                    </a>
-                  </div>
-                </div>
-
-                <div className="grid gap-3">
-                  {(asArray<string>(t("home.final.bullets", { returnObjects: true } as any)).length
-                    ? asArray<string>(t("home.final.bullets", { returnObjects: true } as any))
-                    : ["Business & Partnership", "Services & Operations", "Careers & HR"]
-                  ).map((x, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <div className="mt-1 h-2 w-2 rounded-full bg-indigo-600" />
-                      <div className="text-sm text-slate-800">{x}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
         </section>

@@ -49,7 +49,9 @@
         "desc": "ผสานเทคโนโลยี + ปฏิบัติการจริง เพื่อทำให้ทุกอย่างเกิดขึ้นได้"
       }
     ]
-  },
+  }
+  ,
+
   "home": {
     "seo": {
       "title": "SHD Corporate",
@@ -57,7 +59,7 @@
     },
     "hero": {
       "badges": ["SHD THAILAND", "Glass + Gradient", "TH / EN / 中文"],
-      "title": "SHD Technology — สร้างการเติบโตให้แบรนด์ในเอเชีย",
+      "title": "SHD Technology ขับเคลื่อนสู่ความเป็นที่หนึ่ง",
       "subtitle": "แพลตฟอร์มและทีมงานที่เชื่อมกลยุทธ์ การขาย การตลาด และปฏิบัติการ เพื่อผลลัพธ์ที่วัดผลได้",
       "ctaPrimary": "ดูบริการ",
       "ctaSecondary": "ร่วมงานกับเรา",
@@ -87,7 +89,8 @@
         "title": "แบรนด์ที่เราจัดจำหน่ายอย่างเป็นทางการ",
         "desc": "ค้นหาแบรนด์และกดเข้าไปดูรายละเอียด การรับประกัน และช่องทางบริการ",
         "cardHint": "ผู้จัดจำหน่ายอย่างเป็นทางการ • รับประกัน • ศูนย์บริการ"
-      },
+      }
+      ,
       "showcase": {
         "kicker": "สิ่งที่เราทำ",
         "title": "ออกแบบให้สวยและใช้งานได้จริง",
@@ -128,72 +131,239 @@
         "ปรับข้อความได้จากไฟล์ locales ง่ายๆ"
       ]
     }
+  }
+,
+
+"about": {
+  "seo": {
+    "title": "เกี่ยวกับเรา",
+    "description": "SHD Technology ผู้เชี่ยวชาญด้านการสร้างและขยายแบรนด์ในตลาดเอเชีย ผ่านระบบ ทีม และโครงสร้างที่วัดผลได้จริง"
   },
 
-  "about": {
-    "seo": {
-      "title": "เกี่ยวกับเรา",
-      "description": "เรื่องราว วิสัยทัศน์ และการเติบโตของ SHD Technology"
-    },
+  "hero": {
+    "kicker": "ABOUT SHD",
+    "title": "เบื้องหลังการเติบโตของ SHD Technology",
+    "desc": "เราสร้างระบบ ทีมงาน และโครงสร้างการดำเนินงานที่ช่วยให้แบรนด์เติบโตอย่างยั่งยืนในหลายประเทศ ผ่านกลยุทธ์ การปฏิบัติการ และข้อมูลที่วัดผลได้จริง",
+    "ctaPrimary": "ดูภาพรวม",
+    "ctaSecondary": "ติดต่อเรา",
+    "stats": [
+      { "k": "Founded", "v": "2013" },
+      { "k": "Experience", "v": "13+ ปี" },
+      { "k": "Brands", "v": "20+" },
+      { "k": "Countries", "v": "9" }
+    ]
+  },
 
-    "hero": {
-      "kicker": "เกี่ยวกับเรา",
-      "title": "เบื้องหลังการเติบโตของ SHD",
-      "desc": "เราไม่ได้เติบโตจากโชค แต่เติบโตจากระบบ ทีมงาน และความมุ่งมั่นในการสร้างแบรนด์ระยะยาวในระดับภูมิภาค",
-      "ctaPrimary": "ดูภาพรวม",
-      "ctaSecondary": "ติดต่อเรา"
+  "blocks": [
+    {
+      "title": "Company Story",
+      "desc": "จากการเริ่มต้นสู่การเติบโต: วางรากฐานที่ขยายสเกลได้จริง"
     },
-
-    "section1": {
-      "kicker": "ภาพรวม",
-      "title": "โครงสร้างที่สร้างการเติบโตได้จริง",
-      "desc": "เราสร้างทีมและระบบที่ช่วยให้แบรนด์ขยายได้จริงในหลายประเทศและหลายช่องทาง"
+    {
+      "title": "Operations Excellence",
+      "desc": "เชื่อมกลยุทธ์สู่การปฏิบัติการ ตั้งแต่หน้าบ้านถึงหลังบ้านด้วยมาตรฐานที่วัดผลได้"
     },
+    {
+      "title": "Global + Local",
+      "desc": "ผสานอินไซต์ท้องถิ่นเข้ากับมาตรฐานการทำงานระดับสากล"
+    }
+  ],
 
-    "blocks": [
-      {
-        "title": "Company Story",
-        "desc": "จากทีมเล็กที่เริ่มต้นด้วยเป้าหมายชัดเจน สู่โครงสร้างระดับภูมิภาคที่ขับเคลื่อนแบรนด์ในหลายประเทศ "
-      },
-      {
-        "title": "Operational Excellence",
-        "desc": "กระบวนการทำงานที่วัดผลได้ ตั้งแต่หน้าร้านจนถึงหลังบ้าน ครอบคลุม E-commerce, Distribution, After-sales และ Data Infrastructure"
-      },
-      {
-        "title": "Global + Local",
-        "desc": "ผสานความเข้าใจตลาดท้องถิ่นเข้ากับมาตรฐานระดับสากล เพื่อสร้างการเติบโตที่ยั่งยืนในระยะยาว"
-      }
+  "who": {
+    "kicker": "ABOUT SHD",
+    "title": "เราคือใคร",
+    "subtitle": "SHD Technology",
+    "story": [
+      "เราคือทีมที่ช่วยพาแบรนด์เติบโตในตลาดเอเชีย ด้วยการทำงานแบบลงมือจริง ตั้งแต่การวางกลยุทธ์ การขาย การตลาด ไปจนถึงการปฏิบัติการในแต่ละประเทศ",
+      "SHD ทำงานร่วมกับแบรนด์ในรูปแบบ Co-Brand Building วางแผนเติบโตระยะยาว พร้อมระบบวัดผลที่ชัดเจน และปรับให้เหมาะกับบริบทของตลาดท้องถิ่น",
+      "เราเชื่อมทุกช่องทางให้เดินไปพร้อมกันแบบ Omni-channel เพื่อสร้างทั้งยอดขาย แรงส่งของแบรนด์ และประสบการณ์ที่ดีให้กับลูกค้า",
+      "เป้าหมายของเราคือทำให้การเติบโตเกิดขึ้นได้จริงและยั่งยืน ด้วยมาตรฐานการทำงาน ความเร็วในการลงมือ และความร่วมมือที่จริงใจในทุกขั้นตอน"
     ],
+    "highlights": [
+      {
+        "title": "Co-Brand Building",
+        "desc": "วางแผนเติบโตระยะยาวร่วมกัน"
+      },
+      {
+        "title": "Omni-channel Ops",
+        "desc": "เชื่อมออนไลน์และออฟไลน์ให้เดินพร้อมกัน"
+      },
+      {
+        "title": "Local Execution",
+        "desc": "ทีมพื้นที่จริง ทำงานเร็ว และวัดผลได้"
+      }
+    ]
+  },
 
-    "mission": {
-      "kicker": "พันธกิจของเรา",
-      "title": "Mission",
-      "desc": "สร้างระบบที่ช่วยให้แบรนด์เติบโตได้จริง ผ่านโครงสร้างทีมที่แข็งแรง การตัดสินใจที่ขับเคลื่อนด้วยข้อมูล และมาตรฐานการทำงานระดับสากล"
+  "overview": {
+    "kicker": "About SHD",
+    "title": "ภาพรวมบริษัท (About SHD)",
+    "desc": "ทีมและระบบที่เชื่อมกลยุทธ์ การขาย การตลาด และปฏิบัติการ เพื่อการเติบโตที่วัดผลได้",
+    "cards": [
+      {
+        "title": "Brand Localization",
+        "desc": "ทำให้แบรนด์ต่างประเทศเติบโตแบบ Local ด้วยทีมพื้นที่จริง กลยุทธ์เฉพาะประเทศ",
+        "bullets": [
+          "Go-to-market / Cold start",
+          "Scale up แบบมีระบบ",
+          "Performance + Brand equity"
+        ]
+      },
+      {
+        "title": "Full-cycle Enablement",
+        "desc": "บริการครบวงจร ตั้งแต่การวางช่องทางขาย ทีมปฏิบัติการ คลังสินค้า โลจิสติกส์ และบริการหลังการขาย",
+        "bullets": [
+          "Online operations + Content",
+          "Warehouse & Logistics",
+          "Customer service / After-sales"
+        ]
+      },
+      {
+        "title": "Proven Growth",
+        "desc": "ขับเคลื่อนการเติบโตด้วยผลลัพธ์จริง และช่วยให้แบรนด์ไต่ระดับในหมวดสินค้าหลักได้อย่างมั่นคง",
+        "bullets": [
+          "Data-driven growth",
+          "Omni-channel execution",
+          "Long-term partnership"
+        ]
+      }
+    ]
+  },
+
+  "global": {
+    "kicker": "Global Footprint",
+    "title": "พื้นที่ดำเนินธุรกิจ & ผลงานความสำเร็จ",
+    "regions": {
+      "kicker": "OPERATING REGIONS",
+      "title": "Local Team ในหลายประเทศ",
+      "desc": "ทีมและการดำเนินงานในไทย ฟิลิปปินส์ อินโดนีเซีย บราซิล และมีจีนเป็นศูนย์กลางระดับภูมิภาค เพื่อรองรับการขยายธุรกิจ"
     },
-
-    "vision": {
-      "title": "Vision",
-      "desc": "เป็น Regional Brand Operator ชั้นนำ ที่สร้างการเติบโตอย่างยั่งยืนให้กับแบรนด์ในตลาดเอเชียและตลาดใหม่ทั่วโลก"
+    "achievements": {
+      "kicker": "ACHIEVEMENTS",
+      "title": "สร้างผลลัพธ์ที่จับต้องได้",
+      "desc": "ร่วมมือกับแบรนด์หลากหลายและขับเคลื่อนการเติบโตในช่องทางหลัก ด้วยระบบวัดผลและการทำงานเชิงรุกที่วัดผลได้จริง"
     },
+    "strengths": [
+      {
+        "title": "Network Ready",
+        "desc": "มีโครงสร้างรองรับทั้งออนไลน์และออฟไลน์ พร้อมเครือข่ายพาร์ทเนอร์ในพื้นที่",
+        "bullets": [
+          "Distribution partners",
+          "Service points",
+          "Field execution"
+        ]
+      },
+      {
+        "title": "Category Leadership",
+        "desc": "ผลักดันให้หลายแบรนด์ไต่ขึ้นสู่ระดับผู้นำหมวดสินค้าได้อย่างรวดเร็ว",
+        "bullets": [
+          "Ranking growth",
+          "SOV / SOM uplift",
+          "Repeat purchase"
+        ]
+      },
+      {
+        "title": "Brand Momentum",
+        "desc": "สร้างแรงส่งทั้งยอดขายและแบรนด์ ผ่านคอนเทนต์ แคมเปญ และระบบ Influencer",
+        "bullets": [
+          "KOL / KOC & Live",
+          "Performance ads",
+          "Campaign playbook"
+        ]
+      }
+    ]
+  },
 
-    "values": {
-      "title": "Core Values",
-      "desc": "หลักคิดที่ทำให้เราดำเนินงานอย่างเป็นระบบ โปร่งใส และสร้างความร่วมมือระยะยาวกับพาร์ทเนอร์",
+  "omnichannel": {
+    "kicker": "OMNI-CHANNEL",
+    "title": "เครือข่ายช่องทางขาย (Omni-channel)",
+    "online": {
+      "label": "ONLINE",
+      "title": "Marketplace + Performance",
       "items": [
-        "ความรับผิดชอบและความเป็นเจ้าของงาน",
-        "การตัดสินใจบนพื้นฐานของข้อมูล",
-        "ความโปร่งใสและโครงสร้างที่ชัดเจน",
-        "ความร่วมมือระยะยาว",
-        "มุมมองระดับสากล"
+        "Shopee / Lazada / TikTok",
+        "Search + Social ads",
+        "Live & Short video",
+        "Brand website"
       ]
     },
-
-    "cta": {
-      "title": "Ready to Build With Us?",
-      "desc": "ร่วมเป็นส่วนหนึ่งของการเติบโตระดับภูมิภาคกับ SHD Technology",
-      "button": "ติดต่อเรา"
+    "offline": {
+      "label": "OFFLINE",
+      "title": "Retail + Services",
+      "items": [
+        "Retail partners & Key accounts",
+        "Pop-up / Exhibition",
+        "Service center",
+        "Field activation"
+      ]
     }
+  },
+
+  "mission": {
+    "kicker": "พันธกิจของเรา",
+    "title": "Mission",
+    "desc": "สร้างระบบที่ช่วยให้แบรนด์เติบโตได้จริง ผ่านโครงสร้างทีมที่แข็งแรง การตัดสินใจที่ขับเคลื่อนด้วยข้อมูล และมาตรฐานการทำงานระดับสากล"
+  },
+
+  "vision": {
+    "title": "Vision",
+    "desc": "เป็น Regional Brand Operator ชั้นนำ ที่สร้างการเติบโตอย่างยั่งยืนให้กับแบรนด์ในตลาดเอเชียและตลาดใหม่ทั่วโลก"
+  },
+
+  "values": {
+    "title": "Core Values",
+    "desc": "หลักคิดที่ทำให้เราดำเนินงานอย่างเป็นระบบ โปร่งใส และสร้างความร่วมมือระยะยาวกับพาร์ทเนอร์",
+    "items": [
+      "ความรับผิดชอบและความเป็นเจ้าของงาน (Ownership)",
+      "การตัดสินใจบนพื้นฐานของข้อมูล (Data-driven)",
+      "ความโปร่งใสและโครงสร้างที่ชัดเจน (Transparency)",
+      "ความร่วมมือระยะยาว (Long-term partnership)",
+      "มุมมองระดับสากล (Global mindset)"
+    ]
+  },
+
+  "differentiators": {
+    "kicker": "WHY SHD",
+    "title": "จุดแข็งที่ทำให้ SHD แตกต่าง",
+    "items": [
+      {
+        "title": "Founder-led Partnership",
+        "desc": "ทำงานร่วมกับแบรนด์แบบใกล้ชิด ตั้งเป้าหมายร่วมกัน และขับเคลื่อนผลลัพธ์เชิงกลยุทธ์",
+        "bullets": [
+          "Co-build roadmap",
+          "Clear KPI",
+          "Long-term value"
+        ]
+      },
+      {
+        "title": "Local Ops Infrastructure",
+        "desc": "มีทีมและระบบปฏิบัติการในประเทศ ครอบคลุมตั้งแต่การขาย การตลาด ไปจนถึงบริการหลังการขาย",
+        "bullets": [
+          "Operations playbook",
+          "After-sales support",
+          "Supply chain readiness"
+        ]
+      },
+      {
+        "title": "Execution Excellence",
+        "desc": "ทำงานเร็ว มีมาตรฐาน และวัดผลได้ ปรับแผนจากข้อมูลจริงเพื่อให้เติบโตอย่างยั่งยืน",
+        "bullets": [
+          "Data loop",
+          "Iteration speed",
+          "Quality control"
+        ]
+      }
+    ]
+  },
+
+  "cta": {
+    "title": "พร้อมเติบโตไปด้วยกันไหม?",
+    "desc": "ร่วมเป็นส่วนหนึ่งของการเติบโตระดับภูมิภาคกับ SHD Technology",
+    "button": "ติดต่อเรา",
+    "secondary": "ดูบริการ"
   }
+}
+
 ,
 "brands": {
   "seo": {
@@ -258,7 +428,10 @@
     "subtitle": "ดูแบนเนอร์เพื่อเรียนรู้เพิ่มเติม และคลิกเพื่อไปยังหน้าเกี่ยวข้อง",
     "hint": "แตะ/วางเมาส์ค้างเพื่อหยุดการเลื่อนชั่วคราว"
   },
-
+  "promo": {
+  "buyNow": "ซื้อตอนนี้",
+  "learnMore": "เรียนรู้เพิ่มเติม"
+},
   "items": [
     {
       "name": "Anker",
@@ -338,24 +511,89 @@
   ]
 }
 ,
+
+
   "services": {
     "seo": {
       "title": "Services",
-      "description": "บริการของ SHD: การขาย การตลาด ปฏิบัติการ และข้อมูล"
+      "description": "ศูนย์รวมบริการของ SHD: จองคิว ติดตามงาน และการดูแลหลังการขาย"
     },
     "hero": {
-      "kicker": "บริการ",
+      "kicker": "บริการพรีเมียม",
       "title": "บริการแบบครบวงจรที่ต่อยอดได้",
-      "desc": "เลือกบริการได้เป็นโมดูล หรือทำแบบ end-to-end ตั้งแต่กลยุทธ์ถึงปฏิบัติการ",
-      "ctaPrimary": "ดูบริการ",
-      "ctaSecondary": "ติดต่อ"
+      "subtitle": "จองคิวติดตั้ง 70mai • ติดตามงานซ่อม/เคลม • และการดูแลหลังการขาย — ทุกอย่างอยู่ในมาตรฐานเดียวกัน เพื่อประสบการณ์ที่ชัดเจนและพรีเมียม",
+
+      "ctaPrimary": {
+        "label": "เริ่มจองคิว 70mai",
+        "href": "https://booking.70mai.co.th/"
+      },
+      "ctaSecondary": {
+        "label": "ตรวจสอบงานซ่อม-เคลม",
+        "href": "https://sv.shd-technology.co.th/servicetracking.aspx"
+      },
+
+      "stats": [
+        { "k": "Support", "v": "ทุกวัน 24 ชม." },
+        { "k": "มาตรฐาน", "v": "ตรวจสอบได้" },
+        { "k": "บริการ", "v": "ครบวงจร" }
+      ],
+
+      "imageSrc": "/images/services/hero-card.jpg",
+      "imageAlt": "SHD Services",
+      "cardTitle": "Service Hub",
+      "cardDesc": "เข้าถึงบริการหลักทั้งหมดได้ทันที",
+
+      "quick": [
+        { "label": "จองคิว", "href": "https://booking.70mai.co.th/" },
+        { "label": "เช็คสถานะ", "href": "https://sv.shd-technology.co.th/servicetracking.aspx" }
+      ]
     },
-    "blocks": [
-      { "title": "E-commerce Ops", "desc": "ออเดอร์ คลัง ขนส่ง การเงิน คืนสินค้า และการบริการ" },
-      { "title": "Performance Marketing", "desc": "แผนโฆษณา + ครีเอทีฟ + การทดลอง เพื่อ ROI ที่ชัดเจน" },
-      { "title": "Data Platform", "desc": "รวมข้อมูลทุกช่องทาง เพื่อแดชบอร์ดและการตัดสินใจ" }
+
+    "section": {
+      "kicker": "SERVICES",
+      "title": "บริการหลัก"
+    },
+
+    "card": {
+      "primaryCta": "เริ่มใช้งาน",
+      "contactCta": "ติดต่อเรา"
+    },
+
+    "items": [
+      {
+        "key": "booking",
+        "title": "บริการติดตั้งกล้องติดรถยนต์ 70mai",
+        "desc": "จองคิวออนไลน์ เลือกสาขา/วัน/เวลา พร้อมช่างผู้เชี่ยวชาญดูแลแบบพรีเมียม",
+        "bullets": [
+          "เลือกสาขา/วัน/เวลา ได้ทันที",
+          "จัดการเลื่อนนัด/ยกเลิกได้",
+          "ขั้นตอนชัดเจน โปร่งใส"
+        ],
+        "href": "https://booking.70mai.co.th/",
+        "icon": "CalendarClock",
+        "imageSrc": "/images/services/70mai-booking.jpg",
+        "tag": "Booking",
+        "ctaLabel": "จองคิว"
+      },
+      {
+        "key": "tracking",
+        "title": "ตรวจสอบสถานะงานซ่อม-เคลม",
+        "desc": "ติดตามสถานะงานซ่อม/เคลมแบบเรียลไทม์ ด้วยเลขอ้างอิงที่คุณมี",
+        "bullets": [
+          "ดูสถานะแต่ละขั้นตอน",
+          "มีรายละเอียดงานและการจัดส่ง",
+          "ลดเวลาตามงาน/โทรถาม"
+        ],
+        "href": "https://sv.shd-technology.co.th/servicetracking.aspx",
+        "icon": "PackageSearch",
+        "imageSrc": "/images/services/service-tracking.jpg",
+        "tag": "Tracking",
+        "ctaLabel": "ตรวจสอบ"
+      }
     ]
-  },
+  }
+
+,
   "activities": {
     "seo": {
       "title": "Activities",
@@ -392,35 +630,106 @@
       { "title": "Real Ownership", "desc": "ได้ลงมือจริง รับผิดชอบจริง และเห็นผลลัพธ์จริง" }
     ]
   },
+
   "contact": {
     "seo": {
       "title": "Contact",
-      "description": "ช่องทางติดต่อ SHD Technology"
+      "description": "Contact SHD Technology — email, phone, and address"
     },
+
     "hero": {
-      "kicker": "ติดต่อ",
-      "title": "คุยกับเราได้เลย",
-      "desc": "ติดต่อทีม SHD เพื่อความร่วมมือ งานบริการ หรือคำถามเกี่ยวกับบริษัท",
-      "ctaPrimary": "ส่งข้อความ",
-      "ctaSecondary": "ดูงาน"
+      "kicker": "CONTACT",
+      "title": "ติดต่อทีมงาน SHD ได้ทันที",
+      "desc": "เลือกทีมที่ต้องการติดต่อ แล้วกดครั้งเดียว ระบบจะเปิดอีเมลพร้อมหัวข้อให้อัตโนมัติ",
+
+      "ctaPrimary": {
+        "label": "ส่งอีเมลหลัก",
+        "email": "info@shd-technology.co.th",
+        "subject": "[SHD] General Inquiry"
+      },
+      "ctaPhone": {
+        "label": "โทรด่วน",
+        "value": "+6621004578"
+      },
+      "ctaMap": {
+        "label": "แผนที่"
+      }
     },
-    "section": {
-      "kicker": "ช่องทาง",
-      "title": "ช่องทางติดต่อหลัก",
-      "desc": "ตัวอย่างหน้า Contact ที่พร้อมต่อยอดเป็นฟอร์มจริงได้ทันที"
+
+    "directory": {
+      "kicker": "EMAIL DIRECTORY",
+      "title": "เลือกทีมที่ต้องการติดต่อ"
     },
-    "channels": [
-      { "title": "Email", "desc": "ติดต่อเรื่องงานและความร่วมมือ", "value": "hello@shd-technology.co.th" },
-      { "title": "Phone", "desc": "ติดต่อด่วน", "value": "+66 xx-xxx-xxxx" },
-      { "title": "Office", "desc": "สำนักงานใหญ่ (ตัวอย่าง)", "value": "Bangkok, Thailand" }
+
+    "emails": [
+      {
+        "title": "เรื่องทั่วไป",
+        "desc": "สอบถามข้อมูลทั่วไป",
+        "email": "info@shd-technology.co.th",
+        "subject": "[SHD] General Inquiry",
+        "highlight": true,
+        "icon": "general"
+      },
+      {
+        "title": "บริการหลังการขาย",
+        "desc": "เคลมสินค้า / ซ่อม / อะไหล่",
+        "email": "service@shd-technology.co.th",
+        "subject": "[SHD] After-sales Support",
+        "icon": "service"
+      },
+      {
+        "title": "การเงิน",
+        "desc": "ใบกำกับภาษี / การชำระเงิน",
+        "email": "finance@shd-technology.co.th",
+        "subject": "[SHD] Finance Inquiry",
+        "icon": "finance"
+      },
+      {
+        "title": "ธุรกิจ",
+        "desc": "โอกาสทางธุรกิจ / B2B",
+        "email": "comercial@shd-technology.co.th",
+        "subject": "[SHD] Business Collaboration",
+        "icon": "biz"
+      },
+      {
+        "title": "บุคลากร",
+        "desc": "สมัครงาน / HR",
+        "email": "recruit@shd-technology.co.th",
+        "subject": "[SHD] Recruitment Inquiry",
+        "icon": "hr"
+      },
+      {
+        "title": "การตลาด",
+        "desc": "PR / KOL / Campaign",
+        "email": "marketing@shd-technology.co.th",
+        "subject": "[SHD] Marketing Collaboration",
+        "icon": "marketing"
+      }
     ],
-    "form": {
-      "title": "ส่งข้อความถึงเรา",
-      "desc": "ฟอร์มตัวอย่าง (mock) — คุณสามารถเชื่อม API / Supabase / Email ได้ภายหลัง",
-      "tags": ["Partnership", "Service", "Media", "Other"],
-      "fields": { "name": "ชื่อ", "email": "อีเมล", "message": "ข้อความ" },
-      "submit": "ส่งข้อความ",
-      "mockSubmit": "ส่งเรียบร้อย (ตัวอย่าง)"
+
+    "phoneSection": {
+      "title": "โทรศัพท์",
+      "desc": "กดเพื่อโทรออกทันที หรือคัดลอกเบอร์",
+      "cta": "โทรด่วน",
+      "numbers": [
+        "+66 2-100-4578",
+        "02-115-1262",
+        "081-714-5342"
+      ]
+    },
+
+    "addressSection": {
+      "title": "ที่อยู่บริษัท",
+      "desc": "เปิดแผนที่หรือคัดลอกที่อยู่ได้ทันที",
+      "cta": "เปิดแผนที่",
+      "copy": "Copy address",
+      "emailCta": "ส่งอีเมล",
+      "value": "168 อาคารไอซีเอส ชั้น 7 (ห้อง 703-704) ถนนเจริญนคร แขวงคลองต้นไทร เขตคลองสาน กรุงเทพมหานคร 10600"
+    },
+
+    "copy": {
+      "default": "Copy",
+      "success": "Copied"
     }
   }
 }

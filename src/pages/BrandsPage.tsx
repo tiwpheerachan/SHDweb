@@ -351,38 +351,38 @@ const promoCards: PromoCard[] = [
     draggable={false}
   />
 
-  {/* ✅ buttons overlay (bottom-right) */}
-  <div className="absolute bottom-6 right-6 md:bottom-8 md:right-8 z-20 flex flex-wrap items-center justify-end gap-3">
-    <a
-      href={c.buyHref}
-      target="_blank"
-      rel="noreferrer"
-      className={cx(
-        "inline-flex items-center justify-center rounded-full",
-        "px-6 py-3 text-sm font-semibold",
-        "bg-slate-900 text-white",
-        "transition hover:bg-black"
-      )}
-    >
-      ซื้อตอนนี้
-    </a>
+{/* ✅ buttons overlay (bottom-right) */}
+<div className="absolute bottom-6 right-6 md:bottom-8 md:right-8 z-20 flex flex-wrap items-center justify-end gap-3">
+  <a
+    href={c.buyHref}
+    target="_blank"
+    rel="noreferrer"
+    className={cx(
+      "inline-flex items-center justify-center rounded-full",
+      "px-6 py-3 text-sm font-semibold",
+      "bg-slate-900 text-white",
+      "transition hover:bg-black"
+    )}
+  >
+    {(t("brands.promo.buyNow") as string) || "Buy now"}
+  </a>
 
-    <a
-      href={c.learnHref}
-      target="_blank"
-      rel="noreferrer"
-      className={cx(
-        "inline-flex items-center justify-center rounded-full",
-        "px-6 py-3 text-sm font-semibold",
-        "bg-white/85 backdrop-blur",
-        "ring-1 ring-slate-200",
-        "text-slate-900",
-        "transition hover:bg-white"
-      )}
-    >
-      เรียนรู้เพิ่มเติม <span className="ml-1">›</span>
-    </a>
-  </div>
+  <a
+    href={c.learnHref}
+    target="_blank"
+    rel="noreferrer"
+    className={cx(
+      "inline-flex items-center justify-center rounded-full",
+      "px-6 py-3 text-sm font-semibold",
+      "bg-white/85 backdrop-blur",
+      "ring-1 ring-slate-200",
+      "text-slate-900",
+      "transition hover:bg-white"
+    )}
+  >
+    {(t("brands.promo.learnMore") as string) || "Learn more"} <span className="ml-1">›</span>
+  </a>
+</div>
 </div>
 
               </div>

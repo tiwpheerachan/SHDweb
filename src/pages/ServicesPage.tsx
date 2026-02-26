@@ -67,6 +67,7 @@ function GhostBtn({ href, children }: { href: string; children: React.ReactNode 
 
 /** ✅ NEW card design to match your screenshot */
 function ServiceRowCard({ item }: { item: ServiceRow }) {
+  const { t } = useTranslation();
   const external = item.href.startsWith("http");
 
   return (
@@ -98,9 +99,7 @@ function ServiceRowCard({ item }: { item: ServiceRow }) {
 
         {/* title + desc (with right padding for arrow) */}
         <div className="pr-12">
-          <h3 className="text-[15px] font-black text-slate-950 md:text-base">
-            {item.title}
-          </h3>
+          <h3 className="text-[15px] font-black text-slate-950 md:text-base">{item.title}</h3>
           <p className="mt-1 text-sm text-slate-600">{item.desc}</p>
         </div>
 
@@ -118,8 +117,12 @@ function ServiceRowCard({ item }: { item: ServiceRow }) {
 
         {/* bottom actions */}
         <div className="mt-4 flex flex-wrap items-center gap-2">
-          <LinkBtn href={item.href}>{item.ctaLabel || "เริ่มใช้งาน"}</LinkBtn>
-          <GhostBtn href="/contact">ติดต่อเรา</GhostBtn>
+          <LinkBtn href={item.href}>
+            {item.ctaLabel || (t("services.card.primaryCta", { defaultValue: "เริ่มใช้งาน" }) as string)}
+          </LinkBtn>
+          <GhostBtn href="/contact">
+            {(t("services.card.contactCta", { defaultValue: "ติดต่อเรา" }) as string)}
+          </GhostBtn>
         </div>
       </div>
     </GlassCard>
@@ -129,8 +132,17 @@ function ServiceRowCard({ item }: { item: ServiceRow }) {
 export default function ServicesPage() {
   const { t } = useTranslation();
 
-  const services = useMemo<ServiceRow[]>(
-    () => [
+  // =========================
+  // ✅ i18n: Services rows
+  // - keep design the same
+  // - only replace hardcoded text with t(...)
+  // =========================
+  const services = useMemo<ServiceRow[]>(() => {
+    const rows = t("services.items", { returnObjects: true, defaultValue: [] }) as any[];
+
+    // fallback: if someone forgets to create services.items in locales,
+    // keep old TH strings to avoid crash (design unchanged)
+    const fallback: ServiceRow[] = [
       {
         key: "booking",
         title: "บริการติดตั้งกล้องติดรถยนต์ 70mai",
@@ -153,15 +165,43 @@ export default function ServicesPage() {
         tag: "Tracking",
         ctaLabel: "ตรวจสอบ",
       },
-    ],
-    []
-  );
+    ];
+
+    if (!Array.isArray(rows) || rows.length === 0) return fallback;
+
+    return rows.map((r: any) => {
+      const iconName = String(r?.icon || "");
+      const icon =
+        iconName === "CalendarClock" ? (
+          <CalendarClock className="h-3.5 w-3.5 text-slate-900" />
+        ) : iconName === "PackageSearch" ? (
+          <PackageSearch className="h-3.5 w-3.5 text-slate-900" />
+        ) : (
+          <ArrowRight className="h-3.5 w-3.5 text-slate-900" />
+        );
+
+      return {
+        key: String(r?.key || ""),
+        title: String(r?.title || ""),
+        desc: String(r?.desc || ""),
+        bullets: Array.isArray(r?.bullets) ? r.bullets.map((x: any) => String(x)) : [],
+        href: String(r?.href || "/"),
+        icon,
+        imageSrc: String(r?.imageSrc || ""),
+        tag: r?.tag ? String(r.tag) : undefined,
+        ctaLabel: r?.ctaLabel ? String(r.ctaLabel) : undefined,
+      } as ServiceRow;
+    });
+  }, [t]);
 
   return (
     <>
       <Helmet>
-        <title>{t("services.seo.title")} · SHD Technology</title>
-        <meta name="description" content={t("services.seo.description")} />
+        <title>{(t("services.seo.title") as string) || "Services"} · SHD Technology</title>
+        <meta
+          name="description"
+          content={(t("services.seo.description") as string) || "SHD Technology services"}
+        />
       </Helmet>
 
       {/* ===== HERO (luxury minimal + animated gradient on MAIN TITLE) ===== */}
@@ -214,7 +254,7 @@ export default function ServicesPage() {
             <div className="md:col-span-7">
               <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-extrabold text-slate-900 ring-1 ring-slate-200 shadow-[0_16px_60px_-46px_rgba(2,6,23,0.30)]">
                 <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                Premium Service
+                {(t("services.hero.kicker", { defaultValue: "Premium Service" }) as string)}
               </div>
 
               <h1 className="mt-4 text-3xl font-black tracking-tight md:text-5xl">
@@ -231,28 +271,44 @@ export default function ServicesPage() {
               </p>
 
               <div className="mt-6 flex flex-wrap items-center gap-3">
-                <LinkBtn href="https://booking.70mai.co.th/">เริ่มจองคิว 70mai</LinkBtn>
-                <GhostBtn href="https://sv.shd-technology.co.th/servicetracking.aspx">ตรวจสอบงานซ่อม-เคลม</GhostBtn>
+                <LinkBtn href={(t("services.hero.ctaPrimary.href") as string) || "https://booking.70mai.co.th/"}>
+                  {(t("services.hero.ctaPrimary.label", { defaultValue: "เริ่มจองคิว 70mai" }) as string)}
+                </LinkBtn>
+                <GhostBtn
+                  href={
+                    (t("services.hero.ctaSecondary.href") as string) ||
+                    "https://sv.shd-technology.co.th/servicetracking.aspx"
+                  }
+                >
+                  {(t("services.hero.ctaSecondary.label", { defaultValue: "ตรวจสอบงานซ่อม-เคลม" }) as string)}
+                </GhostBtn>
               </div>
 
               <div className="mt-7 grid gap-3 sm:grid-cols-3">
-                {[
-                  { k: "Support", v: "ทุกวัน 24 ชม." },
-                  { k: "มาตรฐาน", v: "ตรวจสอบได้" },
-                  { k: "บริการ", v: "ครบวงจร" },
-                ].map((x, i) => (
-                  <div
-                    key={i}
-                    className={cn(
-                      "rounded-2xl bg-white p-4",
-                      "ring-1 ring-slate-200",
-                      "shadow-[0_16px_60px_-48px_rgba(2,6,23,0.28)]"
-                    )}
-                  >
-                    <div className="text-xs font-extrabold text-slate-500">{x.k}</div>
-                    <div className="mt-1 text-sm font-black text-slate-950">{x.v}</div>
-                  </div>
-                ))}
+                {(
+                  (t("services.hero.stats", {
+                    returnObjects: true,
+                    defaultValue: [
+                      { k: "Support", v: "ทุกวัน 24 ชม." },
+                      { k: "มาตรฐาน", v: "ตรวจสอบได้" },
+                      { k: "บริการ", v: "ครบวงจร" },
+                    ],
+                  }) as any[]) || []
+                )
+                  .slice(0, 3)
+                  .map((x, i) => (
+                    <div
+                      key={i}
+                      className={cn(
+                        "rounded-2xl bg-white p-4",
+                        "ring-1 ring-slate-200",
+                        "shadow-[0_16px_60px_-48px_rgba(2,6,23,0.28)]"
+                      )}
+                    >
+                      <div className="text-xs font-extrabold text-slate-500">{String(x?.k ?? "")}</div>
+                      <div className="mt-1 text-sm font-black text-slate-950">{String(x?.v ?? "")}</div>
+                    </div>
+                  ))}
               </div>
             </div>
 
@@ -271,8 +327,8 @@ export default function ServicesPage() {
                 >
                   <div className="relative aspect-[6/3.8] overflow-hidden">
                     <img
-                      src="/images/services/hero-card.jpg"
-                      alt="SHD Services"
+                      src={(t("services.hero.imageSrc", { defaultValue: "/images/services/hero-card.jpg" }) as string)}
+                      alt={(t("services.hero.imageAlt", { defaultValue: "SHD Services" }) as string)}
                       className="h-full w-full object-cover"
                       loading="lazy"
                     />
@@ -290,8 +346,17 @@ export default function ServicesPage() {
                     </div>
 
                     <div className="mt-4 flex flex-wrap gap-2">
-                      <GhostBtn href="https://booking.70mai.co.th/">จองคิว</GhostBtn>
-                      <GhostBtn href="https://sv.shd-technology.co.th/servicetracking.aspx">เช็คสถานะ</GhostBtn>
+                      <GhostBtn href={(t("services.hero.quick.0.href") as string) || "https://booking.70mai.co.th/"}>
+                        {(t("services.hero.quick.0.label", { defaultValue: "จองคิว" }) as string)}
+                      </GhostBtn>
+                      <GhostBtn
+                        href={
+                          (t("services.hero.quick.1.href") as string) ||
+                          "https://sv.shd-technology.co.th/servicetracking.aspx"
+                        }
+                      >
+                        {(t("services.hero.quick.1.label", { defaultValue: "เช็คสถานะ" }) as string)}
+                      </GhostBtn>
                     </div>
                   </div>
                 </GlassCard>

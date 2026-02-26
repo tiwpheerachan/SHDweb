@@ -9,16 +9,6 @@ function cn(...xs: Array<string | false | undefined | null>) {
   return xs.filter(Boolean).join(" ");
 }
 
-/**
- * ✅ FIX (คงเดิม 100% + ขยายโลโก้)
- * - Home + ยังไม่ scroll: โปร่งใสทับ hero (เหมือนเดิม)
- * - ✅ ปิด hover effect ทั้งหมด: เอาเม้าส์โดน navbar แล้ว "ต้องไม่เปลี่ยนสี/ไม่ขาว"
- * - Active link ตอน top: เป็นเส้นวง (ring) ไม่เติมพื้นขาว
- * - Scroll แล้ว/หน้าอื่น: เป็น glass pill แบบเดิม
- *
- * ✅ Update:
- * - Careers ลิ้งออกไปยัง http://careers.shd-technology.co.th (external link)
- */
 export default function Navbar() {
   const { t, i18n } = useTranslation();
   const location = useLocation();
@@ -31,7 +21,6 @@ export default function Navbar() {
       { to: "/about", label: t("nav.about") },
       { to: "/brands", label: t("nav.brands") },
       { to: "/services", label: t("nav.services") },
-      // ✅ external
       { to: CAREERS_URL, label: t("nav.careers"), external: true as const },
       { to: "/contact", label: t("nav.contact") },
     ],
@@ -42,24 +31,29 @@ export default function Navbar() {
   const isContactPage = location.pathname === "/contact";
 
   // ===== scroll =====
-  const [scrolled, setScrolled] = useState(false);
+  // ✅ ทำให้ "Home top = ตัวหนังสือขาว" จนกว่า scroll จะเกินค่านี้
+  const HOME_WHITE_UNTIL = 120;
+
+  const [scrollY, setScrollY] = useState(0);
+
   useEffect(() => {
-    const onScroll = () => setScrolled((window.scrollY || 0) > 12);
+    const onScroll = () => setScrollY(window.scrollY || 0);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [location.pathname]);
 
-  // ✅ โหมดแบบ "คงเดิม 100%" (ไม่มี hover)
-  // - non-home: glass always
-  // - home:
-  //    top: transparent
-  //    scrolled: glass
+  const scrolled = scrollY > HOME_WHITE_UNTIL;
+
+  // mode (คงพื้นหลังเดิมตาม logic เดิม)
   type Mode = "glass" | "top";
   const mode: Mode = !isHome ? "glass" : scrolled ? "glass" : "top";
 
   // header positioning
   const topHeroMode = isHome && mode === "top";
+
+  // ✅ เงื่อนไข "Home initial/top": ให้ข้อความเป็นขาวเสมอ
+  const isHomeTop = isHome && !scrolled; // อยู่ในช่วง top ของหน้า home
 
   // ===== mobile drawer =====
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -101,7 +95,6 @@ export default function Navbar() {
     "motion-reduce:transition-none motion-reduce:transform-none"
   );
 
-  // ✅ glass ตอน scroll/หน้าอื่น
   const glassPill = cn(
     "backdrop-blur-2xl",
     "bg-white/58",
@@ -126,26 +119,33 @@ export default function Navbar() {
     "transition-[color,background-color,box-shadow,transform,border-color] duration-200 ease-out"
   );
 
-  // ✅ Active ตอน top: เป็น ring ขาว (ไม่เติมพื้น)
+  // ✅ Desktop links: Home top = ขาวเสมอ
   const desktopLinkClass = (isActive: boolean) =>
     cn(
       desktopLinkBase,
-      mode === "glass"
+
+      isHomeTop
         ? cn(
-            "text-slate-700/90",
-            "hover:bg-white/45 hover:ring-1 hover:ring-white/65",
-            "hover:shadow-[0_18px_60px_-36px_rgba(79,70,229,0.16)]"
-          )
-        : cn(
-            "text-slate-900/90",
-            // top mode: hover ไม่ทำให้ขาวทึบ (ยังให้ feedback บางๆได้ แต่ไม่ fill)
+            "text-white/95",
             "hover:bg-white/0 hover:ring-1 hover:ring-white/35",
             "hover:backdrop-blur-xl"
-          ),
+          )
+        : mode === "glass"
+          ? cn(
+              "text-slate-700/90",
+              "hover:bg-white/45 hover:ring-1 hover:ring-white/65",
+              "hover:shadow-[0_18px_60px_-36px_rgba(79,70,229,0.16)]"
+            )
+          : cn(
+              "text-white/92",
+              "hover:bg-white/0 hover:ring-1 hover:ring-white/35",
+              "hover:backdrop-blur-xl"
+            ),
+
       isActive &&
-        (mode === "glass"
-          ? "bg-white/62 text-slate-900 ring-1 ring-white/75 shadow-[0_20px_70px_-44px_rgba(79,70,229,0.16)]"
-          : cn("bg-white/0 ring-1 ring-white/80 text-slate-900"))
+        (isHomeTop || mode === "top"
+          ? cn("bg-white/0 ring-1 ring-white/80 text-white")
+          : "bg-white/62 text-slate-900 ring-1 ring-white/75 shadow-[0_20px_70px_-44px_rgba(79,70,229,0.16)]")
     );
 
   const contactCtaClass = (m: Mode) =>
@@ -154,14 +154,21 @@ export default function Navbar() {
       "px-4 py-1.5 md:py-2",
       "text-sm font-semibold select-none",
       "transition-[background-color,box-shadow,transform,color,border-color] duration-200 ease-out",
-      m === "glass"
-        ? cn("bg-indigo-600 text-white hover:bg-indigo-700", "shadow-[0_18px_70px_-42px_rgba(79,70,229,0.45)]")
-        : cn(
-            // top: ไม่มีพื้นขาว
-            "bg-white/0 text-slate-900/95",
+
+      isHomeTop
+        ? cn(
+            "bg-white/0 text-white/95",
             "ring-1 ring-white/35",
             "hover:ring-white/55 hover:backdrop-blur-xl"
-          ),
+          )
+        : m === "glass"
+          ? cn("bg-indigo-600 text-white hover:bg-indigo-700", "shadow-[0_18px_70px_-42px_rgba(79,70,229,0.45)]")
+          : cn(
+              "bg-white/0 text-white/95",
+              "ring-1 ring-white/35",
+              "hover:ring-white/55 hover:backdrop-blur-xl"
+            ),
+
       isContactPage && "opacity-60 pointer-events-none"
     );
 
@@ -182,7 +189,6 @@ export default function Navbar() {
     setLangOpen(false);
   };
 
-  // ✅ wrapper ของ LanguageSwitch: top mode ไม่ทำพื้นขาว
   const langWrapClass = cn(
     "rounded-full p-1 transition-[background-color,box-shadow,border-color] duration-200 ease-out",
     mode === "glass"
@@ -190,20 +196,20 @@ export default function Navbar() {
       : "bg-white/0 ring-1 ring-white/30 hover:ring-white/55 backdrop-blur-xl"
   );
 
+  // ✅ icon color: Home top = white, glass = slate
+  const iconColor = isHomeTop || mode === "top" ? "text-white/92" : "text-slate-800";
+
   return (
     <header className={cn("top-0 z-50 w-full", topHeroMode ? "absolute" : "sticky")}>
-      {/* ✅ ไม่มี onMouseEnter/Leave แล้ว (คงเดิม 100%) */}
       <div className="relative">
         <div className={cn("containerX", outerPad)}>
-          {/* glass mode ใช้ floating wrap ให้ดูเป็น pill ลอย */}
           <div className={mode === "glass" ? floatingWrap : ""}>
             <div className={pillFrame}>
-              {/* Logo (✅ ขยายโลโก้) */}
+              {/* Logo */}
               <NavLink to="/" className="relative flex items-center">
                 <img
                   src="/images/logo.png"
                   alt="SHD"
-                  // ✅ เดิม h-9 w-9 / md:h-10 md:w-10 -> เพิ่มให้ใหญ่ขึ้น
                   className="h-11 w-11 md:h-12 md:w-12 object-contain"
                   draggable={false}
                 />
@@ -213,7 +219,6 @@ export default function Navbar() {
               <nav className="relative hidden md:flex items-center gap-1">
                 {links.map((l) => {
                   if ((l as any).external) {
-                    // ✅ External Careers link — keep exact same styling (no active state)
                     return (
                       <a
                         key={l.to}
@@ -226,7 +231,6 @@ export default function Navbar() {
                       </a>
                     );
                   }
-
                   return (
                     <NavLink key={l.to} to={l.to} className={({ isActive }) => desktopLinkClass(isActive)}>
                       {l.label}
@@ -246,7 +250,7 @@ export default function Navbar() {
                 </NavLink>
               </div>
 
-              {/* Mobile (one-row only) */}
+              {/* Mobile */}
               <div className="relative flex items-center gap-2 md:hidden">
                 <button
                   type="button"
@@ -254,7 +258,11 @@ export default function Navbar() {
                   className={iconBtn(mode)}
                   onClick={() => setMobileOpen((v) => !v)}
                 >
-                  {mobileOpen ? <X className="h-5 w-5 text-slate-800" /> : <Menu className="h-5 w-5 text-slate-800" />}
+                  {mobileOpen ? (
+                    <X className={cn("h-5 w-5", iconColor)} />
+                  ) : (
+                    <Menu className={cn("h-5 w-5", iconColor)} />
+                  )}
                 </button>
 
                 <div className="relative">
@@ -264,7 +272,7 @@ export default function Navbar() {
                     className={iconBtn(mode)}
                     onClick={() => setLangOpen((v) => !v)}
                   >
-                    <Globe2 className="h-5 w-5 text-slate-800" />
+                    <Globe2 className={cn("h-5 w-5", iconColor)} />
                   </button>
 
                   {langOpen ? (
@@ -318,7 +326,6 @@ export default function Navbar() {
             >
               <div className="flex items-center justify-between px-4 py-4">
                 <div className="flex items-center gap-3">
-                  {/* ✅ ขยายโลโก้ใน drawer ด้วย */}
                   <img src="/images/logo.png" alt="SHD" className="h-12 w-12 object-contain" draggable={false} />
                   <div className="text-sm font-extrabold text-slate-900">{t("common.menu") || "Menu"}</div>
                 </div>

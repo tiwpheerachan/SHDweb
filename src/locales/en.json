@@ -8,13 +8,16 @@
     "careers": "Careers",
     "contact": "Contact"
   },
-  "common": {
-    "skip": "Skip to content",
-    "section": {
-      "kicker": "Overview",
-      "title": "One coherent light theme across all pages",
-      "desc": "Shared tokens, buttons, cards, and a clean i18n setup (TH/EN/中文) with instant switching."
-    },
+"common": {
+  "skip": "Skip to content",
+  "search": "Search",
+  "open": "Open",
+  "section": {
+    "kicker": "Overview",
+    "title": "One coherent light theme across all pages",
+    "desc": "Shared tokens, buttons, cards, and a clean i18n setup (TH/EN/中文) with instant switching."
+  }
+,
     "stats": [
       {
         "k": "Countries served",
@@ -57,189 +60,545 @@
       }
     ]
   },
-  "home": {
-    "seo": {
-      "title": "SHD Corporate",
-      "description": "SHD Technology corporate website — beautiful light theme with 3-language i18n"
+"home": {
+  "seo": {
+    "title": "SHD Corporate",
+    "description": "SHD Technology corporate website — premium gold/black + glass aesthetic with 3-language i18n."
+  },
+
+  "hero": {
+    "badges": ["SHD THAILAND", "Glass + Gold", "TH / EN / 中文"],
+    "title": "SHD Technology  Striving to be number one",
+    "subtitle": "We connect strategy, commerce, marketing, and operations into outcomes you can measure.",
+    "ctaPrimary": "Explore services",
+    "ctaSecondary": "Join us",
+    "stats": [
+      { "k": "Network", "v": "SEA" },
+      { "k": "Focus", "v": "Growth" },
+      { "k": "Standard", "v": "Enterprise" }
+    ]
+  },
+
+  "highlights": [
+    {
+      "title": "Brand & Distribution",
+      "desc": "Scale brands through the right channels with strong quality control and execution."
     },
-    "hero": {
-      "badges": [
-        "SHD THAILAND",
-        "Glass + Gradient",
-        "TH / EN / 中文"
-      ],
-      "title": "SHD Technology — powering brand growth across Asia",
-      "subtitle": "A platform and team that connects strategy, commerce, marketing, and operations into measurable outcomes.",
-      "ctaPrimary": "Explore services",
-      "ctaSecondary": "Join us",
-      "stats": [
-        {
-          "k": "Network",
-          "v": "SEA"
-        },
-        {
-          "k": "Focus",
-          "v": "Growth"
-        },
-        {
-          "k": "Standard",
-          "v": "Enterprise"
-        }
-      ]
+    {
+      "title": "Commerce Operations",
+      "desc": "End-to-end operations across orders, warehouse, finance, and back office."
     },
+    {
+      "title": "Data & Automation",
+      "desc": "A single source of truth + automation that enables faster, smarter decisions."
+    }
+  ],
+
+  "sections": {
+    "brands": {
+      "kicker": "Brands",
+      "title": "Official brands we distribute",
+      "desc": "Search brands and open details for warranty, service, and support channels.",
+      "cardHint": "Official distributor • Warranty • Service"
+    },
+    
+    "showcase": {
+      "kicker": "What we do",
+      "title": "Built to perform — designed to scale",
+      "desc": "A unified experience across the website: consistent UI, content structure, and multi-language support."
+    }
+  },
+
+  "showcase": [
+    {
+      "title": "Performance Marketing",
+      "desc": "Creative + Performance + Measurement that delivers measurable growth.",
+      "tags": ["Ads", "Creative", "Growth"]
+    },
+    {
+      "title": "Regional Expansion",
+      "desc": "Scale across multiple countries with consistent standards and execution.",
+      "tags": ["SEA", "Localization", "Scale"]
+    },
+    {
+      "title": "SOP & Quality",
+      "desc": "Clear, auditable processes that help teams execute fast with high standards.",
+      "tags": ["Process", "Quality", "Enterprise"]
+    },
+    {
+      "title": "Partnerships",
+      "desc": "Co-build with brands and partners to drive shared long-term value.",
+      "tags": ["Partner", "Co-Build", "Win-Win"]
+    }
+  ],
+
+  "final": {
+    "kicker": "Contact",
+    "title": "Talk to SHD about partnership opportunities",
+    "desc": "Reach out for partnerships, services, or any questions about SHD Technology.",
+    "ctaPrimary": "Send a message",
+    "ctaSecondary": "Learn about us",
+    "bullets": ["Business & Partnership", "Services & Operations", "Careers & HR"]
+  }
+},
+
+  "about": {
+  "seo": {
+    "title": "About",
+    "description": "SHD Technology specializes in building and scaling brands across Asia through measurable systems, strong teams, and operational excellence."
+  },
+
+  "hero": {
+    "kicker": "ABOUT SHD",
+    "title": "The Growth Engine Behind SHD Technology",
+    "desc": "We build systems, teams, and operational structures that enable brands to scale sustainably across multiple countries — driven by strategy, execution, and measurable data.",
+    "ctaPrimary": "See Overview",
+    "ctaSecondary": "Contact Us",
+    "stats": [
+      { "k": "Founded", "v": "2013" },
+      { "k": "Experience", "v": "13+ Years" },
+      { "k": "Brands", "v": "20+" },
+      { "k": "Countries", "v": "9" }
+    ]
+  },
+
+  "blocks": [
+    {
+      "title": "Company Story",
+      "desc": "From 0→1 to 1→100: building scalable foundations for long-term growth."
+    },
+    {
+      "title": "Operational Excellence",
+      "desc": "Turning strategy into measurable execution — from storefront to back office."
+    },
+    {
+      "title": "Global + Local",
+      "desc": "Combining local market insight with global operational standards."
+    }
+  ],
+
+  "who": {
+    "kicker": "ABOUT SHD",
+    "title": "Who We Are",
+    "subtitle": "SHD Technology",
+    "story": [
+      "We are a team dedicated to helping brands grow across Asian markets through hands-on execution — from strategy, sales, and marketing to full in-country operations.",
+      "SHD partners with brands through a Co-Brand Building model, co-creating long-term growth plans supported by measurable and adaptable systems tailored to local markets.",
+      "We connect online and offline channels through an Omni-channel approach, driving sales growth, brand momentum, and customer experience simultaneously.",
+      "Our goal is to make growth real and sustainable — built on execution standards, operational speed, and sincere long-term partnerships."
+    ],
     "highlights": [
       {
-        "title": "Brand & Distribution",
-        "desc": "Scale brands through the right channels with strong quality control."
+        "title": "Co-Brand Building",
+        "desc": "Co-developing long-term growth roadmaps."
       },
       {
-        "title": "Commerce Operations",
-        "desc": "End-to-end ops: orders, logistics, finance, and back office."
+        "title": "Omni-channel Ops",
+        "desc": "Synchronizing online and offline execution."
       },
       {
-        "title": "Data & Automation",
-        "desc": "Unified data and automation for faster, better decisions."
+        "title": "Local Execution",
+        "desc": "On-the-ground teams delivering measurable results."
       }
-    ],
-    "sections": {
-      "showcase": {
-        "kicker": "What we do",
-        "title": "Designed to look premium—and work in real life",
-        "desc": "A coherent 7-page structure with consistent UI language and translations."
+    ]
+  },
+
+  "overview": {
+    "kicker": "About SHD",
+    "title": "Company Overview (About SHD)",
+    "desc": "An integrated team and system connecting strategy, sales, marketing, and operations to deliver measurable growth.",
+    "cards": [
+      {
+        "title": "Brand Localization",
+        "desc": "Helping international brands grow locally through in-market teams, country-specific strategies, and clear performance metrics.",
+        "bullets": [
+          "Go-to-market / Cold start",
+          "Structured scale-up",
+          "Performance + Brand equity"
+        ]
+      },
+      {
+        "title": "Full-cycle Enablement",
+        "desc": "End-to-end support — from channel strategy and operations to warehousing, logistics, and after-sales services.",
+        "bullets": [
+          "Online operations + Content",
+          "Warehouse & Logistics",
+          "Customer service / After-sales"
+        ]
+      },
+      {
+        "title": "Proven Growth",
+        "desc": "Driving real results and enabling brands to move up within their core product categories.",
+        "bullets": [
+          "Data-driven growth",
+          "Omni-channel execution",
+          "Long-term partnership"
+        ]
       }
+    ]
+  },
+
+  "global": {
+    "kicker": "Global Footprint",
+    "title": "Operating Regions & Achievements",
+    "regions": {
+      "kicker": "OPERATING REGIONS",
+      "title": "Multi-country Local Teams",
+      "desc": "We operate with local teams in Thailand, the Philippines, Indonesia, and Brazil, with China serving as a regional hub supporting expansion."
     },
-    "showcase": [
+    "achievements": {
+      "kicker": "ACHIEVEMENTS",
+      "title": "Delivering Measurable Results",
+      "desc": "Partnering with diverse brands to drive sustained growth across key channels through structured metrics and proactive execution."
+    },
+    "strengths": [
       {
-        "title": "Premium light glass UI",
-        "desc": "Soft gradient background + glass cards + gentle shadows, highly readable.",
-        "tags": [
-          "clean",
-          "premium",
-          "modern"
+        "title": "Network Ready",
+        "desc": "Comprehensive online and offline capabilities supported by strong local partner networks.",
+        "bullets": [
+          "Distribution partners",
+          "Service points",
+          "Field execution"
         ]
       },
       {
-        "title": "Complete 7-page site",
-        "desc": "Home, About, Brands, Services, Activities, Careers, Contact.",
-        "tags": [
-          "router-ready",
-          "production base",
-          "consistent"
+        "title": "Category Leadership",
+        "desc": "Helping brands rapidly climb toward category leadership positions.",
+        "bullets": [
+          "Ranking growth",
+          "SOV / SOM uplift",
+          "Repeat purchase"
         ]
       },
       {
-        "title": "i18n TH/EN/中文",
-        "desc": "Instant switching + language persisted in localStorage.",
-        "tags": [
-          "react-i18next",
-          "3 languages",
-          "scalable"
-        ]
-      },
-      {
-        "title": "Ready to extend",
-        "desc": "Add API, CMS, forms, email, or Supabase later—structure stays clean.",
-        "tags": [
-          "TypeScript",
-          "Vite",
-          "extensible"
+        "title": "Brand Momentum",
+        "desc": "Driving both revenue and brand strength through content, campaigns, and influencer ecosystems.",
+        "bullets": [
+          "KOL / KOC & Live",
+          "Performance ads",
+          "Campaign playbook"
         ]
       }
-    ],
-    "final": {
-      "kicker": "Ready",
-      "title": "Start your SHD Corporate project instantly",
-      "desc": "A runnable project with 7 pages and 3 languages—perfect to deploy on Netlify/Vercel.",
-      "ctaPrimary": "Contact us",
-      "ctaSecondary": "Read our story",
-      "bullets": [
-        "Clean structure (pages/components)",
-        "One coherent light theme",
-        "Update copy easily in locale files"
+    ]
+  },
+
+  "omnichannel": {
+    "kicker": "OMNI-CHANNEL",
+    "title": "Omni-channel Sales Network",
+    "online": {
+      "label": "ONLINE",
+      "title": "Marketplace + Performance",
+      "items": [
+        "Shopee / Lazada / TikTok",
+        "Search + Social ads",
+        "Live & Short video",
+        "Brand website"
+      ]
+    },
+    "offline": {
+      "label": "OFFLINE",
+      "title": "Retail + Services",
+      "items": [
+        "Retail partners & Key accounts",
+        "Pop-up / Exhibition",
+        "Service centers",
+        "Field activation"
       ]
     }
   },
-  "about": {
-    "seo": {
-      "title": "About",
-      "description": "Story, principles, and vision of SHD Technology"
-    },
-    "hero": {
-      "kicker": "About",
-      "title": "The story behind SHD growth",
-      "desc": "We build teams and systems that help brands scale across markets and channels.",
-      "ctaPrimary": "See overview",
-      "ctaSecondary": "Contact"
-    },
-    "blocks": [
+
+  "differentiators": {
+    "kicker": "WHY SHD",
+    "title": "What Makes SHD Different",
+    "items": [
       {
-        "title": "Company Story",
-        "desc": "From 0→1 to 1→100: building scalable foundations."
+        "title": "Founder-led Partnership",
+        "desc": "Working closely with brands, aligning goals, and driving strategic long-term outcomes.",
+        "bullets": [
+          "Co-build roadmap",
+          "Clear KPI",
+          "Long-term value"
+        ]
       },
       {
-        "title": "Operational Excellence",
-        "desc": "Measurable processes from storefront to back office."
+        "title": "Local Ops Infrastructure",
+        "desc": "In-country operational teams covering the full value chain from sales and marketing to after-sales support.",
+        "bullets": [
+          "Operations playbook",
+          "After-sales support",
+          "Supply chain readiness"
+        ]
       },
       {
-        "title": "Global + Local",
-        "desc": "Local insights combined with global standards."
+        "title": "Execution Excellence",
+        "desc": "Fast, structured, and measurable execution — continuously improving through real performance data.",
+        "bullets": [
+          "Data loop",
+          "Iteration speed",
+          "Quality control"
+        ]
       }
     ]
   },
-  "brands": {
-    "seo": {
-      "title": "Brands",
-      "description": "Brands and partners powered by SHD"
-    },
-    "hero": {
-      "kicker": "Brands",
-      "title": "A portfolio we help grow",
-      "desc": "A quick overview of brands in our ecosystem and how we collaborate for win-win outcomes.",
-      "ctaPrimary": "View brands",
-      "ctaSecondary": "Talk to us"
-    },
-    "blocks": [
-      {
-        "title": "Distribution & Authorized",
-        "desc": "Transparent distribution with brand-grade standards."
-      },
-      {
-        "title": "Marketplace Growth",
-        "desc": "Multi-platform growth plans with real measurement."
-      },
-      {
-        "title": "Brand Protection",
-        "desc": "Monitoring systems for pricing, stock, and content quality."
-      }
+
+  "mission": {
+    "kicker": "Our Mission",
+    "title": "Mission",
+    "desc": "To build systems that enable brands to grow sustainably — powered by strong team structures, data-driven decision-making, and international execution standards."
+  },
+
+  "vision": {
+    "title": "Vision",
+    "desc": "To become a leading Regional Brand Operator, creating sustainable growth for brands across Asia and emerging global markets."
+  },
+
+  "values": {
+    "title": "Core Values",
+    "desc": "Principles that guide our structured, transparent operations and long-term partnerships.",
+    "items": [
+      "Ownership & Accountability",
+      "Data-driven decisions",
+      "Transparency & Clear Structure",
+      "Long-term partnership mindset",
+      "Global perspective"
     ]
   },
+
+  "cta": {
+    "title": "Ready to Build With Us?",
+    "desc": "Join SHD Technology in shaping sustainable regional growth.",
+    "button": "Contact Us",
+    "secondary": "View Services"
+  }
+}
+  ,
+"brands": {
+  "seo": {
+    "title": "Brands",
+    "description": "Brands and partners under SHD Technology"
+  },
+
+  "hero": {
+    "kicker": "Brands",
+    "title": "Find the brand you're looking for",
+    "desc": "SHD Technology is an official distributor for leading technology brands, providing certified products, after-sales service, and brand-standard warranties.",
+    "ctaPrimary": "Explore brands",
+    "ctaSecondary": "Talk to us"
+  },
+
+  "stats": {
+    "0": { "k": "Brands" },
+    "1": { "k": "Official Distributor" },
+    "2": { "k": "Categories" }
+  },
+
+  "official": {
+    "kicker": "Authorized Distributor",
+    "title": "Official Distributor • Trusted Supply • After-Sales Support",
+    "desc": "We manage genuine products through trusted distribution channels, with brand-compliant warranties and a dedicated after-sales team supporting customers and partners.",
+    "cta": "Become a reseller"
+  },
+
+  "badge": {
+    "official": "Official",
+    "brand": "Brand"
+  },
+
+  "card": {
+    "open": "View brand details"
+  },
+
+  "empty": {
+    "title": "No brands found",
+    "desc": "Try adjusting your search or selecting a different category."
+  },
+
+  "section": {
+    "kicker": "Authorized Distributor",
+    "title": "Official Distributor",
+    "desc": "Select a brand below to view details, after-sales services, and contact channels."
+  },
+
+  "filters": {
+    "all": "All",
+    "lifestyle": "Lifestyle",
+    "smartHome": "Smart Home",
+    "audio": "Audio",
+    "cleaning": "Cleaning",
+    "mobility": "Mobility",
+    "projector": "Projector",
+    "air": "Air"
+  },
+
+  "banner": {
+    "title": "Discover curated content prepared for you",
+    "subtitle": "Browse banners to learn more and click to visit related pages.",
+    "hint": "Hover or touch to pause the sliding temporarily"
+  },
+  "promo": {
+  "buyNow": "Buy now",
+  "learnMore": "Learn more"
+},
+  "items": [
+    {
+      "name": "Anker",
+      "slug": "anker",
+      "tagline": "Charging • Power • Innovation",
+      "desc": "High-quality charging devices, batteries, and power solutions with full warranty and service support."
+    },
+    {
+      "name": "Soundcore",
+      "slug": "soundcore",
+      "tagline": "Audio • Bass • Lifestyle",
+      "desc": "Premium earphones and speakers focused on immersive sound and modern design."
+    },
+    {
+      "name": "Mova",
+      "slug": "mova",
+      "tagline": "Smart Home • Clean • Ease",
+      "desc": "Smart home and cleaning solutions designed for convenience and efficiency."
+    },
+    {
+      "name": "70mai",
+      "slug": "70mai",
+      "tagline": "Dashcam • Smart Car • Safety",
+      "desc": "Dashcams and smart automotive devices focused on safety and reliability."
+    },
+    {
+      "name": "Jimmy",
+      "slug": "jimmy",
+      "tagline": "Vacuum • Clean • Power",
+      "desc": "Powerful vacuum cleaners and cleaning devices built for performance and value."
+    },
+    {
+      "name": "Xiaomi",
+      "slug": "xiaomi",
+      "tagline": "Innovation • Ecosystem • Value",
+      "desc": "A diverse smart ecosystem delivering innovation with strong value."
+    },
+    {
+      "name": "Mibro",
+      "slug": "mibro",
+      "tagline": "Wearables • Fitness • Smart",
+      "desc": "Smartwatches and health wearables designed for lifestyle and fitness."
+    },
+    {
+      "name": "Wanbo",
+      "slug": "wanbo",
+      "tagline": "Projector • Home Cinema • Fun",
+      "desc": "Home projectors built for entertainment, movies, and gaming."
+    },
+    {
+      "name": "Dreame",
+      "slug": "dreame",
+      "tagline": "Cleaning • Robot • Premium",
+      "desc": "Premium robotic vacuum and advanced cleaning technologies."
+    },
+    {
+      "name": "Levoit",
+      "slug": "levoit",
+      "tagline": "Air Care • Health • Comfort",
+      "desc": "Air purifiers and air care devices designed for healthier living."
+    }
+  ],
+
+  "blocks": [
+    {
+      "title": "Distribution & Authorization",
+      "desc": "Transparent and compliant distribution structure with brand-certified warranty and service standards."
+    },
+    {
+      "title": "Marketplace Growth",
+      "desc": "Drive multi-platform sales through structured marketing, content management, and data-driven performance optimization."
+    },
+    {
+      "title": "Brand Protection",
+      "desc": "Brand protection system through price monitoring, stock control, and content quality management."
+    }
+  ]
+},
+
+
   "services": {
     "seo": {
       "title": "Services",
-      "description": "SHD services: commerce, marketing, operations, and data"
+      "description": "SHD Service Hub: booking, repair/claim tracking, and premium after-sales support"
     },
     "hero": {
-      "kicker": "Services",
-      "title": "Modular services that scale",
-      "desc": "Choose modules or run end-to-end—from strategy to execution.",
-      "ctaPrimary": "Explore services",
-      "ctaSecondary": "Contact"
+      "kicker": "Premium Service",
+      "title": "Scalable, end-to-end services",
+      "subtitle": "70mai installation booking • Repair/claim tracking • After-sales care — all under one consistent standard for a clear, premium experience.",
+
+      "ctaPrimary": {
+        "label": "Book 70mai installation",
+        "href": "https://booking.70mai.co.th/"
+      },
+      "ctaSecondary": {
+        "label": "Track repair / claim",
+        "href": "https://sv.shd-technology.co.th/servicetracking.aspx"
+      },
+
+      "stats": [
+        { "k": "Support", "v": "24/7" },
+        { "k": "Standard", "v": "Verifiable" },
+        { "k": "Service", "v": "Full-cycle" }
+      ],
+
+      "imageSrc": "/images/services/hero-card.jpg",
+      "imageAlt": "SHD Services",
+      "cardTitle": "Service Hub",
+      "cardDesc": "Access key services instantly.",
+
+      "quick": [
+        { "label": "Book now", "href": "https://booking.70mai.co.th/" },
+        { "label": "Check status", "href": "https://sv.shd-technology.co.th/servicetracking.aspx" }
+      ]
     },
-    "blocks": [
+
+    "section": {
+      "kicker": "SERVICES",
+      "title": "Key services"
+    },
+
+    "card": {
+      "primaryCta": "Get started",
+      "contactCta": "Contact us"
+    },
+
+    "items": [
       {
-        "title": "E-commerce Ops",
-        "desc": "Orders, warehouse, logistics, finance, returns, and support."
+        "key": "booking",
+        "title": "70mai dashcam installation service",
+        "desc": "Book online, choose branch/date/time, and get premium installation by specialists.",
+        "bullets": [
+          "Pick branch/date/time instantly",
+          "Reschedule or cancel easily",
+          "Clear, transparent steps"
+        ],
+        "href": "https://booking.70mai.co.th/",
+        "icon": "CalendarClock",
+        "imageSrc": "/images/services/70mai-booking.jpg",
+        "tag": "Booking",
+        "ctaLabel": "Book"
       },
       {
-        "title": "Performance Marketing",
-        "desc": "Media plan + creative + experimentation for clear ROI."
-      },
-      {
-        "title": "Data Platform",
-        "desc": "Unified multi-channel data for dashboards and decisions."
+        "key": "tracking",
+        "title": "Repair / claim status tracking",
+        "desc": "Track your repair/claim progress in real time using your reference number.",
+        "bullets": [
+          "See each process step",
+          "Work & shipping details included",
+          "Less follow-up calls"
+        ],
+        "href": "https://sv.shd-technology.co.th/servicetracking.aspx",
+        "icon": "PackageSearch",
+        "imageSrc": "/images/services/service-tracking.jpg",
+        "tag": "Tracking",
+        "ctaLabel": "Track"
       }
     ]
-  },
+  }
+,
   "activities": {
     "seo": {
       "title": "Activities",
@@ -294,56 +653,87 @@
       }
     ]
   },
+
   "contact": {
     "seo": {
       "title": "Contact",
-      "description": "Contact channels for SHD Technology"
+      "description": "Contact SHD Technology — email, phone, and address"
     },
     "hero": {
-      "kicker": "Contact",
-      "title": "Let’s talk",
-      "desc": "Reach out for partnerships, services, or corporate inquiries.",
-      "ctaPrimary": "Send a message",
-      "ctaSecondary": "Careers"
+      "kicker": "CONTACT",
+      "title": "Contact the SHD team instantly",
+      "desc": "Choose the team you want to reach, then one click will open an email with the subject filled in automatically.",
+      "ctaPrimary": {
+        "label": "Email main inbox",
+        "email": "info@shd-technology.co.th",
+        "subject": "[SHD] General Inquiry"
+      },
+      "ctaPhone": { "label": "Call now", "value": "+6621004578" },
+      "ctaMap": { "label": "Map" }
     },
-    "section": {
-      "kicker": "Channels",
-      "title": "Primary contact channels",
-      "desc": "A ready-to-extend Contact page template."
+    "directory": {
+      "kicker": "EMAIL DIRECTORY",
+      "title": "Pick the right team to contact"
     },
-    "channels": [
+    "emails": [
       {
-        "title": "Email",
-        "desc": "Business & partnerships",
-        "value": "hello@shd-technology.co.th"
+        "title": "General",
+        "desc": "General inquiries",
+        "email": "info@shd-technology.co.th",
+        "subject": "[SHD] General Inquiry",
+        "highlight": true,
+        "icon": "general"
       },
       {
-        "title": "Phone",
-        "desc": "Urgent inquiries",
-        "value": "+66 xx-xxx-xxxx"
+        "title": "After-sales Support",
+        "desc": "Warranty / Repair / Spare parts",
+        "email": "service@shd-technology.co.th",
+        "subject": "[SHD] After-sales Support",
+        "icon": "service"
       },
       {
-        "title": "Office",
-        "desc": "HQ (example)",
-        "value": "Bangkok, Thailand"
+        "title": "Finance",
+        "desc": "Tax invoice / Payments",
+        "email": "finance@shd-technology.co.th",
+        "subject": "[SHD] Finance Inquiry",
+        "icon": "finance"
+      },
+      {
+        "title": "Business",
+        "desc": "Business opportunities / B2B",
+        "email": "comercial@shd-technology.co.th",
+        "subject": "[SHD] Business Collaboration",
+        "icon": "biz"
+      },
+      {
+        "title": "People & HR",
+        "desc": "Careers / HR",
+        "email": "recruit@shd-technology.co.th",
+        "subject": "[SHD] Recruitment Inquiry",
+        "icon": "hr"
+      },
+      {
+        "title": "Marketing",
+        "desc": "PR / KOL / Campaigns",
+        "email": "marketing@shd-technology.co.th",
+        "subject": "[SHD] Marketing Collaboration",
+        "icon": "marketing"
       }
     ],
-    "form": {
-      "title": "Send us a message",
-      "desc": "Mock form — connect to API / Supabase / email later.",
-      "tags": [
-        "Partnership",
-        "Service",
-        "Media",
-        "Other"
-      ],
-      "fields": {
-        "name": "Name",
-        "email": "Email",
-        "message": "Message"
-      },
-      "submit": "Send",
-      "mockSubmit": "Sent (demo)"
-    }
+    "phoneSection": {
+      "title": "Phone",
+      "desc": "Tap to call instantly or copy the number",
+      "cta": "Call now",
+      "numbers": ["+66 2-100-4578", "02-115-1262", "081-714-5342"]
+    },
+    "addressSection": {
+      "title": "Office address",
+      "desc": "Open the map or copy the address instantly",
+      "cta": "Open map",
+      "copy": "Copy address",
+      "emailCta": "Send email",
+      "value": "168 ICS Building, 7th Floor (Rooms 703-704), Charoen Nakhon Rd., Khlong Ton Sai, Khlong San, Bangkok 10600, Thailand"
+    },
+    "copy": { "default": "Copy", "success": "Copied" }
   }
 }

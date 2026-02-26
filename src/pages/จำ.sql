@@ -10,3 +10,23 @@
 | Brand 2   | `/images/brands/topttoy.jpg` | Brand grid        | TOPTOY      |
 | Brand 3   | `/images/brands/careers.jpg` | Brand grid        | SHD Careers |
 | Brand 4   | `/images/brands/etax.jpg`    | Brand grid        | eTax        |
+
+ใส่ไฟล์ตามนี้ใน public/:
+
+/videos/about-hero.mp4
+
+/images/about/regions.jpg
+
+/images/about/achievements.jpg
+
+/images/about/omni-online.jpg
+
+/images/about/omni-offline.jpg
+
+หลักๆ เป็นอีเมลครับ
+info@shd-technology.co.th / เรื่องทั่วไป, อื่นๆ
+service@shd-technology.co.th / ด้านหลังการขาย
+finance@shd-technology.co.th / ด้านการเงิน
+comercial@shd-technology.co.th / ด้านธุรกิจ
+recruit@shd-technology.co.th / ด้านบุคลากร
+marketing@shd-technology.co.th / ด้านการตลาด
