@@ -445,7 +445,42 @@
     "cta": "Become a reseller"
   },
 
-  "badge": {
+
+  "detail": {
+    "seo": {
+      "title": "{{brand}}",
+      "description": "{{brand}} — {{tagline}}"
+    },
+    "notFound": {
+      "title": "Brand not found",
+      "desc": "The link may be incorrect, or this brand has not been added yet.",
+      "backCta": "← Back to Brands"
+    },
+    "back": "← Go Back",
+    "badge": {
+      "official": "Official Distributor",
+      "brand": "Brand"
+    },
+    "aboutTitle": "About the Brand",
+    "contactsTitle": "Contact Channels",
+    "contacts": {
+      "disabledTitle": "{{label}} (link not available)",
+      "platforms": {
+        "shopee": "Shopee",
+        "lazada": "Lazada",
+        "tiktok": "TikTok",
+        "facebook": "Facebook",
+        "lineoa": "LINE OA"
+      }
+    },
+    "openSite": "Open Official Website ↗",
+    "contactShd": "Contact SHD",
+    "otherBrandsTitle": "Other Brands in Our Portfolio",
+    "viewAll": "View All →"
+  }
+,
+
+"badge": {
     "official": "Official",
     "brand": "Brand"
   },

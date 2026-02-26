@@ -415,6 +415,39 @@
     "description": "แบรนด์และพาร์ทเนอร์ในเครือของ SHD"
   },
 
+    "detail": {
+      "seo": {
+        "title": "{{brand}}",
+        "description": "{{brand}} — {{tagline}}"
+      },
+      "notFound": {
+        "title": "ไม่พบแบรนด์",
+        "desc": "ลิงก์อาจไม่ถูกต้อง หรือแบรนด์นี้ยังไม่ถูกเพิ่ม",
+        "backCta": "← กลับไปหน้า Brands"
+      },
+      "back": "← ย้อนกลับ",
+      "badge": {
+        "official": "Official Distributor",
+        "brand": "Brand"
+      },
+      "aboutTitle": "เกี่ยวกับแบรนด์",
+      "contactsTitle": "ช่องทางติดต่อ",
+      "contacts": {
+        "disabledTitle": "{{label}} (ยังไม่ใส่ลิงก์)",
+        "platforms": {
+          "shopee": "Shopee",
+          "lazada": "Lazada",
+          "tiktok": "TikTok",
+          "facebook": "Facebook",
+          "lineoa": "LINE OA"
+        }
+      },
+      "openSite": "เปิดเว็ปไซต์ทางการ ↗",
+      "contactShd": "ติดต่อ SHD",
+      "otherBrandsTitle": "เเบรนด์อื่นๆ ในเครือ",
+      "viewAll": "เลือกดูทั้งหมด →"
+    }
+  ,
   "hero": {
     "kicker": "แบรนด์",
     "title": "ค้นหาแบรนด์ที่คุณสนใจ",

@@ -455,6 +455,40 @@
     "brand": "品牌"
   },
 
+  "detail": {
+    "seo": {
+      "title": "{{brand}}",
+      "description": "{{brand}} — {{tagline}}"
+    },
+    "notFound": {
+      "title": "未找到品牌",
+      "desc": "链接可能不正确，或该品牌尚未添加。",
+      "backCta": "← 返回品牌列表"
+    },
+    "back": "← 返回",
+    "badge": {
+      "official": "官方授权经销商",
+      "brand": "品牌"
+    },
+    "aboutTitle": "关于品牌",
+    "contactsTitle": "联系方式",
+    "contacts": {
+      "disabledTitle": "{{label}}（暂无链接）",
+      "platforms": {
+        "shopee": "Shopee",
+        "lazada": "Lazada",
+        "tiktok": "TikTok",
+        "facebook": "Facebook",
+        "lineoa": "LINE 官方账号"
+      }
+    },
+    "openSite": "打开官方网站 ↗",
+    "contactShd": "联系 SHD",
+    "otherBrandsTitle": "集团旗下其他品牌",
+    "viewAll": "查看全部 →"
+  }
+,
+
   "card": {
     "open": "查看品牌详情"
   },

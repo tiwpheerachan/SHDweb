@@ -2,6 +2,7 @@
 import React, { useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import GlassCard from "../components/GlassCard";
 
 type BrandContacts = {
@@ -31,15 +32,6 @@ function cx(...xs: Array<string | false | null | undefined>) {
 
 type ContactKey = "shopee" | "lazada" | "tiktok" | "facebook" | "lineoa";
 
-const CONTACT_ORDER: Array<{ key: ContactKey; label: string }> = [
-  { key: "shopee", label: "Shopee" },
-  { key: "lazada", label: "Lazada" },
-  { key: "tiktok", label: "TikTok" },
-  { key: "facebook", label: "Facebook" },
-  { key: "lineoa", label: "LINE OA" },
-];
-
-// ✅ รองรับทั้ง .png และ .png.png (จากรูปของคุณไฟล์เป็น *.png.png)
 const CONTACT_ICON_CANDIDATES: Record<ContactKey, string[]> = {
   shopee: ["/images/contact/shopee.png", "/images/contact/shopee.png"],
   lazada: ["/images/contact/lazada.png", "/images/contact/lazada.png"],
@@ -57,10 +49,12 @@ function ContactIcon({
   label,
   href,
   candidates,
+  disabledTitle,
 }: {
   label: string;
   href?: string;
   candidates: string[];
+  disabledTitle: string;
 }) {
   const realHref = normalizeHref(href);
   const disabled = !realHref;
@@ -74,7 +68,7 @@ function ContactIcon({
       target={disabled ? undefined : "_blank"}
       rel={disabled ? undefined : "noreferrer"}
       aria-label={label}
-      title={disabled ? `${label} (ยังไม่ใส่ลิงก์)` : label}
+      title={disabled ? disabledTitle : label}
       onClick={(e) => {
         if (disabled) {
           e.preventDefault();
@@ -83,8 +77,6 @@ function ContactIcon({
       }}
       className={cx(
         "group relative flex h-12 w-12 items-center justify-center rounded-full",
-        // ✅ ไม่มี bg-white เพื่อลดความรู้สึก “ฝ้า”
-        // ✅ overflow-hidden กันขอบ/มุมแตก
         "bg-transparent ring-1 ring-slate-200 overflow-hidden",
         "shadow-[0_14px_44px_-30px_rgba(15,23,42,.35)]",
         "transition",
@@ -93,7 +85,6 @@ function ContactIcon({
           : "hover:-translate-y-0.5 hover:ring-amber-300 hover:shadow-[0_22px_70px_-50px_rgba(245,158,11,.55)]"
       )}
     >
-      {/* glow เฉพาะตอน enabled */}
       {!disabled && (
         <span
           className="pointer-events-none absolute -inset-3 rounded-full opacity-0 blur-xl transition duration-300 group-hover:opacity-100"
@@ -103,7 +94,6 @@ function ContactIcon({
         />
       )}
 
-      {/* ✅ รูปเต็มวงกลม / ไม่ใส่ overlay ใดๆ ทับรูป */}
       <img
         src={src}
         alt={label}
@@ -121,7 +111,7 @@ function ContactIcon({
   );
 }
 
-// ✅ ใส่ลิงก์ “แยกตามแบรนด์” ตรงนี้เลย (แต่ละช่องไม่เหมือนกัน)
+// ✅ ใส่ลิงก์ “แยกตามแบรนด์” แบบครบ + fallback Global ถ้าไม่มี
 const BRANDS: Brand[] = [
   {
     name: "Anker",
@@ -135,10 +125,10 @@ const BRANDS: Brand[] = [
       "แบรนด์เทคโนโลยีชั้นนำด้านอุปกรณ์ชาร์จ พาวเวอร์แบงก์ และอุปกรณ์เสริมที่เน้นคุณภาพ ความปลอดภัย และการใช้งานจริงในชีวิตประจำวัน",
     highlights: ["Power & Charging", "Quality & Safety", "Everyday Tech"],
     contacts: {
-      shopee: "https://shopee.co.th/your-anker-store",
-      lazada: "https://www.lazada.co.th/shop/your-anker-store",
-      tiktok: "https://www.tiktok.com/@your_anker",
-      facebook: "https://www.facebook.com/your.anker",
+      shopee: "https://shopee.co.th/ankerthailandstore",
+      lazada: "https://www.lazada.co.th/shop/anker",
+      tiktok: "https://www.tiktok.com/@anker.official.store",
+      facebook: "https://www.facebook.com/anker.thailand.store",
       lineoa: "https://lin.ee/youranker",
     },
   },
@@ -154,10 +144,10 @@ const BRANDS: Brand[] = [
       "แบรนด์เครื่องเสียงจาก Anker โดดเด่นด้านหูฟังไร้สาย ลำโพง และเทคโนโลยีเสียงที่บาลานซ์ทั้งคุณภาพและความคุ้มค่า",
     highlights: ["TWS & Headphones", "Speakers", "Great Value Audio"],
     contacts: {
-      shopee: "https://shopee.co.th/your-soundcore-store",
-      lazada: "https://www.lazada.co.th/shop/your-soundcore-store",
-      tiktok: "https://www.tiktok.com/@your_soundcore",
-      facebook: "https://www.facebook.com/your.soundcore",
+      shopee: "https://shopee.co.th/soundcoreofficialstore",
+      lazada: "https://www.lazada.co.th/shop/soundcore",
+      tiktok: "https://www.tiktok.com/@soundcore",
+      facebook: "https://www.facebook.com/soundcoreofficialstore",
       lineoa: "https://lin.ee/yoursoundcore",
     },
   },
@@ -168,13 +158,14 @@ const BRANDS: Brand[] = [
     img: "/images/brands/mova.jpg",
     category: "Smart Home",
     isOfficial: true,
+    website: "https://www.movahome.com/",
     about: "โซลูชันสมาร์ทโฮมที่ออกแบบให้ใช้งานง่าย ดีไซน์สวย และตอบโจทย์ไลฟ์สไตล์ยุคใหม่",
     highlights: ["Smart Living", "Modern Design", "Easy to Use"],
     contacts: {
-      shopee: "https://shopee.co.th/your-mova-store",
-      lazada: "https://www.lazada.co.th/shop/your-mova-store",
-      tiktok: "https://www.tiktok.com/@your_mova",
-      facebook: "https://www.facebook.com/your.mova",
+      shopee: "https://shopee.co.th/movaofficialstore",
+      lazada: "https://www.lazada.co.th/shop/mova-home-appliances",
+      tiktok: "https://www.tiktok.com/@movaofficialstore",
+      facebook: "https://www.facebook.com/movaofficialstore",
       lineoa: "https://lin.ee/yourmova",
     },
   },
@@ -190,10 +181,10 @@ const BRANDS: Brand[] = [
       "แบรนด์กล้องติดรถยนต์และอุปกรณ์สำหรับรถยนต์ ที่เน้นฟีเจอร์ความปลอดภัย ภาพคมชัด และความน่าเชื่อถือในการใช้งานจริง",
     highlights: ["Dashcam", "Car Safety", "Smart Accessories"],
     contacts: {
-      shopee: "https://shopee.co.th/your-70mai-store",
-      lazada: "https://www.lazada.co.th/shop/your-70mai-store",
-      tiktok: "https://www.tiktok.com/@your_70mai",
-      facebook: "https://www.facebook.com/your.70mai",
+      shopee: "https://shopee.co.th/70maiofficialstore1",
+      lazada: "https://www.lazada.co.th/shop/70mai",
+      tiktok: "https://www.tiktok.com/@70mai.thailand",
+      facebook: "https://www.facebook.com/70mai.officialstore.thailand",
       lineoa: "https://lin.ee/your70mai",
     },
   },
@@ -204,13 +195,14 @@ const BRANDS: Brand[] = [
     img: "/images/brands/jimmy.jpg",
     category: "Cleaning",
     isOfficial: true,
+    website: "https://www.jimmyclean.com/",
     about: "อุปกรณ์ทำความสะอาดและเครื่องดูดฝุ่นที่เน้นพลังดูด การกรองฝุ่น และประสบการณ์ใช้งานที่สะดวก",
     highlights: ["Vacuum", "Cleaning Tools", "Home Care"],
     contacts: {
-      shopee: "https://shopee.co.th/your-jimmy-store",
-      lazada: "https://www.lazada.co.th/shop/your-jimmy-store",
-      tiktok: "https://www.tiktok.com/@your_jimmy",
-      facebook: "https://www.facebook.com/your.jimmy",
+      shopee: "https://shopee.co.th/jimmyofficialstore",
+      lazada: "https://www.lazada.co.th/shop/jimmy-home-appliances",
+      tiktok: "https://www.tiktok.com/@jimmyofficial",
+      facebook: "https://www.facebook.com/JimmyCleanOfficial",
       lineoa: "https://lin.ee/yourjimmy",
     },
   },
@@ -221,15 +213,15 @@ const BRANDS: Brand[] = [
     img: "/images/brands/xiaomi.jpg",
     category: "Smart Home",
     isOfficial: true,
-    website: "https://www.mi.com/",
+    website: "https://www.mi.com/th/",
     about:
       "แบรนด์เทคโนโลยีและสมาร์ทดีไวซ์ที่มีระบบนิเวศหลากหลาย ครอบคลุมตั้งแต่สมาร์ทโฮมถึงไลฟ์สไตล์",
     highlights: ["Smart Ecosystem", "Connected Devices", "Lifestyle Tech"],
     contacts: {
-      shopee: "https://shopee.co.th/your-xiaomi-store",
-      lazada: "https://www.lazada.co.th/shop/your-xiaomi-store",
-      tiktok: "https://www.tiktok.com/@your_xiaomi",
-      facebook: "https://www.facebook.com/your.xiaomi",
+      shopee: "https://shopee.co.th/xiaomithailand",
+      lazada: "https://www.lazada.co.th/shop/xiaomi",
+      tiktok: "https://www.tiktok.com/@xiaomithailand",
+      facebook: "https://www.facebook.com/XiaomiThailand",
       lineoa: "https://lin.ee/yourxiaomi",
     },
   },
@@ -240,14 +232,15 @@ const BRANDS: Brand[] = [
     img: "/images/brands/mibro.jpg",
     category: "Lifestyle",
     isOfficial: true,
+    website: "https://mibro-watches.com/",
     about:
       "อุปกรณ์สวมใส่และสมาร์ทวอทช์ที่โฟกัสการติดตามสุขภาพ ฟีเจอร์กีฬา และดีไซน์ที่ใช้งานได้ทุกวัน",
     highlights: ["Wearables", "Health Tracking", "Sport Features"],
     contacts: {
-      shopee: "https://shopee.co.th/your-mibro-store",
-      lazada: "https://www.lazada.co.th/shop/your-mibro-store",
-      tiktok: "https://www.tiktok.com/@your_mibro",
-      facebook: "https://www.facebook.com/your.mibro",
+      shopee: "https://shopee.co.th/mibrothailandstore",
+      lazada: "https://www.lazada.co.th/shop/mibro",
+      tiktok: "https://www.tiktok.com/@mibrothailand",
+      facebook: "https://www.facebook.com/mibroofficialstore",
       lineoa: "https://lin.ee/yourmibro",
     },
   },
@@ -258,13 +251,14 @@ const BRANDS: Brand[] = [
     img: "/images/brands/wanbo.jpg",
     category: "Projector",
     isOfficial: true,
+    website: "https://www.wanbopro.com/",
     about: "โปรเจกเตอร์สำหรับบ้านและความบันเทิงที่เน้นภาพคม ความสว่างเหมาะสม และติดตั้งง่าย",
     highlights: ["Home Projector", "Easy Setup", "Entertainment"],
     contacts: {
-      shopee: "https://shopee.co.th/your-wanbo-store",
-      lazada: "https://www.lazada.co.th/shop/your-wanbo-store",
-      tiktok: "https://www.tiktok.com/@your_wanbo",
-      facebook: "https://www.facebook.com/your.wanbo",
+      shopee: "https://shopee.co.th/wanboofficialstore",
+      lazada: "https://www.lazada.co.th/shop/wanbo",
+      tiktok: "https://www.tiktok.com/@wanbo.thailand",
+      facebook: "https://www.facebook.com/wanbo.thailand",
       lineoa: "https://lin.ee/yourwanbo",
     },
   },
@@ -275,14 +269,15 @@ const BRANDS: Brand[] = [
     img: "/images/brands/dreame.jpg",
     category: "Cleaning",
     isOfficial: true,
+    website: "https://www.dreametech.com/",
     about:
       "เทคโนโลยีทำความสะอาดระดับพรีเมียม ทั้งหุ่นยนต์ดูดฝุ่นและอุปกรณ์ทำความสะอาดที่เน้นประสิทธิภาพและดีไซน์",
     highlights: ["Robot Vacuum", "Premium Cleaning", "Smart Features"],
     contacts: {
-      shopee: "https://shopee.co.th/your-dreame-store",
-      lazada: "https://www.lazada.co.th/shop/your-dreame-store",
-      tiktok: "https://www.tiktok.com/@your_dreame",
-      facebook: "https://www.facebook.com/your.dreame",
+      shopee: "https://shopee.co.th/dreameofficial",
+      lazada: "https://www.lazada.co.th/shop/dreameofficialstore",
+      tiktok: "https://www.tiktok.com/@dreame.thailand",
+      facebook: "https://www.facebook.com/DreameThaiOfficial",
       lineoa: "https://lin.ee/yourdreame",
     },
   },
@@ -293,37 +288,56 @@ const BRANDS: Brand[] = [
     img: "/images/brands/levoit.jpg",
     category: "Air",
     isOfficial: true,
+    website: "https://www.levoit.com/",
     about:
       "โซลูชันเพื่ออากาศที่ดีขึ้นในบ้าน เช่น เครื่องฟอกอากาศและอุปกรณ์ดูแลสุขภาพที่เน้นมาตรฐานและความสบายใจ",
     highlights: ["Air Purifier", "Healthy Home", "Trusted Standards"],
     contacts: {
-      shopee: "https://shopee.co.th/your-levoit-store",
-      lazada: "https://www.lazada.co.th/shop/your-levoit-store",
-      tiktok: "https://www.tiktok.com/@your_levoit",
-      facebook: "https://www.facebook.com/your.levoit",
+      shopee: "https://shopee.co.th/levoitofficialstore",
+      lazada: "https://www.lazada.co.th/shop/levoit",
+      tiktok: "https://www.tiktok.com/@levoit.thailand",
+      facebook: "https://www.facebook.com/LevoitThailand",
       lineoa: "https://lin.ee/yourlevoit",
     },
   },
 ];
 
 export default function BrandDetailPage() {
+  const { t } = useTranslation();
   const { slug } = useParams();
 
   const brand = useMemo(() => BRANDS.find((b) => b.slug === slug), [slug]);
+
+  // ✅ labels from i18n (keep layout/UX same)
+  const CONTACT_ORDER = useMemo(() => {
+    const order: Array<{ key: ContactKey; label: string }> = [
+      { key: "shopee", label: (t("brands.detail.contacts.platforms.shopee") as string) || "Shopee" },
+      { key: "lazada", label: (t("brands.detail.contacts.platforms.lazada") as string) || "Lazada" },
+      { key: "tiktok", label: (t("brands.detail.contacts.platforms.tiktok") as string) || "TikTok" },
+      { key: "facebook", label: (t("brands.detail.contacts.platforms.facebook") as string) || "Facebook" },
+      { key: "lineoa", label: (t("brands.detail.contacts.platforms.lineoa") as string) || "LINE OA" },
+    ];
+    return order;
+  }, [t]);
 
   if (!brand) {
     return (
       <section className="bg-white">
         <div className="mx-auto w-full max-w-6xl px-4 md:px-6 py-14">
           <div className="rounded-3xl bg-slate-50 p-8 ring-1 ring-slate-200">
-            <div className="text-sm font-extrabold text-slate-900">ไม่พบแบรนด์</div>
-            <div className="mt-2 text-sm text-slate-600">ลิงก์อาจไม่ถูกต้อง หรือแบรนด์นี้ยังไม่ถูกเพิ่ม</div>
+            <div className="text-sm font-extrabold text-slate-900">
+              {(t("brands.detail.notFound.title") as string) || "ไม่พบแบรนด์"}
+            </div>
+            <div className="mt-2 text-sm text-slate-600">
+              {(t("brands.detail.notFound.desc") as string) ||
+                "ลิงก์อาจไม่ถูกต้อง หรือแบรนด์นี้ยังไม่ถูกเพิ่ม"}
+            </div>
             <div className="mt-6">
               <Link
                 to="/brands"
                 className="inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white"
               >
-                ← กลับไปหน้า Brands
+                {(t("brands.detail.notFound.backCta") as string) || "← กลับไปหน้า Brands"}
               </Link>
             </div>
           </div>
@@ -333,12 +347,19 @@ export default function BrandDetailPage() {
   }
 
   const contacts = brand.contacts || {};
+  const disabledTitle = (t("brands.detail.contacts.disabledTitle", { label: "" }) as string) || "";
 
   return (
     <>
       <Helmet>
-        <title>{brand.name} · SHD Technology</title>
-        <meta name="description" content={`${brand.name} — ${brand.tagline}`} />
+        <title>{(t("brands.detail.seo.title", { brand: brand.name }) as string) || `${brand.name} · SHD Technology`}</title>
+        <meta
+          name="description"
+          content={
+            (t("brands.detail.seo.description", { brand: brand.name, tagline: brand.tagline }) as string) ||
+            `${brand.name} — ${brand.tagline}`
+          }
+        />
       </Helmet>
 
       <section className="bg-white">
@@ -349,7 +370,7 @@ export default function BrandDetailPage() {
               to="/brands"
               className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-slate-200 hover:bg-slate-50 transition"
             >
-              ← Back
+              {(t("brands.detail.back") as string) || "← Back"}
             </Link>
 
             <div
@@ -358,7 +379,9 @@ export default function BrandDetailPage() {
                 brand.isOfficial ? "bg-emerald-600" : "bg-slate-900"
               )}
             >
-              {brand.isOfficial ? "Official Distributor" : "Brand"}
+              {brand.isOfficial
+                ? ((t("brands.detail.badge.official") as string) || "Official Distributor")
+                : ((t("brands.detail.badge.brand") as string) || "Brand")}
             </div>
           </div>
 
@@ -393,7 +416,9 @@ export default function BrandDetailPage() {
 
             {/* right info */}
             <GlassCard className="p-6 md:p-7">
-              <div className="text-xs font-extrabold text-slate-600">About</div>
+              <div className="text-xs font-extrabold text-slate-600">
+                {(t("brands.detail.aboutTitle") as string) || "About"}
+              </div>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">{brand.about}</p>
 
               <div className="mt-5 flex flex-wrap gap-2">
@@ -409,7 +434,9 @@ export default function BrandDetailPage() {
 
               {/* Contacts */}
               <div className="mt-6">
-                <div className="text-xs font-extrabold text-slate-600">Contacts</div>
+                <div className="text-xs font-extrabold text-slate-600">
+                  {(t("brands.detail.contactsTitle") as string) || "Contacts"}
+                </div>
                 <div className="mt-3 flex flex-wrap items-center gap-3">
                   {CONTACT_ORDER.map((c) => (
                     <ContactIcon
@@ -417,6 +444,10 @@ export default function BrandDetailPage() {
                       label={c.label}
                       href={(contacts as any)[c.key]}
                       candidates={CONTACT_ICON_CANDIDATES[c.key]}
+                      disabledTitle={
+                        (t("brands.detail.contacts.disabledTitle", { label: c.label }) as string) ||
+                        `${c.label} (ยังไม่ใส่ลิงก์)`
+                      }
                     />
                   ))}
                 </div>
@@ -434,7 +465,7 @@ export default function BrandDetailPage() {
                                shadow-[0_18px_70px_-48px_rgba(245,158,11,.70)]
                                transition hover:-translate-y-0.5 hover:brightness-[1.03] active:translate-y-0"
                   >
-                    Open Official Site ↗
+                    {(t("brands.detail.openSite") as string) || "Open Official Site ↗"}
                   </a>
                 ) : null}
 
@@ -442,7 +473,7 @@ export default function BrandDetailPage() {
                   to="/contact"
                   className="inline-flex items-center justify-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 ring-1 ring-slate-200 transition hover:bg-slate-50"
                 >
-                  Contact SHD
+                  {(t("brands.detail.contactShd") as string) || "Contact SHD"}
                 </Link>
               </div>
             </GlassCard>
@@ -451,9 +482,11 @@ export default function BrandDetailPage() {
           {/* other brands */}
           <div className="mt-10">
             <div className="flex items-center justify-between gap-3">
-              <div className="text-sm font-extrabold text-slate-900">Other brands</div>
+              <div className="text-sm font-extrabold text-slate-900">
+                {(t("brands.detail.otherBrandsTitle") as string) || "Other brands"}
+              </div>
               <Link to="/brands" className="text-sm font-semibold text-slate-700 hover:text-slate-900 hover:underline">
-                View all →
+                {(t("brands.detail.viewAll") as string) || "View all →"}
               </Link>
             </div>
 
@@ -479,9 +512,7 @@ export default function BrandDetailPage() {
                         draggable={false}
                       />
 
-                      {/* ✅ ไล่สีขาวจากด้านล่างรูป */}
                       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white/85 via-white/35 to-transparent" />
-                      {/* ✅ vignette เบาๆ ด้านบน */}
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/18 via-black/0 to-transparent opacity-70" />
                     </div>
 
