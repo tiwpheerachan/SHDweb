@@ -1,6 +1,6 @@
 // src/App.tsx
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import PageShell from "./components/PageShell";
 
 import HomePage from "./pages/HomePage";
@@ -12,9 +12,37 @@ import ActivitiesPage from "./pages/ActivitiesPage";
 import CareersPage from "./pages/CareersPage";
 import ContactPage from "./pages/ContactPage";
 
+/**
+ * ✅ Scroll to top on route change (React Router doesn't do this by default)
+ * - default: scroll to top
+ * - if url has #hash and element exists -> scroll to that element
+ */
+function ScrollToTop() {
+  const { pathname, search, hash } = useLocation();
+
+  useEffect(() => {
+    // ถ้ามี #hash ให้เลื่อนไปยัง element นั้นก่อน
+    if (hash) {
+      const id = hash.slice(1);
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "auto", block: "start" });
+        return;
+      }
+    }
+
+    // ค่าเริ่มต้น: กลับไปบนสุดเมื่อเปลี่ยนหน้า
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname, search, hash]);
+
+  return null;
+}
+
 export default function App() {
   return (
     <PageShell>
+      <ScrollToTop />
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
