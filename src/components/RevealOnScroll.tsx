@@ -4,14 +4,9 @@ import { useReveal } from "./useReveal";
 type Props = {
   children: React.ReactNode;
   className?: string;
-  /** delay in ms for stagger effect */
   delay?: number;
-  /** "up" | "left" | "right" | "scale" | "blur" */
   direction?: "up" | "left" | "right" | "scale" | "blur";
-  /** distance in px (default 36) */
   distance?: number;
-  /** wrapper tag */
-  as?: keyof JSX.IntrinsicElements;
 };
 
 export default function RevealOnScroll({
@@ -20,7 +15,6 @@ export default function RevealOnScroll({
   delay = 0,
   direction = "up",
   distance = 36,
-  as: Tag = "div",
 }: Props) {
   const { ref, shown } = useReveal<HTMLDivElement>();
 
@@ -45,12 +39,12 @@ export default function RevealOnScroll({
   };
 
   return (
-    <Tag
-      ref={ref as any}
+    <div
+      ref={ref}
       className={className}
       style={baseStyle}
     >
       {children}
-    </Tag>
+    </div>
   );
 }
