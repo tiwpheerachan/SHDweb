@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import GlassCard from "../components/GlassCard";
+import RevealOnScroll from "../components/RevealOnScroll";
 
 type BrandContacts = {
   shopee?: string;
@@ -387,6 +388,7 @@ export default function BrandDetailPage() {
 
           {/* ✅ ล็อคกรอบรูป: ไม่ให้แกว่งตามเนื้อหา */}
           <div className="mt-6 grid gap-6 md:grid-cols-[1.25fr_.75fr] md:items-start">
+            <RevealOnScroll>
             <div className="md:self-start w-full shrink-0">
               <div className="relative overflow-hidden rounded-[30px] ring-1 ring-slate-200 shadow-[0_26px_100px_-70px_rgba(15,23,42,0.35)]">
                 <div className="relative aspect-[16/9] w-full overflow-hidden">
@@ -413,8 +415,10 @@ export default function BrandDetailPage() {
                 </div>
               </div>
             </div>
+            </RevealOnScroll>
 
             {/* right info */}
+            <RevealOnScroll delay={150} direction="right">
             <GlassCard className="p-6 md:p-7">
               <div className="text-xs font-extrabold text-slate-600">
                 {(t("brands.detail.aboutTitle") as string) || "About"}
@@ -477,9 +481,11 @@ export default function BrandDetailPage() {
                 </Link>
               </div>
             </GlassCard>
+            </RevealOnScroll>
           </div>
 
           {/* other brands */}
+          <RevealOnScroll delay={100}>
           <div className="mt-10">
             <div className="flex items-center justify-between gap-3">
               <div className="text-sm font-extrabold text-slate-900">
@@ -524,6 +530,7 @@ export default function BrandDetailPage() {
                 ))}
             </div>
           </div>
+          </RevealOnScroll>
         </div>
       </section>
     </>

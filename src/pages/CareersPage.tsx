@@ -4,6 +4,9 @@ import { useTranslation } from "react-i18next";
 import SectionHeader from "../components/SectionHeader";
 import GlassCard from "../components/GlassCard";
 import { StatPills } from "../components/StatPills";
+import RevealOnScroll from "../components/RevealOnScroll";
+import StaggerReveal from "../components/StaggerReveal";
+import MagneticButton from "../components/MagneticButton";
 
 export default function CareersPage() {
   const { t } = useTranslation();
@@ -28,6 +31,7 @@ export default function CareersPage() {
           }}
         />
         <div className="relative p-7 md:p-10">
+          <RevealOnScroll>
           <div className="chip">{t("careers.hero.kicker")}</div>
           <h1 className="mt-5 text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
             {t("careers.hero.title")}
@@ -37,12 +41,12 @@ export default function CareersPage() {
           </p>
 
           <div className="mt-7 flex flex-wrap items-center gap-3">
-            <a className="btnPrimary" href="#content">
+            <MagneticButton><a className="btnPrimary" href="#content">
               {t("careers.hero.ctaPrimary")}
-            </a>
-            <a className="btn" href="/contact">
+            </a></MagneticButton>
+            <MagneticButton><a className="btn" href="/contact">
               {t("careers.hero.ctaSecondary")}
-            </a>
+            </a></MagneticButton>
           </div>
 
           <StatPills
@@ -52,6 +56,7 @@ export default function CareersPage() {
               { k: t("common.stats.2.k"), v: t("common.stats.2.v") },
             ]}
           />
+          </RevealOnScroll>
         </div>
       </section>
 
@@ -62,18 +67,19 @@ export default function CareersPage() {
           desc={t("common.section.desc")}
         />
 
-        <div className="mt-6 grid gap-4 md:grid-cols-3 md:gap-6">
+        <StaggerReveal className="mt-6 grid gap-4 md:grid-cols-3 md:gap-6">
           {blocks.map((b, idx) => (
-            <GlassCard key={idx} className="p-6 md:p-7">
+            <GlassCard key={idx} tilt className="p-6 md:p-7">
               <div className="flex items-start justify-between gap-4">
                 <div className="text-sm font-extrabold text-slate-900">{b.title}</div>
-                <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-indigo-600 via-cyan-500 to-rose-400 opacity-90" />
+                <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-indigo-600 via-cyan-500 to-rose-400 opacity-90 animate-float-slow" />
               </div>
               <div className="mt-3 text-sm leading-relaxed text-slate-600">{b.desc}</div>
             </GlassCard>
           ))}
-        </div>
+        </StaggerReveal>
 
+        <RevealOnScroll delay={100}>
         <div className="mt-6 card">
           <div className="grid gap-4 md:grid-cols-2 md:gap-6">
             <div>
@@ -90,6 +96,7 @@ export default function CareersPage() {
             </div>
           </div>
         </div>
+        </RevealOnScroll>
       </section>
     </>
   );

@@ -5,6 +5,11 @@ import { useTranslation } from "react-i18next";
 import { ArrowRight, CalendarClock, PackageSearch } from "lucide-react";
 import SectionHeader from "../components/SectionHeader";
 import GlassCard from "../components/GlassCard";
+import RevealOnScroll from "../components/RevealOnScroll";
+import StaggerReveal from "../components/StaggerReveal";
+import MagneticButton from "../components/MagneticButton";
+import TiltCard from "../components/TiltCard";
+import TextReveal from "../components/TextReveal";
 
 function cn(...xs: Array<string | false | undefined | null>) {
   return xs.filter(Boolean).join(" ");
@@ -72,6 +77,7 @@ function ServiceRowCard({ item }: { item: ServiceRow }) {
 
   return (
     <GlassCard
+      tilt
       className={cn(
         "group relative overflow-hidden rounded-[18px] bg-white",
         "ring-1 ring-slate-200",
@@ -252,6 +258,7 @@ export default function ServicesPage() {
           <div className="grid items-center gap-8 md:grid-cols-12">
             {/* LEFT */}
             <div className="md:col-span-7">
+              <RevealOnScroll>
               <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-extrabold text-slate-900 ring-1 ring-slate-200 shadow-[0_16px_60px_-46px_rgba(2,6,23,0.30)]">
                 <span className="h-2 w-2 rounded-full bg-emerald-500" />
                 {(t("services.hero.kicker", { defaultValue: "Premium Service" }) as string)}
@@ -271,9 +278,12 @@ export default function ServicesPage() {
               </p>
 
               <div className="mt-6 flex flex-wrap items-center gap-3">
+                <MagneticButton strength={0.2}>
                 <LinkBtn href={(t("services.hero.ctaPrimary.href") as string) || "https://booking.70mai.co.th/"}>
                   {(t("services.hero.ctaPrimary.label", { defaultValue: "เริ่มจองคิว 70mai" }) as string)}
                 </LinkBtn>
+                </MagneticButton>
+                <MagneticButton strength={0.2}>
                 <GhostBtn
                   href={
                     (t("services.hero.ctaSecondary.href") as string) ||
@@ -282,6 +292,7 @@ export default function ServicesPage() {
                 >
                   {(t("services.hero.ctaSecondary.label", { defaultValue: "ตรวจสอบงานซ่อม-เคลม" }) as string)}
                 </GhostBtn>
+                </MagneticButton>
               </div>
 
               <div className="mt-7 grid gap-3 sm:grid-cols-3">
@@ -310,10 +321,12 @@ export default function ServicesPage() {
                     </div>
                   ))}
               </div>
+              </RevealOnScroll>
             </div>
 
             {/* RIGHT */}
             <div className="md:col-span-5">
+              <RevealOnScroll delay={200} direction="right">
               <div className="relative">
                 <div className="heroFrameGrad absolute -inset-[2px] rounded-[30px] opacity-70 blur-[0.2px]" />
                 <div className="heroFrameGrad absolute -inset-[1px] rounded-[30px] opacity-55" />
@@ -361,24 +374,27 @@ export default function ServicesPage() {
                   </div>
                 </GlassCard>
               </div>
+              </RevealOnScroll>
             </div>
           </div>
         </div>
       </section>
 
       {/* ===== SERVICES (cards redesigned to match screenshot) ===== */}
-      <section className="mx-auto max-w-6xl px-4 pb-14 pt-2">
+      <section className="mx-auto max-w-6xl px-4 pb-14 pt-2 section-glow">
+        <RevealOnScroll>
         <SectionHeader
           kicker={t("services.section.kicker", { defaultValue: "SERVICES" })}
           title={t("services.section.title", { defaultValue: "บริการหลัก" })}
           align="left"
         />
+        </RevealOnScroll>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
+        <StaggerReveal className="mt-6 grid gap-4 md:grid-cols-2">
           {services.map((s) => (
             <ServiceRowCard key={s.key} item={s} />
           ))}
-        </div>
+        </StaggerReveal>
       </section>
     </>
   );

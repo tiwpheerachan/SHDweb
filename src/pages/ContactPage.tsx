@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import { Mail, Phone, MapPin, Copy, ArrowUpRight } from "lucide-react";
 import SectionHeader from "../components/SectionHeader";
 import GlassCard from "../components/GlassCard";
+import MagneticButton from "../components/MagneticButton";
+import TiltCard from "../components/TiltCard";
 
 function cx(...xs: Array<string | false | null | undefined>) {
   return xs.filter(Boolean).join(" ");
@@ -223,6 +225,7 @@ export default function ContactPage() {
 
                     {/* CTAs */}
                     <div className="flex flex-wrap gap-3">
+                      <MagneticButton strength={0.2}>
                       <a
                         href={mailto(t("contact.hero.ctaPrimary.email"), t("contact.hero.ctaPrimary.subject"))}
                         className={cx(
@@ -235,7 +238,9 @@ export default function ContactPage() {
                         <Mail className="h-4 w-4" />
                         {t("contact.hero.ctaPrimary.label")}
                       </a>
+                      </MagneticButton>
 
+                      <MagneticButton strength={0.2}>
                       <a
                         href={`tel:${t("contact.hero.ctaPhone.value")}`}
                         className={cx(
@@ -248,7 +253,9 @@ export default function ContactPage() {
                         <Phone className="h-4 w-4" />
                         {t("contact.hero.ctaPhone.label")}
                       </a>
+                      </MagneticButton>
 
+                      <MagneticButton strength={0.2}>
                       <a
                         href={mapHref}
                         target="_blank"
@@ -263,6 +270,7 @@ export default function ContactPage() {
                         <MapPin className="h-4 w-4" />
                         {t("contact.hero.ctaMap.label")}
                       </a>
+                      </MagneticButton>
                     </div>
                   </div>
                 </div>
@@ -298,7 +306,7 @@ export default function ContactPage() {
                   )}
                   style={{ transitionDelay: dirRv.shown ? `${60 + i * 55}ms` : "0ms" }}
                 >
-                  <GlassCard className="relative p-7 bg-white/60 backdrop-blur-2xl ring-1 ring-slate-200">
+                  <GlassCard tilt className="relative p-7 bg-white/60 backdrop-blur-2xl ring-1 ring-slate-200">
                     {/* subtle floating icon (very light) */}
                     <div className="absolute right-6 top-6 hidden md:block floaty opacity-[.08]">
                       <Mail className="h-10 w-10" />
@@ -350,7 +358,7 @@ export default function ContactPage() {
 
           {/* ================= PHONE + ADDRESS ================= */}
           <div ref={infoRv.ref} className={cx("mt-12 grid gap-6 md:grid-cols-2 rv", infoRv.shown && "is-in")}>
-            <GlassCard className="p-7 bg-white/60 backdrop-blur-2xl ring-1 ring-slate-200">
+            <GlassCard tilt className="p-7 bg-white/60 backdrop-blur-2xl ring-1 ring-slate-200">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <div className="text-[16px] font-semibold text-slate-900">{t("contact.phoneSection.title")}</div>
@@ -390,7 +398,7 @@ export default function ContactPage() {
               </div>
             </GlassCard>
 
-            <GlassCard className="p-7 bg-white/60 backdrop-blur-2xl ring-1 ring-slate-200">
+            <GlassCard tilt className="p-7 bg-white/60 backdrop-blur-2xl ring-1 ring-slate-200">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <div className="text-[16px] font-semibold text-slate-900">{t("contact.addressSection.title")}</div>

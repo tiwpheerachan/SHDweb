@@ -2,6 +2,8 @@ import React, { useMemo, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Logo from "./Logo";
+import RevealOnScroll from "./RevealOnScroll";
+import MagneticButton from "./MagneticButton";
 
 function cn(...xs: Array<string | false | undefined | null>) {
   return xs.filter(Boolean).join(" ");
@@ -90,6 +92,7 @@ const socials = useMemo(
         {/* =========================
             TOP GRID (เหมือน ref แต่พื้นหลังขาว)
            ========================= */}
+        <RevealOnScroll>
         <div className="grid gap-10 md:grid-cols-[1.25fr_.9fr] md:items-start">
           {/* LEFT: Newsletter + Social */}
           <div className="flex flex-col gap-6">
@@ -208,8 +211,9 @@ const socials = useMemo(
 
           {/* RIGHT: CTA + Links */}
           <div className="flex flex-col gap-8 md:items-end">
-            {/* CTA Button (ทองไล่สี) */}
+            {/* CTA Button (ทองไล่สี + magnetic) */}
             <div className="w-full md:w-auto">
+              <MagneticButton strength={0.3}>
               <NavLink
                 to="/contact"
                 className={cn(
@@ -219,11 +223,12 @@ const socials = useMemo(
                   "bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-300",
                   "ring-1 ring-amber-200/70",
                   "shadow-[0_18px_60px_-35px_rgba(245,158,11,0.85)]",
-                  "hover:brightness-[1.03] active:brightness-[0.98] transition"
+                  "hover:brightness-[1.03] hover:-translate-y-0.5 active:brightness-[0.98] transition-all duration-300"
                 )}
               >
                 {t("footer.cta") || "Schedule a call"}
               </NavLink>
+              </MagneticButton>
             </div>
 
             {/* Links columns */}
@@ -275,6 +280,8 @@ const socials = useMemo(
             </div>
           </div>
         </div>
+
+        </RevealOnScroll>
 
         {/* Divider (บางๆ เรียบๆ) */}
         <div className="mt-12 h-px w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent" />

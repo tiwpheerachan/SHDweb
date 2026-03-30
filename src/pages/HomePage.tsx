@@ -4,7 +4,13 @@ import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import GlassCard from "../components/GlassCard";
+import RevealOnScroll from "../components/RevealOnScroll";
 import SectionHeader from "../components/SectionHeader";
+import StaggerReveal from "../components/StaggerReveal";
+import MagneticButton from "../components/MagneticButton";
+import TextReveal from "../components/TextReveal";
+import ParallaxSection from "../components/ParallaxSection";
+import AnimatedCounter from "../components/AnimatedCounter";
 
 type AnyObj = Record<string, any>;
 
@@ -243,7 +249,7 @@ export default function HomePage() {
 </video>
 
       {/* ✅ NO background gradient overlay ✅
-          แต่เพิ่ม “เส้นไล่สีบางๆ” ที่วิ่งผ่านเหมือนดาวตก + twinkle เบามาก (ไม่ทำพื้นหลังเป็นไล่สี) */}
+          แต่เพิ่ม "เส้นไล่สีบางๆ" ที่วิ่งผ่านเหมือนดาวตก + twinkle เบามาก (ไม่ทำพื้นหลังเป็นไล่สี) */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         {/* meteor lines */}
         <span
@@ -272,6 +278,7 @@ export default function HomePage() {
 
 {/* ========= TOP HERO TEXT (DARK BG • WHITE TITLE • GOLD OUTLINES • PREMIUM PILLS) ========= */}
 
+<RevealOnScroll delay={100}>
 <div className="mx-auto max-w-3xl text-center">
   {/* ✅ Badge: dark glass + GOLD outline + shimmer */}
   <div className="inline-flex">
@@ -374,9 +381,10 @@ export default function HomePage() {
     "แพลตฟอร์มและทีมงานที่เชื่อมกลยุทธ์ การขาย การตลาด และปฏิบัติการ เพื่อผลลัพธ์ที่วัดผลได้"}
 </p>
 
-  {/* ✅ Buttons: GOLD outline pills */}
+  {/* ✅ Buttons: GOLD outline pills + magnetic */}
   <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
     {/* Primary: WHITE pill + gold rim + premium shine */}
+    <MagneticButton strength={0.25}>
     <a
       href="/services"
       className={cx(
@@ -419,8 +427,10 @@ export default function HomePage() {
         <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-[#b8892c]/80 transition-all duration-300 group-hover:w-full" />
       </span>
     </a>
+    </MagneticButton>
 
     {/* Secondary: DARK glass + GOLD outline */}
+    <MagneticButton strength={0.25}>
     <a
       href="http://careers.shd-technology.co.th/"
       target="_blank"
@@ -447,9 +457,12 @@ export default function HomePage() {
   {t("home.hero.ctaSecondary") || "ร่วมงานกับเรา"}
 </span>
     </a>
+    </MagneticButton>
   </div>
 </div>
-          {/* ========= STAGE: รองรับ “กรอบเป็นวิดีโอ” + ไม่มี “กรอบ/ขอบ” (เหลือแค่รูป/วิดีโอ) ========= */}
+</RevealOnScroll>
+          {/* ========= STAGE: รองรับ "กรอบเป็นวิดีโอ" + ไม่มี "กรอบ/ขอบ" (เหลือแค่รูป/วิดีโอ) ========= */}
+          <RevealOnScroll delay={200}>
           <div className="mt-14">
             <div className="mx-auto max-w-6xl px-4 md:px-6">
               <div className="grid items-stretch gap-4 md:grid-cols-[1fr_2.6fr_1fr]">
@@ -557,6 +570,7 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+          </RevealOnScroll>
 
           {/* bottom spacing */}
           <div className="pb-16 md:pb-20" />
@@ -571,11 +585,16 @@ export default function HomePage() {
             ✅ Card กว้างขึ้นนิด (เพิ่ม max-w + ปรับ grid ให้การ์ดกว้างขึ้น)
             ✅ เลข 10 ทำเอฟเฟค count 0 → 10 (ความเร็วกลางๆ)
         ====================================================== */}
-        <section className="bg-white">
+        <section className="bg-white section-glow">
           <div className="mx-auto w-full max-w-7xl px-4 md:px-6 py-14">
+            <RevealOnScroll>
             <div className="text-center">
-              {/* ✅ Number count effect 0 -> 10 */}
-              <CountTo to={10} className="text-[72px] leading-none font-extrabold tracking-tight md:text-[104px]" />
+              {/* ✅ Number count effect 0 -> 10 (scroll-triggered + pop) */}
+              <AnimatedCounter
+                to={10}
+                duration={1200}
+                className="text-[72px] leading-none font-extrabold tracking-tight md:text-[104px] bg-gradient-to-b from-[#f6e7b0] via-[#d7b85a] to-[#b48a22] bg-clip-text text-transparent"
+              />
 
               <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
                 {(t("home.sections.brands.title") as string) || "แบรนด์ที่เราจัดจำหน่ายอย่างเป็นทางการ"}
@@ -586,7 +605,7 @@ export default function HomePage() {
                   "ค้นหาแบรนด์และกดเข้าไปดูรายละเอียด การรับประกัน และช่องทางบริการ"}
               </p>
 
-              {/* Search (premium gold ring — less white, more “rich gold”) */}
+              {/* Search (premium gold ring — less white, more "rich gold") */}
               <div className="mx-auto mt-6 w-full max-w-md">
                 <div className="rounded-full p-[1px] bg-gradient-to-r from-[#C79A2E] via-[#D7B04A] to-[#9A6B12]">
                   <div className="flex items-center gap-2 rounded-full bg-white px-4 py-3 ring-1 ring-black/[0.03] shadow-[0_10px_30px_-22px_rgba(154,107,18,.28)] transition focus-within:shadow-[0_16px_44px_-28px_rgba(154,107,18,.42)]">
@@ -625,9 +644,10 @@ export default function HomePage() {
                 })}
               </div>
             </div>
+            </RevealOnScroll>
 
-            {/* ✅ Cards: ปรับใหม่ให้ “รูปเยอะขึ้น / ขาวไม่ล้น / ข้อความเตี้ยลง” */}
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+            {/* ✅ Cards: ปรับใหม่ให้ "รูปเยอะขึ้น / ขาวไม่ล้น / ข้อความเตี้ยลง" */}
+            <StaggerReveal className="mt-10 grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
               {brandLinksToShow.slice(0, 10).map((b) => (
                 <Link
                   key={b.slug}
@@ -640,7 +660,7 @@ export default function HomePage() {
                     "hover:-translate-y-0.5 hover:shadow-[0_22px_70px_-46px_rgba(15,23,42,.22)]"
                   )}
                 >
-                  {/* ✅ Top image: “ยาวขึ้น” (สูงขึ้นนิด) */}
+                  {/* ✅ Top image: "ยาวขึ้น" (สูงขึ้นนิด) */}
                   <div className="relative aspect-[6/5.5] w-full overflow-hidden bg-slate-50">
                     <img
                       src={b.img}
@@ -652,7 +672,7 @@ export default function HomePage() {
                     {/* ✅ Top vignette เบาๆ ให้ดู premium แต่ไม่มืดจัด */}
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/25 via-black/0 to-transparent" />
 
-                    {/* ✅ Bottom fade: ลด “ขาวล้น” (สั้นลง + จางลง + ไม่ทึบ) */}
+                    {/* ✅ Bottom fade: ลด "ขาวล้น" (สั้นลง + จางลง + ไม่ทึบ) */}
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white/80 via-white/35 to-transparent" />
                   </div>
 
@@ -694,7 +714,7 @@ export default function HomePage() {
                   </div>
                 </Link>
               ))}
-            </div>
+            </StaggerReveal>
           </div>
         </section>
       </div>

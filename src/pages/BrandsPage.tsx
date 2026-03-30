@@ -4,7 +4,11 @@ import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import GlassCard from "../components/GlassCard";
+import RevealOnScroll from "../components/RevealOnScroll";
+import StaggerReveal from "../components/StaggerReveal";
 import { StatPills } from "../components/StatPills";
+import MagneticButton from "../components/MagneticButton";
+import TiltCard from "../components/TiltCard";
 
 function cx(...xs: Array<string | false | null | undefined>) {
   return xs.filter(Boolean).join(" ");
@@ -300,6 +304,7 @@ export default function BrandsPage() {
       ========================== */}
       <section className="bg-white">
         <div className="mx-auto w-full max-w-6xl px-4 md:px-6 py-10">
+          <RevealOnScroll>
           <div
             className="relative"
             onMouseEnter={() => (promoPauseRef.current = true)}
@@ -358,6 +363,7 @@ export default function BrandsPage() {
                       {/* ✅ buttons overlay (bottom-right) */}
                       <div className="absolute bottom-6 right-6 md:bottom-8 md:right-8 z-20 flex flex-wrap items-center justify-end gap-3">
                         {/* external -> keep <a target=_blank> */}
+                        <MagneticButton strength={0.2}>
                         <a
                           href={c.buyHref}
                           target="_blank"
@@ -371,8 +377,10 @@ export default function BrandsPage() {
                         >
                           {(t("brands.promo.buyNow") as string) || "Buy now"}
                         </a>
+                        </MagneticButton>
 
                         {/* ✅ internal route -> use <Link> */}
+                        <MagneticButton strength={0.2}>
                         <Link
                           to={c.learnHref}
                           className={cx(
@@ -386,6 +394,7 @@ export default function BrandsPage() {
                         >
                           {(t("brands.promo.learnMore") as string) || "Learn more"} <span className="ml-1">›</span>
                         </Link>
+                        </MagneticButton>
                       </div>
                     </div>
                   </div>
@@ -412,14 +421,16 @@ export default function BrandsPage() {
               ))}
             </div>
           </div>
+          </RevealOnScroll>
         </div>
       </section>
 
       {/* =========================
           HERO (Home-like)
       ========================== */}
-      <section className="bg-white">
+      <section className="bg-white section-glow">
         <div className="mx-auto w-full max-w-6xl px-4 md:px-6 py-12 md:py-14">
+          <RevealOnScroll>
           <div className="text-center">
             {/* Big number (ตามสไตล์ Home section) */}
             <div className="text-[72px] leading-none font-extrabold tracking-tight md:text-[108px]">
@@ -484,6 +495,7 @@ export default function BrandsPage() {
               />
             </div>
           </div>
+          </RevealOnScroll>
         </div>
       </section>
 
@@ -492,7 +504,7 @@ export default function BrandsPage() {
       ========================== */}
       <section className="bg-white">
         <div className="mx-auto w-full max-w-6xl px-4 md:px-6 py-12">
-          <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+          <StaggerReveal className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
             {shown.map((b) => (
               <Link
                 key={b.slug}
@@ -561,7 +573,7 @@ export default function BrandsPage() {
                 </div>
               </Link>
             ))}
-          </div>
+          </StaggerReveal>
 
           {/* =========================
               Centered carousel banners (like reference)
