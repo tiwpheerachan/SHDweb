@@ -1,400 +1,174 @@
-// frontend/src/pages/ServicesPage.tsx
-import React, { useMemo } from "react";
+// src/pages/ServicesPage.tsx
+import React from "react";
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
-import { ArrowRight, CalendarClock, PackageSearch } from "lucide-react";
-import SectionHeader from "../components/SectionHeader";
-import GlassCard from "../components/GlassCard";
+import { Link } from "react-router-dom";
+import {
+  ArrowRight,
+  Target,
+  Radar,
+  Rocket,
+  Users,
+  Warehouse,
+  Wrench,
+  RefreshCcw,
+  Megaphone,
+  LineChart,
+  Store,
+} from "lucide-react";
 import RevealOnScroll from "../components/RevealOnScroll";
-import StaggerReveal from "../components/StaggerReveal";
-import MagneticButton from "../components/MagneticButton";
-import TiltCard from "../components/TiltCard";
-import TextReveal from "../components/TextReveal";
+import { CtaCharacters, FloatingMascot } from "@/components/ui/culture-chars";
 
-function cn(...xs: Array<string | false | undefined | null>) {
+function cx(...xs: Array<string | false | null | undefined>) {
   return xs.filter(Boolean).join(" ");
 }
 
-type ServiceRow = {
-  key: string;
-  title: string;
-  desc: string;
-  bullets: string[];
-  href: string;
-  icon: React.ReactNode;
-  imageSrc: string; // kept for later, not used in card design
-  tag?: string;
-  ctaLabel?: string;
-};
-
-function LinkBtn({ href, children }: { href: string; children: React.ReactNode }) {
-  const external = href.startsWith("http");
-  return (
-    <a
-      href={href}
-      target={external ? "_blank" : undefined}
-      rel={external ? "noreferrer" : undefined}
-      className={cn(
-        "group inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-extrabold",
-        "bg-slate-900 text-white",
-        "shadow-[0_14px_50px_-28px_rgba(2,6,23,0.55)]",
-        "transition hover:-translate-y-[1px] hover:bg-slate-950",
-        "focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
-      )}
-    >
-      {children}
-      <ArrowRight className="h-4 w-4 transition group-hover:translate-x-[2px]" />
-    </a>
-  );
-}
-
-function GhostBtn({ href, children }: { href: string; children: React.ReactNode }) {
-  const external = href.startsWith("http");
-  return (
-    <a
-      href={href}
-      target={external ? "_blank" : undefined}
-      rel={external ? "noreferrer" : undefined}
-      className={cn(
-        "group inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-extrabold",
-        "bg-white text-slate-900",
-        "ring-1 ring-slate-200",
-        "shadow-[0_12px_45px_-34px_rgba(2,6,23,0.35)]",
-        "transition hover:-translate-y-[1px] hover:ring-slate-300",
-        "focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
-      )}
-    >
-      {children}
-      <ArrowRight className="h-4 w-4 transition group-hover:translate-x-[2px]" />
-    </a>
-  );
-}
-
-/** ✅ NEW card design to match your screenshot */
-function ServiceRowCard({ item }: { item: ServiceRow }) {
-  const { t } = useTranslation();
-  const external = item.href.startsWith("http");
-
-  return (
-    <GlassCard
-      tilt
-      className={cn(
-        "group relative overflow-hidden rounded-[18px] bg-white",
-        "ring-1 ring-slate-200",
-        "shadow-[0_14px_55px_-42px_rgba(2,6,23,0.28)]",
-        "transition hover:-translate-y-[2px] hover:shadow-[0_18px_70px_-48px_rgba(2,6,23,0.36)]"
-      )}
-    >
-      <div className="relative p-5 md:p-6">
-        {/* top-right arrow */}
-        <a
-          href={item.href}
-          target={external ? "_blank" : undefined}
-          rel={external ? "noreferrer" : undefined}
-          className={cn(
-            "absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full",
-            "bg-white ring-1 ring-slate-200",
-            "shadow-[0_12px_40px_-30px_rgba(2,6,23,0.25)]",
-            "transition",
-            "group-hover:bg-slate-900 group-hover:text-white"
-          )}
-          aria-label={`Open ${item.title}`}
-        >
-          <ArrowRight className="h-4 w-4" />
-        </a>
-
-        {/* title + desc (with right padding for arrow) */}
-        <div className="pr-12">
-          <h3 className="text-[15px] font-black text-slate-950 md:text-base">{item.title}</h3>
-          <p className="mt-1 text-sm text-slate-600">{item.desc}</p>
-        </div>
-
-        {/* bullets (single line style, wrap if needed) */}
-        {!!item.bullets?.length && (
-          <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-slate-600">
-            {item.bullets.slice(0, 3).map((b, i) => (
-              <div key={i} className="inline-flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-slate-400" />
-                <span className="leading-relaxed">{b}</span>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* bottom actions */}
-        <div className="mt-4 flex flex-wrap items-center gap-2">
-          <LinkBtn href={item.href}>
-            {item.ctaLabel || (t("services.card.primaryCta", { defaultValue: "เริ่มใช้งาน" }) as string)}
-          </LinkBtn>
-          <GhostBtn href="/contact">
-            {(t("services.card.contactCta", { defaultValue: "ติดต่อเรา" }) as string)}
-          </GhostBtn>
-        </div>
-      </div>
-    </GlassCard>
-  );
-}
+const EMPOWERMENT = [
+  { icon: Target, title: "Brand Positioning", desc: "Localized positioning, product selection and pricing strategy tailored to each market's golden window of opportunity." },
+  { icon: Radar, title: "Channel Penetration", desc: "Access to 1,000+ core stores, Key Account (KA) resources and marketplace flagship operations." },
+  { icon: Rocket, title: "Marketing Acceleration", desc: "A robust digital marketing matrix — content, performance and creator ecosystems that drive breakthroughs." },
+  { icon: Users, title: "User Operation", desc: "CRM, community and after-sales operations that compound loyalty and lifetime value." },
+];
 
 export default function ServicesPage() {
   const { t } = useTranslation();
 
-  // =========================
-  // ✅ i18n: Services rows
-  // - keep design the same
-  // - only replace hardcoded text with t(...)
-  // =========================
-  const services = useMemo<ServiceRow[]>(() => {
-    const rows = t("services.items", { returnObjects: true, defaultValue: [] }) as any[];
-
-    // fallback: if someone forgets to create services.items in locales,
-    // keep old TH strings to avoid crash (design unchanged)
-    const fallback: ServiceRow[] = [
-      {
-        key: "booking",
-        title: "บริการติดตั้งกล้องติดรถยนต์ 70mai",
-        desc: "จองคิวออนไลน์ เลือกสาขา/วัน/เวลา พร้อมช่างผู้เชี่ยวชาญดูแลแบบพรีเมียม",
-        bullets: ["เลือกสาขา/วัน/เวลา ได้ทันที", "จัดการเลื่อนนัด/ยกเลิกได้", "ขั้นตอนชัดเจน โปร่งใส"],
-        href: "https://booking.70mai.co.th/",
-        icon: <CalendarClock className="h-3.5 w-3.5 text-slate-900" />,
-        imageSrc: "/images/services/70mai-booking.jpg",
-        tag: "Booking",
-        ctaLabel: "จองคิว",
-      },
-      {
-        key: "tracking",
-        title: "ตรวจสอบสถานะงานซ่อม-เคลม",
-        desc: "ติดตามสถานะงานซ่อม/เคลมแบบเรียลไทม์ ด้วยเลขอ้างอิงที่คุณมี",
-        bullets: ["ดูสถานะแต่ละขั้นตอน", "มีรายละเอียดงานและการจัดส่ง", "ลดเวลาตามงาน/โทรถาม"],
-        href: "https://sv.shd-technology.co.th/servicetracking.aspx",
-        icon: <PackageSearch className="h-3.5 w-3.5 text-slate-900" />,
-        imageSrc: "/images/services/service-tracking.jpg",
-        tag: "Tracking",
-        ctaLabel: "ตรวจสอบ",
-      },
-    ];
-
-    if (!Array.isArray(rows) || rows.length === 0) return fallback;
-
-    return rows.map((r: any) => {
-      const iconName = String(r?.icon || "");
-      const icon =
-        iconName === "CalendarClock" ? (
-          <CalendarClock className="h-3.5 w-3.5 text-slate-900" />
-        ) : iconName === "PackageSearch" ? (
-          <PackageSearch className="h-3.5 w-3.5 text-slate-900" />
-        ) : (
-          <ArrowRight className="h-3.5 w-3.5 text-slate-900" />
-        );
-
-      return {
-        key: String(r?.key || ""),
-        title: String(r?.title || ""),
-        desc: String(r?.desc || ""),
-        bullets: Array.isArray(r?.bullets) ? r.bullets.map((x: any) => String(x)) : [],
-        href: String(r?.href || "/"),
-        icon,
-        imageSrc: String(r?.imageSrc || ""),
-        tag: r?.tag ? String(r.tag) : undefined,
-        ctaLabel: r?.ctaLabel ? String(r.ctaLabel) : undefined,
-      } as ServiceRow;
-    });
-  }, [t]);
-
   return (
     <>
       <Helmet>
-        <title>{(t("services.seo.title") as string) || "Services"} · SHD Technology</title>
-        <meta
-          name="description"
-          content={(t("services.seo.description") as string) || "SHD Technology services"}
-        />
+        <title>Services · SHD Technology</title>
+        <meta name="description" content="Full-cycle brand localization: four-dimensional empowerment, self-built infrastructure, and 0-1 to 1-100 growth across emerging markets." />
       </Helmet>
 
-      {/* ===== HERO (luxury minimal + animated gradient on MAIN TITLE) ===== */}
-      <style>{`
-        .heroGradText{
-          background-image: linear-gradient(90deg,
-            #0f172a,
-            #2563eb,
-            #7c3aed,
-            #db2777,
-            #0ea5e9,
-            #0f172a
-          );
-          background-size: 320% 100%;
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
-          animation: shdHeroGrad 7s ease-in-out infinite;
-        }
-        @keyframes shdHeroGrad{
-          0%{ background-position: 0% 50%; }
-          50%{ background-position: 100% 50%; }
-          100%{ background-position: 0% 50%; }
-        }
-
-        .heroFrameGrad{
-          background-image: linear-gradient(90deg,
-            rgba(14,165,233,0.55),
-            rgba(124,58,237,0.55),
-            rgba(219,39,119,0.50),
-            rgba(245,158,11,0.45),
-            rgba(14,165,233,0.55)
-          );
-          background-size: 260% 100%;
-          animation: shdFrameMove 9s ease-in-out infinite;
-        }
-        @keyframes shdFrameMove{
-          0%{ background-position: 0% 50%; }
-          50%{ background-position: 100% 50%; }
-          100%{ background-position: 0% 50%; }
-        }
-      `}</style>
-
-      <section className="relative overflow-hidden bg-white">
-        <div className="absolute inset-x-0 top-0 h-[1px] bg-slate-200/70" />
-
-        <div className="mx-auto max-w-6xl px-4 pb-10 pt-12 md:pb-12 md:pt-14">
-          <div className="grid items-center gap-8 md:grid-cols-12">
-            {/* LEFT */}
-            <div className="md:col-span-7">
-              <RevealOnScroll>
-              <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-extrabold text-slate-900 ring-1 ring-slate-200 shadow-[0_16px_60px_-46px_rgba(2,6,23,0.30)]">
-                <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                {(t("services.hero.kicker", { defaultValue: "Premium Service" }) as string)}
-              </div>
-
-              <h1 className="mt-4 text-3xl font-black tracking-tight md:text-5xl">
-                <span className="heroGradText">
-                  {t("services.hero.title", { defaultValue: "บริการแบบครบวงจรที่ต่อยอดได้" })}
-                </span>
-              </h1>
-
-              <p className="mt-3 max-w-xl text-base text-slate-600 md:text-lg">
-                {t("services.hero.subtitle", {
-                  defaultValue:
-                    "จองคิวติดตั้ง 70mai • ติดตามงานซ่อม/เคลม • และการดูแลหลังการขาย — ทุกอย่างอยู่ในมาตรฐานเดียวกัน เพื่อประสบการณ์ที่ชัดเจนและพรีเมียม",
-                })}
-              </p>
-
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <MagneticButton strength={0.2}>
-                <LinkBtn href={(t("services.hero.ctaPrimary.href") as string) || "https://booking.70mai.co.th/"}>
-                  {(t("services.hero.ctaPrimary.label", { defaultValue: "เริ่มจองคิว 70mai" }) as string)}
-                </LinkBtn>
-                </MagneticButton>
-                <MagneticButton strength={0.2}>
-                <GhostBtn
-                  href={
-                    (t("services.hero.ctaSecondary.href") as string) ||
-                    "https://sv.shd-technology.co.th/servicetracking.aspx"
-                  }
-                >
-                  {(t("services.hero.ctaSecondary.label", { defaultValue: "ตรวจสอบงานซ่อม-เคลม" }) as string)}
-                </GhostBtn>
-                </MagneticButton>
-              </div>
-
-              <div className="mt-7 grid gap-3 sm:grid-cols-3">
-                {(
-                  (t("services.hero.stats", {
-                    returnObjects: true,
-                    defaultValue: [
-                      { k: "Support", v: "ทุกวัน 24 ชม." },
-                      { k: "มาตรฐาน", v: "ตรวจสอบได้" },
-                      { k: "บริการ", v: "ครบวงจร" },
-                    ],
-                  }) as any[]) || []
-                )
-                  .slice(0, 3)
-                  .map((x, i) => (
-                    <div
-                      key={i}
-                      className={cn(
-                        "rounded-2xl bg-white p-4",
-                        "ring-1 ring-slate-200",
-                        "shadow-[0_16px_60px_-48px_rgba(2,6,23,0.28)]"
-                      )}
-                    >
-                      <div className="text-xs font-extrabold text-slate-500">{String(x?.k ?? "")}</div>
-                      <div className="mt-1 text-sm font-black text-slate-950">{String(x?.v ?? "")}</div>
-                    </div>
-                  ))}
-              </div>
-              </RevealOnScroll>
+      {/* HERO */}
+      <section className="relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 dot-grid opacity-60 [mask-image:radial-gradient(70%_60%_at_50%_0%,black,transparent)]" />
+        <div className="relative mx-auto max-w-6xl px-4 md:px-6 pt-10 md:pt-16 pb-4">
+          <RevealOnScroll>
+            <div className="chip-label">Services</div>
+            <h1 className="mt-6 max-w-4xl font-display text-[2.6rem] font-extrabold leading-[1.03] tracking-tight text-ink md:text-6xl">
+              Full-cycle solutions for <span className="hl">market entry</span> & scale-up.
+            </h1>
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink/60 md:text-lg">
+              One partner, end-to-end: from the first shipment to category leadership. We combine a four-dimensional empowerment model with a self-built operational backbone.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link to="/contact" className="btn-primary">Start a project <ArrowRight className="h-4 w-4" /></Link>
+              <Link to="/brands" className="btn-outline">See the results</Link>
             </div>
+          </RevealOnScroll>
+        </div>
+      </section>
 
-            {/* RIGHT */}
-            <div className="md:col-span-5">
-              <RevealOnScroll delay={200} direction="right">
-              <div className="relative">
-                <div className="heroFrameGrad absolute -inset-[2px] rounded-[30px] opacity-70 blur-[0.2px]" />
-                <div className="heroFrameGrad absolute -inset-[1px] rounded-[30px] opacity-55" />
-
-                <GlassCard
-                  className={cn(
-                    "relative overflow-hidden rounded-[28px] bg-white",
-                    "ring-1 ring-slate-200",
-                    "shadow-[0_22px_90px_-60px_rgba(2,6,23,0.35)]"
-                  )}
-                >
-                  <div className="relative aspect-[6/3.8] overflow-hidden">
-                    <img
-                      src={(t("services.hero.imageSrc", { defaultValue: "/images/services/hero-card.jpg" }) as string)}
-                      alt={(t("services.hero.imageAlt", { defaultValue: "SHD Services" }) as string)}
-                      className="h-full w-full object-cover"
-                      loading="lazy"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/10 via-black/0 to-black/18" />
-                  </div>
-
-                  <div className="p-5">
-                    <div className="text-sm font-black text-slate-950">
-                      {t("services.hero.cardTitle", { defaultValue: "Service Hub" })}
-                    </div>
-                    <div className="mt-2 text-sm text-slate-600">
-                      {t("services.hero.cardDesc", {
-                        defaultValue: "เข้าถึงบริการหลักทั้งหมดได้ทันที",
-                      })}
-                    </div>
-
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      <GhostBtn href={(t("services.hero.quick.0.href") as string) || "https://booking.70mai.co.th/"}>
-                        {(t("services.hero.quick.0.label", { defaultValue: "จองคิว" }) as string)}
-                      </GhostBtn>
-                      <GhostBtn
-                        href={
-                          (t("services.hero.quick.1.href") as string) ||
-                          "https://sv.shd-technology.co.th/servicetracking.aspx"
-                        }
-                      >
-                        {(t("services.hero.quick.1.label", { defaultValue: "เช็คสถานะ" }) as string)}
-                      </GhostBtn>
-                    </div>
-                  </div>
-                </GlassCard>
+      {/* FULL-CYCLE STAGES */}
+      <section className="mx-auto max-w-6xl px-4 md:px-6 py-16 md:py-20">
+        <RevealOnScroll>
+          <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-ink md:text-4xl">
+            The growth journey, <span className="hl-blue">end to end</span>
+          </h2>
+        </RevealOnScroll>
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {[
+            { k: "0 → 1", title: "Market Entry & Cold Start", desc: "Market research, brand localization, channel setup, compliance and first-mile logistics.", tone: "ink" },
+            { k: "1 → 100", title: "Scale-up & Rapid Growth", desc: "Omnichannel expansion, marketing acceleration and data-driven operations to seize category share.", tone: "brand" },
+            { k: "∞", title: "Overseas Expansion", desc: "Replicating the playbook across regions — SEA, LATAM and the Middle East.", tone: "sun" },
+          ].map((s, i) => (
+            <RevealOnScroll key={s.k} delay={i * 90}>
+              <div
+                className={cx(
+                  "h-full rounded-4xl p-8",
+                  s.tone === "ink" && "bg-ink text-white",
+                  s.tone === "brand" && "bg-brand text-white",
+                  s.tone === "sun" && "bg-sun text-ink"
+                )}
+              >
+                <div className={cx("font-display text-5xl font-extrabold", s.tone === "sun" ? "text-ink" : "text-sun")}>{s.k}</div>
+                <div className="mt-5 font-display text-xl font-extrabold">{s.title}</div>
+                <p className={cx("mt-2 text-sm leading-relaxed", s.tone === "sun" ? "text-ink/70" : "text-white/65")}>{s.desc}</p>
               </div>
+            </RevealOnScroll>
+          ))}
+        </div>
+      </section>
+
+      {/* FOUR-DIMENSIONAL EMPOWERMENT */}
+      <section className="bg-paper">
+        <div className="mx-auto max-w-6xl px-4 md:px-6 py-16 md:py-24">
+          <RevealOnScroll>
+            <div className="chip-label">Four-dimensional empowerment</div>
+            <h2 className="mt-5 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-tight text-ink md:text-4xl">
+              Positioning · Penetration · Acceleration · Operation
+            </h2>
+          </RevealOnScroll>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {EMPOWERMENT.map((c, i) => (
+              <RevealOnScroll key={c.title} delay={i * 80}>
+                <div className="card h-full p-6">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand text-white">
+                    <c.icon className="h-6 w-6" />
+                  </div>
+                  <div className="mt-5 font-display text-lg font-extrabold text-ink">{c.title}</div>
+                  <p className="mt-2 text-sm leading-relaxed text-ink/60">{c.desc}</p>
+                </div>
               </RevealOnScroll>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ===== SERVICES (cards redesigned to match screenshot) ===== */}
-      <section className="mx-auto max-w-6xl px-4 pb-14 pt-2 section-glow">
+      {/* INFRASTRUCTURE */}
+      <section className="mx-auto max-w-6xl px-4 md:px-6 py-16 md:py-24">
         <RevealOnScroll>
-        <SectionHeader
-          kicker={t("services.section.kicker", { defaultValue: "SERVICES" })}
-          title={t("services.section.title", { defaultValue: "บริการหลัก" })}
-          align="left"
-        />
+          <h2 className="max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-tight text-ink md:text-4xl">
+            A <span className="hl">self-built</span> operational backbone
+          </h2>
+          <p className="mt-4 max-w-2xl text-base text-ink/60">
+            We own the infrastructure that most partners outsource — so quality, speed and brand trust stay in our hands.
+          </p>
         </RevealOnScroll>
-
-        <StaggerReveal className="mt-6 grid gap-4 md:grid-cols-2">
-          {services.map((s) => (
-            <ServiceRowCard key={s.key} item={s} />
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            { icon: Warehouse, title: "Warehousing & logistics", desc: "Owned local networks for fast, reliable regional fulfillment." },
+            { icon: Wrench, title: "After-sales service centers", desc: "Dedicated local support and repair to protect the brand." },
+            { icon: RefreshCcw, title: "OMO omnichannel system", desc: "A seamless Online-Merge-Offline operating platform." },
+            { icon: Store, title: "Retail & KA channels", desc: "1,000+ core stores and Key Account relationships." },
+            { icon: Megaphone, title: "Digital marketing matrix", desc: "Content, performance ads and creator ecosystems at scale." },
+            { icon: LineChart, title: "Data & operations", desc: "Analytics-driven decisions across the full funnel." },
+          ].map((r, i) => (
+            <RevealOnScroll key={r.title} delay={(i % 3) * 80}>
+              <div className="flex h-full items-start gap-4 rounded-4xl bg-white p-6 ring-1 ring-ink/[0.07] shadow-card">
+                <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-ink text-white">
+                  <r.icon className="h-5 w-5" />
+                </div>
+                <div>
+                  <div className="font-display font-extrabold text-ink">{r.title}</div>
+                  <div className="mt-1 text-sm text-ink/55">{r.desc}</div>
+                </div>
+              </div>
+            </RevealOnScroll>
           ))}
-        </StaggerReveal>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="mx-auto max-w-6xl px-4 md:px-6 pb-16 md:pb-24">
+        <RevealOnScroll>
+          <div className="relative">
+          <CtaCharacters />
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-brand px-8 py-14 text-center text-white md:px-16">
+            <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/10" />
+            <div className="relative">
+              <h2 className="mx-auto max-w-2xl font-display text-3xl font-extrabold leading-tight md:text-5xl">
+                Let's map your market-entry playbook.
+              </h2>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+                <Link to="/contact" className="btn bg-white text-ink hover:-translate-y-0.5">Talk to our team <ArrowRight className="h-4 w-4" /></Link>
+                <Link to="/about" className="btn bg-transparent text-white ring-1 ring-white/40 hover:ring-white/70">About SHD</Link>
+              </div>
+            </div>
+          </div>
+          </div>
+        </RevealOnScroll>
       </section>
     </>
   );

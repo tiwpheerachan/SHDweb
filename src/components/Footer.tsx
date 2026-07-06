@@ -1,9 +1,8 @@
 import React, { useMemo, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import Logo from "./Logo";
+import { ArrowRight } from "lucide-react";
 import RevealOnScroll from "./RevealOnScroll";
-import MagneticButton from "./MagneticButton";
 
 function cn(...xs: Array<string | false | undefined | null>) {
   return xs.filter(Boolean).join(" ");
@@ -25,292 +24,133 @@ export default function Footer() {
     [t]
   );
 
-const socials = useMemo(
-  () => [
-    {
-      key: "facebook",
-      label: "Facebook",
-      href: "https://facebook.com/yourpage", // เปลี่ยนเป็นลิงก์จริง
-      src: "/images/social/facebook.png",
-    },
-    {
-      key: "instagram",
-      label: "Instagram",
-      href: "https://instagram.com/yourpage",
-      src: "/images/social/instagram.png",
-    },
-    {
-      key: "line",
-      label: "LINE",
-      href: "https://line.me/ti/p/yourid",
-      src: "/images/social/line.png",
-    },
-  ],
-  []
-);
+  const socials = useMemo(
+    () => [
+      { key: "facebook", label: "Facebook", href: "https://facebook.com/yourpage", src: "/images/social/facebook.png" },
+      { key: "instagram", label: "Instagram", href: "https://instagram.com/yourpage", src: "/images/social/instagram.png" },
+      { key: "line", label: "LINE", href: "https://line.me/ti/p/yourid", src: "/images/social/line.png" },
+    ],
+    []
+  );
 
-
-  // ✅ อีเมลจะ “ส่งไปที่ info@... โดยไม่แสดงใน UI”
-  // วิธี: ใช้ form submit ไปที่ endpoint ของคุณ หรือ service อย่าง Formspree / Netlify Forms
-  // ตอนนี้ใส่เป็น placeholder action="#" ให้คุณไปผูก backend เอง
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "ok" | "error">("idle");
 
-  async function onSubmit(e: React.FormEvent) {
+  function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus("idle");
-
-    // TODO:
-    // 1) เปลี่ยน URL เป็น endpoint ของคุณ เช่น "/api/newsletter"
-    // 2) backend เป็นคนส่งเมลไป info@shd-technology.co.th
-    //    (ฝั่ง UI จะไม่โชว์ info@... ตามที่ต้องการ)
-    try {
-      // ตัวอย่างเรียก API (คุณสร้างเอง)
-      // const res = await fetch("/api/newsletter", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({ email }),
-      // });
-      // if (!res.ok) throw new Error("bad");
-
-      // mock success:
-      if (!email || !email.includes("@")) throw new Error("bad");
-      setEmail("");
-      setStatus("ok");
-    } catch {
-      setStatus("error");
-    }
+    if (!email || !email.includes("@")) return setStatus("error");
+    setEmail("");
+    setStatus("ok");
   }
 
-  const linkClass =
-    "text-sm text-slate-600 hover:text-slate-900 transition-colors";
-  const activeLinkClass = "text-sm text-slate-900 font-semibold";
-
   return (
-    <footer className="mt-16 border-t border-slate-200 bg-white">
-      <div className="containerX py-14">
-        {/* =========================
-            TOP GRID (เหมือน ref แต่พื้นหลังขาว)
-           ========================= */}
+    <footer className="mt-20 bg-ink text-white">
+      <div className="mx-auto w-full max-w-6xl px-4 md:px-6 py-16">
         <RevealOnScroll>
-        <div className="grid gap-10 md:grid-cols-[1.25fr_.9fr] md:items-start">
-          {/* LEFT: Newsletter + Social */}
-          <div className="flex flex-col gap-6">
-            {/* Logo area (พื้นที่สำหรับ logo บริษัท) */}
-{/* Logo (ใหญ่ขึ้น / ไม่มีกรอบ) */}
-<div className="flex items-center">
-  <img
-    src="/images/logo.png"
-    alt="SHD Technology"
-    className="h-16 w-16 object-contain md:h-20 md:w-20"
-    loading="lazy"
-    draggable={false}
-  />
-</div>
-
-
-            {/* Newsletter text */}
-            <div className="max-w-md">
-              <div className="text-sm font-semibold text-slate-900">
-                {t("footer.newsletterTitle") || "Subscribe to our newsletter"}
+          <div className="grid gap-12 md:grid-cols-[1.2fr_.8fr] md:items-start">
+            {/* LEFT */}
+            <div className="flex flex-col gap-6">
+              <div className="flex items-center gap-3">
+                <img src="/images/logo.png" alt="SHD Technology" className="h-12 w-12 object-contain" draggable={false} />
+                <div>
+                  <div className="font-display text-xl font-extrabold tracking-tight">SHD Technology</div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/45">Co., Ltd.</div>
+                </div>
               </div>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                {t("footer.newsletterDesc") ||
-                  "Get updates, highlights, and exclusive news from SHD."}
+
+              <p className="max-w-md text-sm leading-relaxed text-white/60">
+                {t("footer.tagline") ||
+                  "A dedicated regional solutions partner. Since 2013 we drive brand localization and full-cycle growth across Southeast Asia, Latin America and the Middle East."}
               </p>
+
+              {/* Newsletter */}
+              <form onSubmit={onSubmit} className="max-w-md">
+                <div className="text-sm font-semibold text-white">
+                  {t("footer.newsletterTitle") || "Subscribe to our newsletter"}
+                </div>
+                <div className="mt-3 flex items-center gap-2 rounded-full bg-white/[0.06] px-2 py-2 ring-1 ring-white/12 focus-within:ring-sun/60">
+                  <input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    type="email"
+                    placeholder={t("footer.emailPlaceholder") || "Your email address"}
+                    className="w-full bg-transparent px-3 text-sm text-white placeholder:text-white/40 outline-none"
+                  />
+                  <button
+                    type="submit"
+                    aria-label="Subscribe"
+                    className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-sun text-ink transition hover:brightness-105"
+                  >
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
+                </div>
+                <div className="mt-2 min-h-[18px] text-xs">
+                  {status === "ok" && <span className="text-sun">{t("footer.subscribed") || "Subscribed. Thank you!"}</span>}
+                  {status === "error" && <span className="text-red-400">{t("footer.invalidEmail") || "Please enter a valid email."}</span>}
+                </div>
+              </form>
+
+              <div className="flex items-center gap-3">
+                {socials.map((s) => (
+                  <a
+                    key={s.key}
+                    href={s.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-white/[0.06] ring-1 ring-white/12 transition hover:ring-sun/60"
+                    aria-label={s.label}
+                  >
+                    <img src={s.src} alt={s.label} className="h-full w-full object-cover" draggable={false} />
+                  </a>
+                ))}
+              </div>
             </div>
 
-            {/* Email input minimalist + arrow */}
-            <form onSubmit={onSubmit} className="max-w-md">
-              <label className="sr-only" htmlFor="footer-email">
-                Email
-              </label>
+            {/* RIGHT */}
+            <div className="grid gap-8 sm:grid-cols-2">
+              <div>
+                <div className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">Navigate</div>
+                <div className="mt-4 grid gap-2.5">
+                  {links.map((l) => (
+                    <NavLink
+                      key={l.to}
+                      to={l.to}
+                      className="text-sm text-white/65 transition-colors hover:text-white"
+                    >
+                      {l.label}
+                    </NavLink>
+                  ))}
+                </div>
+              </div>
 
-              <div
-                className={cn(
-                  "group flex items-center gap-3",
-                  "rounded-2xl bg-white",
-                  "ring-1 ring-slate-200",
-                  "px-4 py-3",
-                  "focus-within:ring-2 focus-within:ring-amber-300/60",
-                  "transition"
-                )}
-              >
-                <input
-                  id="footer-email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  type="email"
-                  inputMode="email"
-                  autoComplete="email"
-                  placeholder={t("footer.emailPlaceholder") || "Your email address"}
-                  className={cn(
-                    "w-full bg-transparent outline-none",
-                    "text-sm text-slate-900 placeholder:text-slate-400"
-                  )}
-                />
-
-                <button
-                  type="submit"
-                  className={cn(
-                    "shrink-0 inline-flex items-center justify-center",
-                    "h-10 w-10 rounded-full",
-                    "ring-1 ring-amber-200/70",
-                    "bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-300",
-                    "text-slate-900",
-                    "shadow-[0_10px_30px_-18px_rgba(245,158,11,0.85)]",
-                    "hover:brightness-[1.03] active:brightness-[0.98] transition"
-                  )}
-                  aria-label="Submit email"
-                  title="Submit"
+              <div>
+                <div className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">Headquarters</div>
+                <div className="mt-4 space-y-2 text-sm text-white/65">
+                  <div>Shenzhen, China</div>
+                  <div>Regional hubs · Thailand · Indonesia</div>
+                  <div>the.dataverse@shd-technology.co.th</div>
+                </div>
+                <NavLink
+                  to="/contact"
+                  className="mt-5 inline-flex items-center gap-2 rounded-full bg-sun px-5 py-2.5 text-sm font-bold text-ink transition hover:-translate-y-0.5"
                 >
-                  {/* arrow icon (pure CSS) */}
-                  <span className="block translate-x-[0.5px] text-[18px] leading-none">
-                    →
-                  </span>
-                </button>
-              </div>
-
-              {/* status */}
-              <div className="mt-2 min-h-[18px] text-xs">
-                {status === "ok" && (
-                  <span className="text-emerald-600">
-                    {t("footer.subscribed") || "Subscribed. Thank you!"}
-                  </span>
-                )}
-                {status === "error" && (
-                  <span className="text-rose-600">
-                    {t("footer.invalidEmail") || "Please enter a valid email."}
-                  </span>
-                )}
-              </div>
-            </form>
-
-<div className="flex items-center gap-4">
-  {socials.map((s) => (
-    <a
-      key={s.key}
-      href={s.href}
-      target="_blank"
-      rel="noreferrer"
-      className="group flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-slate-200 transition hover:ring-amber-300 hover:shadow-[0_12px_40px_-25px_rgba(245,158,11,0.7)]"
-      aria-label={s.label}
-      title={s.label}
-    >
-      <img
-        src={s.src}
-        alt={s.label}
-        className="h-full w-full object-cover transition group-hover:scale-110"
-        draggable={false}
-      />
-    </a>
-  ))}
-</div>
-
-          </div>
-
-          {/* RIGHT: CTA + Links */}
-          <div className="flex flex-col gap-8 md:items-end">
-            {/* CTA Button (ทองไล่สี + magnetic) */}
-            <div className="w-full md:w-auto">
-              <MagneticButton strength={0.3}>
-              <NavLink
-                to="/contact"
-                className={cn(
-                  "inline-flex items-center justify-center",
-                  "h-11 px-5 rounded-full",
-                  "text-sm font-semibold text-slate-900",
-                  "bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-300",
-                  "ring-1 ring-amber-200/70",
-                  "shadow-[0_18px_60px_-35px_rgba(245,158,11,0.85)]",
-                  "hover:brightness-[1.03] hover:-translate-y-0.5 active:brightness-[0.98] transition-all duration-300"
-                )}
-              >
-                {t("footer.cta") || "Schedule a call"}
-              </NavLink>
-              </MagneticButton>
-            </div>
-
-            {/* Links columns */}
-            <div className="grid w-full gap-8 sm:grid-cols-2 md:w-auto">
-              <div>
-                <div className="text-xs font-extrabold tracking-wide text-slate-900">
-                  {t("common.section.title") || "Navigation"}
-                </div>
-                <div className="mt-3 grid grid-cols-2 gap-x-6 gap-y-2">
-                  {links.slice(0, 6).map((l) => (
-                    <NavLink
-                      key={l.to}
-                      to={l.to}
-                      className={({ isActive }) =>
-                        cn(isActive ? activeLinkClass : linkClass)
-                      }
-                    >
-                      {l.label}
-                    </NavLink>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <div className="text-xs font-extrabold tracking-wide text-slate-900">
-                  {t("footer.rights") || "Company"}
-                </div>
-                <div className="mt-3 grid gap-2">
-                  {links.slice(6).map((l) => (
-                    <NavLink
-                      key={l.to}
-                      to={l.to}
-                      className={({ isActive }) =>
-                        cn(isActive ? activeLinkClass : linkClass)
-                      }
-                    >
-                      {l.label}
-                    </NavLink>
-                  ))}
-
-                  <NavLink to="/brands" className={linkClass}>
-                    {t("brands.hero.ctaPrimary") || "View brands"}
-                  </NavLink>
-                  <NavLink to="/careers" className={linkClass}>
-                    {t("home.hero.ctaSecondary") || "Join our team"}
-                  </NavLink>
-                </div>
+                  {t("footer.cta") || "Schedule a call"}
+                  <ArrowRight className="h-4 w-4" />
+                </NavLink>
               </div>
             </div>
           </div>
-        </div>
-
         </RevealOnScroll>
 
-        {/* Divider (บางๆ เรียบๆ) */}
-        <div className="mt-12 h-px w-full bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+        <div className="mt-14 h-px w-full bg-white/10" />
 
-        {/* =========================
-            BOTTOM ROW
-           ========================= */}
-        <div className="mt-6 flex flex-col gap-3 text-xs text-slate-500 md:flex-row md:items-center md:justify-between">
-          <div>© {new Date().getFullYear()} SHD Technology Co., Ltd.</div>
-
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <NavLink
-              to="/contact"
-              className="hover:text-slate-800 transition-colors"
-            >
-              {t("nav.contact")}
-            </NavLink>
-            <NavLink
-              to="/about"
-              className="hover:text-slate-800 transition-colors"
-            >
-              {t("nav.about")}
-            </NavLink>
-            <NavLink
-              to="/careers"
-              className="hover:text-slate-800 transition-colors"
-            >
-              {t("nav.careers")}
-            </NavLink>
+        <div className="mt-6 flex flex-col gap-3 text-xs text-white/45 md:flex-row md:items-center md:justify-between">
+          <div>© {new Date().getFullYear()} SHD Technology Co., Ltd. All rights reserved.</div>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <NavLink to="/about" className="hover:text-white/80">{t("nav.about")}</NavLink>
+            <NavLink to="/brands" className="hover:text-white/80">{t("nav.brands")}</NavLink>
+            <NavLink to="/contact" className="hover:text-white/80">{t("nav.contact")}</NavLink>
           </div>
         </div>
       </div>

@@ -83,14 +83,14 @@ function ContactIcon({
         "transition",
         disabled
           ? "opacity-55 cursor-not-allowed grayscale-[18%] saturate-[0.9]"
-          : "hover:-translate-y-0.5 hover:ring-amber-300 hover:shadow-[0_22px_70px_-50px_rgba(245,158,11,.55)]"
+          : "hover:-translate-y-0.5 hover:ring-sun hover:shadow-[0_22px_70px_-50px_rgba(51,85,255,.55)]"
       )}
     >
       {!disabled && (
         <span
           className="pointer-events-none absolute -inset-3 rounded-full opacity-0 blur-xl transition duration-300 group-hover:opacity-100"
           style={{
-            background: "radial-gradient(18px 18px at 50% 50%, rgba(245,158,11,.35), transparent 70%)",
+            background: "radial-gradient(18px 18px at 50% 50%, rgba(51,85,255,.35), transparent 70%)",
           }}
         />
       )}
@@ -377,7 +377,7 @@ export default function BrandDetailPage() {
             <div
               className={cx(
                 "inline-flex items-center rounded-full px-3 py-1 text-xs font-extrabold text-white",
-                brand.isOfficial ? "bg-emerald-600" : "bg-slate-900"
+                brand.isOfficial ? "bg-brand" : "bg-slate-900"
               )}
             >
               {brand.isOfficial
@@ -398,12 +398,12 @@ export default function BrandDetailPage() {
                     className="absolute inset-0 opacity-[0.16]"
                     style={{
                       background:
-                        "radial-gradient(700px 420px at 15% 0%, rgba(245,158,11,.55), transparent 60%)," +
+                        "radial-gradient(700px 420px at 15% 0%, rgba(51,85,255,.55), transparent 60%)," +
                         "radial-gradient(700px 420px at 90% 30%, rgba(99,102,241,.35), transparent 65%)",
                     }}
                   />
                   <div className="absolute left-6 bottom-6">
-                    <div className="inline-flex rounded-full p-[1px] bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-300 shadow-[0_18px_70px_-50px_rgba(245,158,11,.55)]">
+                    <div className="inline-flex rounded-full p-[1px] bg-gradient-to-r from-sun via-sun to-sun-300 shadow-[0_18px_70px_-50px_rgba(51,85,255,.55)]">
                       <div className="rounded-full bg-black/30 px-3 py-1 text-xs font-extrabold text-white ring-1 ring-white/15 backdrop-blur">
                         {brand.category}
                       </div>
@@ -464,9 +464,9 @@ export default function BrandDetailPage() {
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold text-slate-900
-                               bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-300
-                               ring-1 ring-amber-200/70
-                               shadow-[0_18px_70px_-48px_rgba(245,158,11,.70)]
+                               bg-gradient-to-r from-sun via-sun to-sun-300
+                               ring-1 ring-sun/70
+                               shadow-[0_18px_70px_-48px_rgba(51,85,255,.70)]
                                transition hover:-translate-y-0.5 hover:brightness-[1.03] active:translate-y-0"
                   >
                     {(t("brands.detail.openSite") as string) || "Open Official Site ↗"}
