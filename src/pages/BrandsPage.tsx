@@ -5,8 +5,14 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Search } from "lucide-react";
 import RevealOnScroll from "../components/RevealOnScroll";
-import { CtaCharacters, FloatingMascot } from "@/components/ui/culture-chars";
+import { CtaCharacters } from "@/components/ui/culture-chars";
+import { IconCloud } from "@/components/ui/icon-cloud";
 import StaggerReveal from "../components/StaggerReveal";
+
+const CLOUD_LOGOS = [
+  "xiaomi", "anker", "dreame", "70mai", "soundcore", "mova",
+  "wanbo", "mibro", "jimmy", "levoit", "maimo",
+].map((s) => `/images/brand-logos-dark/${s}.png`);
 
 function cx(...xs: Array<string | false | null | undefined>) {
   return xs.filter(Boolean).join(" ");
@@ -60,43 +66,54 @@ export default function BrandsPage() {
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 dot-grid opacity-60 [mask-image:radial-gradient(70%_60%_at_50%_0%,black,transparent)]" />
         <div className="relative mx-auto max-w-6xl px-4 md:px-6 pt-10 md:pt-16">
-          <FloatingMascot src="char-yellow" size="w-12 md:w-16" className="right-[4%] top-20 md:top-24" r="-8deg" dur="5s" />
-          <RevealOnScroll>
-            <div className="chip-label">{t("pg.brands.chip")}</div>
-            <h1 className="mt-6 max-w-4xl font-display text-[2.6rem] font-extrabold leading-[1.03] tracking-tight text-ink md:text-6xl">
-              {t("pg.brands.heroPre")} <span className="hl-blue">{t("pg.brands.heroHl")}</span> {t("pg.brands.heroPost")}
-            </h1>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink/60 md:text-lg">{t("pg.brands.heroDesc")}</p>
-          </RevealOnScroll>
+          <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_.95fr]">
+            <div>
+              <RevealOnScroll>
+                <div className="chip-label">{t("pg.brands.chip")}</div>
+                <h1 className="mt-6 max-w-xl font-display text-[2.6rem] font-extrabold leading-[1.03] tracking-tight text-ink md:text-6xl">
+                  {t("pg.brands.heroPre")} <span className="hl-blue">{t("pg.brands.heroHl")}</span> {t("pg.brands.heroPost")}
+                </h1>
+                <p className="mt-6 max-w-xl text-base leading-relaxed text-ink/60 md:text-lg">{t("pg.brands.heroDesc")}</p>
+              </RevealOnScroll>
 
-          {/* search + filters */}
-          <RevealOnScroll delay={80}>
-            <div className="mt-8 flex flex-col gap-4">
-              <div className="flex items-center gap-2 rounded-full bg-white px-4 py-3 ring-1 ring-ink/10 sm:max-w-md">
-                <Search className="h-4 w-4 text-ink/40" />
-                <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder={(t("common.search") as string) || "Search brands"}
-                  className="w-full bg-transparent text-sm text-ink placeholder:text-ink/40 outline-none"
-                />
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {CATEGORIES.map((c) => (
-                  <button
-                    key={c}
-                    onClick={() => setCat(c)}
-                    className={cx(
-                      "rounded-full px-4 py-1.5 text-sm font-semibold transition",
-                      cat === c ? "bg-ink text-white" : "bg-white text-ink/65 ring-1 ring-ink/10 hover:text-ink"
-                    )}
-                  >
-                    {(t(`pg.brands.categories.${c}`) as string) || c}
-                  </button>
-                ))}
-              </div>
+              {/* search + filters */}
+              <RevealOnScroll delay={80}>
+                <div className="mt-8 flex flex-col gap-4">
+                  <div className="flex items-center gap-2 rounded-full bg-white px-4 py-3 ring-1 ring-ink/10 sm:max-w-md">
+                    <Search className="h-4 w-4 text-ink/40" />
+                    <input
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                      placeholder={(t("common.search") as string) || "Search brands"}
+                      className="w-full bg-transparent text-sm text-ink placeholder:text-ink/40 outline-none"
+                    />
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {CATEGORIES.map((c) => (
+                      <button
+                        key={c}
+                        onClick={() => setCat(c)}
+                        className={cx(
+                          "rounded-full px-4 py-1.5 text-sm font-semibold transition",
+                          cat === c ? "bg-ink text-white" : "bg-white text-ink/65 ring-1 ring-ink/10 hover:text-ink"
+                        )}
+                      >
+                        {(t(`pg.brands.categories.${c}`) as string) || c}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </RevealOnScroll>
             </div>
-          </RevealOnScroll>
+
+            {/* Interactive brand-logo globe */}
+            <RevealOnScroll delay={120}>
+              <div className="relative hidden lg:block">
+                <div className="pointer-events-none absolute inset-6 -z-10 rounded-full bg-gradient-to-tr from-brand/[0.07] via-sun/[0.06] to-transparent blur-2xl" />
+                <IconCloud images={CLOUD_LOGOS} className="mx-auto max-w-[440px]" />
+              </div>
+            </RevealOnScroll>
+          </div>
         </div>
       </section>
 

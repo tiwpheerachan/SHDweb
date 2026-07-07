@@ -188,26 +188,40 @@ export default function HomePage() {
       </section>
 
       {/* ================= FOUR-DIMENSIONAL EMPOWERMENT ================= */}
-      <section className="mx-auto max-w-6xl px-4 md:px-6 py-8 md:py-12">
+      <section className="mx-auto max-w-6xl px-4 md:px-6 py-14 md:py-20">
         <RevealOnScroll>
-          <div className="chip-label">{t("pg.home.whatWeDo")}</div>
-          <h2 className="mt-5 max-w-3xl font-display text-3xl font-extrabold leading-tight tracking-tight text-ink md:text-5xl">
-            {t("pg.home.empPre")} <span className="hl-blue">{t("pg.home.empHl")}</span> {t("pg.home.empPost")}
-          </h2>
-          <p className="mt-4 max-w-2xl text-base text-ink/60">{t("pg.home.empDesc")}</p>
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-2xl">
+              <div className="chip-label">{t("pg.home.whatWeDo")}</div>
+              <h2 className="mt-5 font-display text-3xl font-extrabold leading-tight tracking-tight text-ink md:text-5xl">
+                {t("pg.home.empPre")} <span className="hl-blue">{t("pg.home.empHl")}</span> {t("pg.home.empPost")}
+              </h2>
+            </div>
+            <p className="max-w-sm text-base leading-relaxed text-ink/60 md:pb-1.5 md:text-right">{t("pg.home.empDesc")}</p>
+          </div>
         </RevealOnScroll>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {emp.map((c, i) => {
             const Icon = empIcons[i];
+            const accent = [
+              { box: "bg-brand text-white", num: "text-brand/10", bar: "bg-brand" },
+              { box: "bg-sun text-ink", num: "text-sun/25", bar: "bg-sun" },
+              { box: "bg-ink text-white", num: "text-ink/[0.07]", bar: "bg-ink" },
+              { box: "bg-brand-400 text-white", num: "text-brand-400/15", bar: "bg-brand-400" },
+            ][i];
             return (
               <RevealOnScroll key={i} delay={i * 80}>
-                <div className="card h-full p-6">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-ink text-white">
+                <div className="group relative flex h-full flex-col overflow-hidden rounded-[26px] bg-white p-6 ring-1 ring-ink/[0.07] shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card-hover">
+                  <span className={cx("pointer-events-none absolute -right-1 -top-4 select-none font-display text-[5.5rem] font-extrabold leading-none tracking-tighter", accent.num)}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className={cx("relative inline-flex h-12 w-12 items-center justify-center rounded-2xl shadow-sm transition-transform duration-300 group-hover:scale-105", accent.box)}>
                     <Icon className="h-6 w-6" />
                   </div>
-                  <div className="mt-5 font-display text-lg font-extrabold text-ink">{c.t}</div>
-                  <p className="mt-2 text-sm leading-relaxed text-ink/60">{c.d}</p>
+                  <div className="relative mt-5 font-display text-lg font-extrabold leading-snug text-ink">{c.t}</div>
+                  <p className="relative mt-2 flex-1 text-sm leading-relaxed text-ink/60">{c.d}</p>
+                  <span className={cx("mt-6 h-1 w-9 rounded-full transition-all duration-500 group-hover:w-full", accent.bar)} />
                 </div>
               </RevealOnScroll>
             );

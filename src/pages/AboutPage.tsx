@@ -2,7 +2,7 @@
 import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles, Eye, HeartHandshake, ShieldCheck, Repeat, Leaf } from "lucide-react";
+import { ArrowRight, Sparkles, Eye, HeartHandshake, ShieldCheck, Repeat, Leaf, Warehouse, RefreshCcw, Network } from "lucide-react";
 import RevealOnScroll from "../components/RevealOnScroll";
 import { CtaCharacters, FloatingMascot } from "@/components/ui/culture-chars";
 
@@ -33,6 +33,8 @@ export default function AboutPage() {
   const foundation = arr<{ title: string; sub: string }>("pg.about.foundation");
   const values = arr<{ title: string; desc: string }>("pg.about.values");
   const timeline = arr<{ title: string; desc: string }>("pg.about.timeline");
+  const systemPoints = arr<{ label: string; desc: string }>("pg.about.systemPoints");
+  const systemIcons = [Warehouse, RefreshCcw, Network];
 
   return (
     <>
@@ -60,10 +62,40 @@ export default function AboutPage() {
       <section className="mx-auto max-w-6xl px-4 md:px-6 py-14 md:py-20">
         <div className="grid gap-10 md:grid-cols-[1.15fr_.85fr] md:items-start">
           <RevealOnScroll>
-            <div className="space-y-5 text-base leading-relaxed text-ink/70">
-              <p>{t("pg.about.intro1")}</p>
-              <p>{t("pg.about.intro2")}</p>
-              <p>{t("pg.about.intro3")}</p>
+            <div>
+              <p className="text-lg leading-relaxed text-ink/70">{t("pg.about.intro1")}</p>
+
+              {/* Precise market entry — end-to-end system */}
+              <div className="mt-9">
+                <h3 className="font-display text-xl font-extrabold leading-snug text-ink md:text-2xl">
+                  {t("pg.about.systemTitle")}
+                </h3>
+                <div className="mt-5 space-y-4">
+                  {systemPoints.map((p, i) => {
+                    const Icon = systemIcons[i];
+                    return (
+                      <div key={i} className="flex items-start gap-4">
+                        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand">
+                          <Icon className="h-5 w-5" />
+                        </span>
+                        <div>
+                          <div className="font-display font-extrabold text-ink">{p.label}</div>
+                          <p className="mt-0.5 text-sm leading-relaxed text-ink/60">{p.desc}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Proven success */}
+              <div className="mt-8 rounded-3xl bg-paper p-6 ring-1 ring-ink/[0.05]">
+                <div className="inline-flex items-center gap-2 rounded-full bg-brand px-3 py-1 text-xs font-bold text-white">
+                  <span className="h-1.5 w-1.5 rounded-full bg-sun" />
+                  {t("pg.about.provenTitle")}
+                </div>
+                <p className="mt-3 text-sm leading-relaxed text-ink/70">{t("pg.about.provenDesc")}</p>
+              </div>
             </div>
           </RevealOnScroll>
 
