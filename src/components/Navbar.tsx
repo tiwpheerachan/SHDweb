@@ -87,16 +87,13 @@ export default function Navbar() {
             )}
           >
             {/* Logo */}
-            <NavLink to="/" className="flex items-center gap-2">
+            <NavLink to="/" className="flex items-center" aria-label="SHD Technology">
               <img
                 src="/images/logo.png"
-                alt="SHD"
-                className="h-9 w-9 md:h-10 md:w-10 object-contain"
+                alt="SHD Technology"
+                className="h-7 w-auto md:h-8 object-contain"
                 draggable={false}
               />
-              <span className="hidden font-display text-lg font-extrabold tracking-tight text-ink sm:block">
-                SHD
-              </span>
             </NavLink>
 
             {/* Desktop nav */}
@@ -212,8 +209,7 @@ export default function Navbar() {
           <div className="absolute left-1/2 top-3 w-[min(560px,calc(100%-24px))] -translate-x-1/2 overflow-hidden rounded-[28px] bg-white shadow-[0_26px_80px_-40px_rgba(11,11,15,0.5)] ring-1 ring-ink/10">
             <div className="flex items-center justify-between px-4 py-4">
               <div className="flex items-center gap-3">
-                <img src="/images/logo.png" alt="SHD" className="h-9 w-9 object-contain" draggable={false} />
-                <div className="font-display text-sm font-extrabold text-ink">Menu</div>
+                <img src="/images/logo.png" alt="SHD Technology" className="h-7 w-auto object-contain" draggable={false} />
               </div>
               <button
                 type="button"
