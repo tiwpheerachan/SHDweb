@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Linkedin } from "lucide-react";
 import RevealOnScroll from "./RevealOnScroll";
 
 function cn(...xs: Array<string | false | undefined | null>) {
@@ -24,11 +24,13 @@ export default function Footer() {
     [t]
   );
 
-  const socials = useMemo(
+  const socials = useMemo<Array<{ key: string; label: string; href: string; src?: string; linkedin?: boolean }>>(
     () => [
-      { key: "facebook", label: "Facebook", href: "https://facebook.com/yourpage", src: "/images/social/facebook.png" },
-      { key: "instagram", label: "Instagram", href: "https://instagram.com/yourpage", src: "/images/social/instagram.png" },
-      { key: "line", label: "LINE", href: "https://line.me/ti/p/yourid", src: "/images/social/line.png" },
+      { key: "line", label: "LINE", href: "https://line.me/R/ti/p/@863efexq", src: "/images/social/line.png" },
+      { key: "facebook", label: "Facebook", href: "https://www.facebook.com/shdtechnology", src: "/images/contact/facebook.png" },
+      { key: "instagram", label: "Instagram", href: "https://www.instagram.com/shdtechnology", src: "/images/social/instagram.png" },
+      { key: "tiktok", label: "TikTok", href: "https://www.tiktok.com/@shdtechnology", src: "/images/contact/tiktok.png" },
+      { key: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/company/shd-technology-co-th", linkedin: true },
     ],
     []
   );
@@ -97,11 +99,18 @@ export default function Footer() {
                     key={s.key}
                     href={s.href}
                     target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-white/[0.06] ring-1 ring-white/12 transition hover:ring-sun/60"
+                    rel="noopener noreferrer"
+                    className="inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-white/12 transition hover:-translate-y-0.5 hover:ring-sun/60"
                     aria-label={s.label}
+                    title={s.label}
                   >
-                    <img src={s.src} alt={s.label} className="h-full w-full object-cover" draggable={false} />
+                    {s.linkedin ? (
+                      <span className="grid h-full w-full place-items-center bg-[#0A66C2]">
+                        <Linkedin className="h-5 w-5 text-white" fill="white" />
+                      </span>
+                    ) : (
+                      <img src={s.src} alt={s.label} className="h-full w-full object-cover" draggable={false} />
+                    )}
                   </a>
                 ))}
               </div>

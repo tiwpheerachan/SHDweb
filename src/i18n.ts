@@ -4,6 +4,7 @@ import { initReactI18next } from "react-i18next";
 import th from "./locales/th.json";
 import en from "./locales/en.json";
 import zh from "./locales/zh.json";
+import { pages } from "./locales/pages";
 
 const STORAGE_KEY = "shd_lang";
 const saved = typeof window !== "undefined" ? window.localStorage.getItem(STORAGE_KEY) : null;
@@ -12,9 +13,9 @@ i18n
   .use(initReactI18next)
   .init({
     resources: {
-      th: { translation: th },
-      en: { translation: en },
-      zh: { translation: zh },
+      th: { translation: { ...th, ...pages.th } },
+      en: { translation: { ...en, ...pages.en } },
+      zh: { translation: { ...zh, ...pages.zh } },
     },
     lng: saved || "th",
     fallbackLng: "en",

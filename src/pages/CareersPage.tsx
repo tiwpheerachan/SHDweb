@@ -10,14 +10,7 @@ const CAREERS_URL = "http://careers.shd-technology.co.th";
 
 export default function CareersPage() {
   const { t } = useTranslation();
-  const i18nBlocks = (t("careers.blocks", { returnObjects: true }) as Array<{ title: string; desc: string }>) || [];
-  const blocks = Array.isArray(i18nBlocks) && i18nBlocks.length
-    ? i18nBlocks
-    : [
-        { title: "Cross-border by design", desc: "Work across Shenzhen, Thailand, Indonesia and beyond with a truly global team." },
-        { title: "Ownership from day one", desc: "Real responsibility, fast feedback loops, and room to lead brand launches." },
-        { title: "Win-win culture", desc: "Sincerity, mutual success and sustainable growth guide how we work together." },
-      ];
+  const blocks = (t("pg.careers.blocks", { returnObjects: true }) as Array<{ title: string; desc: string }>) || [];
 
   return (
     <>
@@ -30,20 +23,18 @@ export default function CareersPage() {
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 dot-grid opacity-60 [mask-image:radial-gradient(70%_60%_at_50%_0%,black,transparent)]" />
         <div className="relative mx-auto max-w-6xl px-4 md:px-6 pt-10 md:pt-16">
-          <FloatingMascot src="char-red" size="w-12 md:w-16" className="right-[4%] top-0 md:top-2" r="-8deg" dur="4.7s" />
+          <FloatingMascot src="char-red" size="w-12 md:w-16" className="right-[4%] top-20 md:top-24" r="-8deg" dur="4.7s" />
           <RevealOnScroll>
-            <div className="chip-label">Careers</div>
+            <div className="chip-label">{t("pg.careers.chip")}</div>
             <h1 className="mt-6 max-w-3xl font-display text-[2.6rem] font-extrabold leading-[1.03] tracking-tight text-ink md:text-6xl">
-              Grow your career where <span className="hl">brands go global</span>.
+              {t("pg.careers.heroPre")} <span className="hl">{t("pg.careers.heroHl")}</span>{t("pg.careers.heroPost")}
             </h1>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink/60 md:text-lg">
-              We're a cross-border team turning ambitious brands into category leaders across Southeast Asia, Latin America and the Middle East.
-            </p>
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink/60 md:text-lg">{t("pg.careers.heroDesc")}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href={CAREERS_URL} target="_blank" rel="noreferrer" className="btn-primary">
-                View open roles <ArrowRight className="h-4 w-4" />
+                {t("pg.cta.apply")} <ArrowRight className="h-4 w-4" />
               </a>
-              <Link to="/contact" className="btn-outline">Contact us</Link>
+              <Link to="/contact" className="btn-outline">{t("pg.cta.contactUs")}</Link>
             </div>
           </RevealOnScroll>
         </div>
@@ -73,11 +64,11 @@ export default function CareersPage() {
           <CtaCharacters />
           <div className="flex flex-col items-start justify-between gap-6 rounded-4xl bg-sun p-8 text-ink md:flex-row md:items-center md:p-10">
             <div>
-              <div className="font-display text-2xl font-extrabold">Ready to make an impact?</div>
-              <p className="mt-2 max-w-xl text-sm text-ink/70">Explore our open positions and join the team building the next wave of global brands.</p>
+              <div className="font-display text-2xl font-extrabold">{t("pg.careers.ctaTitle")}</div>
+              <p className="mt-2 max-w-xl text-sm text-ink/70">{t("pg.careers.ctaDesc")}</p>
             </div>
             <a href={CAREERS_URL} target="_blank" rel="noreferrer" className="btn bg-ink text-white hover:-translate-y-0.5 shrink-0">
-              Browse jobs <ArrowRight className="h-4 w-4" />
+              {t("pg.cta.browse")} <ArrowRight className="h-4 w-4" />
             </a>
           </div>
           </div>

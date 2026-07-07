@@ -60,15 +60,13 @@ export default function BrandsPage() {
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 dot-grid opacity-60 [mask-image:radial-gradient(70%_60%_at_50%_0%,black,transparent)]" />
         <div className="relative mx-auto max-w-6xl px-4 md:px-6 pt-10 md:pt-16">
-          <FloatingMascot src="char-yellow" size="w-12 md:w-16" className="right-[4%] top-0 md:top-2" r="-8deg" dur="5s" />
+          <FloatingMascot src="char-yellow" size="w-12 md:w-16" className="right-[4%] top-20 md:top-24" r="-8deg" dur="5s" />
           <RevealOnScroll>
-            <div className="chip-label">Brand partners</div>
+            <div className="chip-label">{t("pg.brands.chip")}</div>
             <h1 className="mt-6 max-w-4xl font-display text-[2.6rem] font-extrabold leading-[1.03] tracking-tight text-ink md:text-6xl">
-              A <span className="hl-blue">partnership matrix</span> of category leaders.
+              {t("pg.brands.heroPre")} <span className="hl-blue">{t("pg.brands.heroHl")}</span> {t("pg.brands.heroPost")}
             </h1>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink/60 md:text-lg">
-              Strategic, often exclusive partnerships with Anker, Xiaomi, Dreame, 70mai and 20+ global brands — many ranking No.1 in their Southeast Asian categories.
-            </p>
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink/60 md:text-lg">{t("pg.brands.heroDesc")}</p>
           </RevealOnScroll>
 
           {/* search + filters */}
@@ -93,7 +91,7 @@ export default function BrandsPage() {
                       cat === c ? "bg-ink text-white" : "bg-white text-ink/65 ring-1 ring-ink/10 hover:text-ink"
                     )}
                   >
-                    {c}
+                    {(t(`pg.brands.categories.${c}`) as string) || c}
                   </button>
                 ))}
               </div>
@@ -126,7 +124,7 @@ export default function BrandsPage() {
         </StaggerReveal>
 
         {shown.length === 0 && (
-          <div className="py-16 text-center text-ink/50">No brands match your search.</div>
+          <div className="py-16 text-center text-ink/50">{t("pg.brands.noResults")}</div>
         )}
       </section>
 
@@ -137,14 +135,12 @@ export default function BrandsPage() {
           <CtaCharacters />
           <div className="rounded-[2.5rem] bg-ink px-8 py-14 text-center text-white md:px-16">
             <h2 className="mx-auto max-w-2xl font-display text-3xl font-extrabold leading-tight md:text-4xl">
-              Want your brand on this matrix?
+              {t("pg.brands.ctaTitle")}
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-base text-white/60">
-              We co-build brands from launch to category leadership across emerging markets.
-            </p>
+            <p className="mx-auto mt-4 max-w-xl text-base text-white/60">{t("pg.brands.ctaDesc")}</p>
             <div className="mt-8">
               <Link to="/contact" className="btn bg-sun text-ink hover:-translate-y-0.5">
-                Partner with SHD <ArrowUpRight className="h-4 w-4" />
+                {t("pg.cta.partner")} <ArrowUpRight className="h-4 w-4" />
               </Link>
             </div>
           </div>

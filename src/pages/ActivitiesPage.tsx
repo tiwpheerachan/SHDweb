@@ -7,25 +7,22 @@ import RevealOnScroll from "../components/RevealOnScroll";
 import { CtaCharacters, FloatingMascot } from "@/components/ui/culture-chars";
 import Carousel from "../components/Carousel";
 
-const GALLERY = [
-  { img: "/images/brands/promos/promo-1.jpg", caption: "Setting sail together — annual team gathering" },
-  { img: "/images/about/achievements.jpg", caption: "Celebrating category No.1 milestones" },
-  { img: "/images/brands/promos/promo-2.jpg", caption: "Brand launch campaigns across the region" },
-  { img: "/images/about/regions.jpg", caption: "On the ground across our markets" },
-  { img: "/images/brands/promos/promo-3.jpg", caption: "Partner activations & retail moments" },
-  { img: "/images/brands/promos/promo-4.jpg", caption: "One team, one shared vision" },
+const GALLERY_IMGS = [
+  "/images/brands/promos/promo-1.jpg",
+  "/images/about/achievements.jpg",
+  "/images/brands/promos/promo-2.jpg",
+  "/images/about/regions.jpg",
+  "/images/brands/promos/promo-3.jpg",
+  "/images/brands/promos/promo-4.jpg",
 ];
 
 export default function ActivitiesPage() {
   const { t } = useTranslation();
-  const i18nBlocks = (t("activities.blocks", { returnObjects: true }) as Array<{ title: string; desc: string }>) || [];
-  const blocks = Array.isArray(i18nBlocks) && i18nBlocks.length
-    ? i18nBlocks
-    : [
-        { title: "Team building & offsites", desc: "\"Setting sail together\" — company-wide events that celebrate our shared journey and momentum." },
-        { title: "Brand launch milestones", desc: "Celebrating No.1 category rankings across Southeast Asia with our partner brands." },
-        { title: "Community & culture", desc: "A people-first culture rooted in sincerity, accountability and sustainable growth." },
-      ];
+  const arr = <T,>(k: string) => (t(k, { returnObjects: true }) as T[]) || [];
+  const blocks = arr<{ title: string; desc: string }>("pg.activities.blocks");
+  const captions = arr<string>("pg.activities.gallery");
+  const stats = arr<{ k: string; v: string }>("pg.activities.stats");
+  const gallery = GALLERY_IMGS.map((img, i) => ({ img, caption: captions[i] || "" }));
 
   return (
     <>
@@ -38,15 +35,13 @@ export default function ActivitiesPage() {
       <section className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 dot-grid opacity-60 [mask-image:radial-gradient(70%_60%_at_50%_0%,black,transparent)]" />
         <div className="relative mx-auto max-w-6xl px-4 md:px-6 pt-10 md:pt-16">
-          <FloatingMascot src="char-yellow" size="w-12 md:w-16" className="right-[4%] top-0 md:top-2" r="9deg" dur="4.9s" />
+          <FloatingMascot src="char-yellow" size="w-12 md:w-16" className="right-[4%] top-20 md:top-24" r="9deg" dur="4.9s" />
           <RevealOnScroll>
-            <div className="chip-label">Activities</div>
+            <div className="chip-label">{t("pg.activities.chip")}</div>
             <h1 className="mt-6 max-w-3xl font-display text-[2.6rem] font-extrabold leading-[1.03] tracking-tight text-ink md:text-6xl">
-              The moments that <span className="hl-blue">move us forward</span>.
+              {t("pg.activities.heroPre")} <span className="hl-blue">{t("pg.activities.heroHl")}</span>{t("pg.activities.heroPost")}
             </h1>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink/60 md:text-lg">
-              From team offsites to category-leading brand launches — a look at the culture and milestones behind SHD.
-            </p>
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink/60 md:text-lg">{t("pg.activities.heroDesc")}</p>
           </RevealOnScroll>
         </div>
       </section>
@@ -56,14 +51,14 @@ export default function ActivitiesPage() {
         <RevealOnScroll>
           <div className="flex items-end justify-between gap-4">
             <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink md:text-4xl">
-              Moments from <span className="hl">the journey</span>
+              {t("pg.activities.momentsPre")} <span className="hl">{t("pg.activities.momentsHl")}</span>
             </h2>
-            <div className="hidden text-sm font-medium text-ink/40 md:block">Auto-scrolling · hover to pause</div>
+            <div className="hidden text-sm font-medium text-ink/40 md:block">{t("pg.activities.autoScroll")}</div>
           </div>
         </RevealOnScroll>
         <RevealOnScroll delay={80}>
           <Carousel className="mt-8" autoPlayMs={4200}>
-            {GALLERY.map((g, i) => (
+            {gallery.map((g, i) => (
               <figure
                 key={i}
                 data-card
@@ -109,11 +104,7 @@ export default function ActivitiesPage() {
         <RevealOnScroll delay={120}>
           <div className="mt-5 rounded-4xl bg-brand p-8 text-white md:p-10">
             <div className="grid gap-6 md:grid-cols-3">
-              {[
-                { k: "500+", v: "Team members worldwide" },
-                { k: "8", v: "Markets and growing" },
-                { k: "288%", v: "Consecutive GMV growth" },
-              ].map((s) => (
+              {stats.map((s) => (
                 <div key={s.k}>
                   <div className="font-display text-4xl font-extrabold text-sun">{s.k}</div>
                   <div className="mt-1 text-sm text-white/70">{s.v}</div>
@@ -126,7 +117,7 @@ export default function ActivitiesPage() {
         <RevealOnScroll delay={160}>
           <div className="mt-8 text-center">
             <Link to="/careers" className="btn-primary">
-              Join the team <ArrowRight className="h-4 w-4" />
+              {t("pg.cta.joinTeam")} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </RevealOnScroll>

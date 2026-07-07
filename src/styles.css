@@ -119,6 +119,54 @@ body {
   }
 }
 
+/* ===== Highlighter shimmer (the yellow/blue pills) ===== */
+.hl, .hl-blue { position: relative; isolation: isolate; }
+.hl::after, .hl-blue::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 38%, rgba(255, 255, 255, 0.55) 50%, transparent 62%);
+  background-size: 250% 100%;
+  background-position: 160% 0;
+  animation: hlSheen 5.5s ease-in-out infinite;
+}
+.hl-blue::after { background: linear-gradient(110deg, transparent 38%, rgba(255, 255, 255, 0.4) 50%, transparent 62%); background-size: 250% 100%; }
+@keyframes hlSheen {
+  0% { background-position: 160% 0; }
+  55%, 100% { background-position: -60% 0; }
+}
+
+/* ===== Drifting aurora blobs ===== */
+@keyframes shdDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(26px, -22px) scale(1.06); }
+  66% { transform: translate(-22px, 18px) scale(0.96); }
+}
+.blob-drift { animation: shdDrift 20s ease-in-out infinite; will-change: transform; }
+.blob-drift-slow { animation: shdDrift 28s ease-in-out infinite reverse; will-change: transform; }
+
+/* ===== Button shine sweep (on hover) ===== */
+.btn-primary, .btn-brand, .btn-sun { position: relative; overflow: hidden; }
+.btn-primary::before, .btn-brand::before, .btn-sun::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: -40%;
+  width: 40%;
+  background: linear-gradient(110deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transform: skewX(-18deg);
+  opacity: 0;
+  pointer-events: none;
+}
+.btn-primary:hover::before, .btn-brand:hover::before, .btn-sun:hover::before {
+  animation: btnShine 0.75s ease;
+}
+@keyframes btnShine {
+  0% { left: -40%; opacity: 0.9; }
+  100% { left: 140%; opacity: 0; }
+}
+
 /* ===== Culture characters (gentle bounce/float) ===== */
 @keyframes shdBob {
   0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
